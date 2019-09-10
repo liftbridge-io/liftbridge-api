@@ -30,8 +30,8 @@ message SubscribeRequest {
     string        stream         = 1; // Stream name to subscribe to
     int32         partition      = 2; // Stream partition to subscribe to
     StartPosition startPosition  = 3; // Where to begin consuming from
-    int64         startOffset    = 4; // Offset to begin consuming from
-    int64         startTimestamp = 5; // Timestamp to begin consuming from
+    int64         startOffset    = 4 [jstype=JS_STRING]; // Offset to begin consuming from
+    int64         startTimestamp = 5 [jstype=JS_STRING]; // Timestamp to begin consuming from
 }
 
 // FetchMetadataRequest is sent to retrieve the latest cluster metadata.
@@ -91,10 +91,10 @@ enum AckPolicy {
 
 // Message represents a message from a stream.
 message Message {
-    int64               offset        = 1;  // Monotonic message offset in the stream
+    int64               offset        = 1 [jstype=JS_STRING];  // Monotonic message offset in the stream
     bytes               key           = 2;  // Message key
     bytes               value         = 3;  // Message payload
-    int64               timestamp     = 4;  // When the message was received by the broker
+    int64               timestamp     = 4 [jstype=JS_STRING];  // When the message was received by the broker
     string              subject       = 5;  // NATS subject message was received on
     string              reply         = 6;  // NATS reply subject
     map<string, bytes>  headers       = 7;  // Message headers
@@ -109,7 +109,7 @@ message Ack {
     string    stream           = 1; // Name of the stream
     string    partitionSubject = 2; // NATS subject partition is attached to
     string    msgSubject       = 3; // NATS subject the message was received on
-    int64     offset           = 4; // Stream offset the message was committed to
+    int64     offset           = 4 [jstype=JS_STRING]; // Stream offset the message was committed to
     string    ackInbox         = 5; // NATS subject to publish acks to
     string    correlationId    = 6; // User-supplied value from the message
     AckPolicy ackPolicy        = 7; // The AckPolicy sent on the message
