@@ -1,11 +1,26 @@
-# liftbridge-grpc
+Liftbridge API
+==============
 
-Protobuf definitions for the [Liftbridge](https://github.com/liftbridge-io/liftbridge) gRPC API.
+This repository contains the public API definitions for
+[Liftbridge](https://github.com/liftbridge-io/liftbridge). It is primarily intended for
+Liftbridge client developers.
 
-## NATS Message Envelope
+## gRPC API
 
-Every Liftbridge message that is sent over NATS should be sent with the following
-envelope header:
+The client-facing gRPC API is defined in [api.fbs](api.fbs).
+
+## Direct NATS API
+
+It is also possible for a client to publish messages to Liftbridge via NATS directly.
+Liftbridge accepts plain NATS messages, allowing it to make existing subjects durable
+without any publisher changes. However, these messages will not have some features such
+as acks.
+
+In order to opt into Liftbridge-specific features, the message must be prefixed with the
+following header and be encoded as a `PublishRequest` (defined in
+[api.fbs](api.fbs)).
+
+### Liftbridge Envelope Header
 
 ```
 0               8               16              24              32
