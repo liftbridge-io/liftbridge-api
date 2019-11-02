@@ -27,7 +27,7 @@ following header and be encoded as a `PublishRequest` (defined in
 ├───────────────┴───────────────┴───────────────┴───────────────┤
 │                          Magic Number                         │
 ├───────────────┬───────────────┬───────────────┬───────────────┤
-│    Version    │   HeaderLen   │     Flags     │    MsgType    │
+│    Version    │   HeaderLen   │     Flags     │    Reserved   │
 ├───────────────┴───────────────┴───────────────┴───────────────┤
 │                       CRC-32C (optional)                      │
 └───────────────────────────────────────────────────────────────┘
@@ -57,15 +57,6 @@ The flag bits are defined as follows:
 | Bit | Description     |
 | --- | --------------- |
 | 0   | CRC-32C enabled |
-
-#### MsgType [1 byte]
-
-This is the Liftbridge-specific message type
-
-| MsgType | Description |
-| ------- | ----------- |
-| 0       | Publish     |
-| 1       | Replication |
 
 #### CRC-32C [4 bytes, optional]
 
