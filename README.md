@@ -38,7 +38,7 @@ following header and be encoded as a `PublishRequest` (defined in
 
 The Liftbridge magic number is `B9 0E 43 B4`. This was chosen by random but deliberately
 restricted to invalid UTF-8 to reduce the chance of a collision. This was also verified
-to not match known file sigatures.
+to not match known file signatures.
 
 #### Version [1 byte]
 
