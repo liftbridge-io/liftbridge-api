@@ -1,84 +1,29 @@
 namespace proto;
 
-// CreateStreamRequest is sent to create a new stream.
+table MessageHeader {
+  key   : string  (id: 0);
+  value : [ubyte] (id: 1);
+}
+
+// Message is the core immutable unit that is propagated/stored.
+table Message {
+  value   : [ubyte]         (id: 0);
+  key     : [ubyte]         (id: 1); // Message key used for log compaction
+  reply   : string          (id: 2); // NATS subject to reply to
+  headers : [MessageHeader] (id: 3); // Message headers
+  subject : string          (id: 4); // NATS subject message was received on
+  offset  : int64           (id: 5); // Monotonic message offset in the stream
+}
+
 table CreateStreamRequest {
-  subject           : string (id: 0); // Stream NATS subject
-  name              : string (id: 1); // Stream name (unique per subject)
+  subject           : string (id: 0); // NATS subject to attach to
+  stream            : string (id: 1); // Stream name (unique per subject)
   group             : string (id: 2); // Partitions NATS subject amongst group members
-  replicationFactor : int32  (id: 3); // Number of stream replicas
-  partitions        : int32  (id: 4); // Number of stream partitions
+  replicationFactor : int32  (id: 3); // Number of stream replicas (-1 to replicate to the entire cluster)
+  partitions        : uint32 (id: 4); // Number of stream partitions
 }
 
-// CreateStreamResponse is sent by server after creating a stream.
 table CreateStreamResponse {
-  // Intentionally empty.
-}
-
-// StartPosition determines the start-position type on a subscription.
-enum StartPosition : uint8 {
-  NEW_ONLY  = 0, // Start at new messages after the latest
-  OFFSET    = 1, // Start at a specified offset
-  EARLIEST  = 2, // Start at the oldest message
-  LATEST    = 3, // Start at the newest message
-  TIMESTAMP = 4, // Start at a specified timestamp
-}
-
-// SubscribeRequest is sent to subscribe to a stream partition.
-table SubscribeRequest {
-  stream         : string        (id: 0); // Stream name to subscribe to
-  partition      : int32         (id: 1); // Stream partition to subscribe to
-  startPosition  : StartPosition (id: 2); // Where to begin consuming from
-  startOffset    : int64         (id: 3); // Offset to begin consuming from
-  startTimestamp : int64         (id: 4); // Timestamp to begin consuming from
-}
-
-// FetchMetadataRequest is sent to retrieve the latest cluster metadata.
-table FetchMetadataRequest {
-  streams : [string] (id: 0); // The streams to fetch metadata for (all if empty)
-}
-
-// FetchMetadataResponse contains the cluster metadata requested.
-table FetchMetadataResponse {
-  brokers  : [Broker]         (id: 0); // Information for all brokers
-  metadata : [StreamMetadata] (id: 1); // Information for all streams
-}
-
-// PublishRequest is sent to publish a new message.
-table PublishRequest {
-  message : Message (id: 0); // Message to publish
-}
-
-// PublishResponse is sent by the server after publishing a message.
-table PublishResponse {
-  ack : Ack (id: 0); // The ack for the published message if AckPolicy was not NONE
-}
-
-// Broker contains information for a Liftbridge broker.
-table Broker {
-  id   : string (id: 0); // Broker id
-  host : string (id: 1); // Broker host
-  port : int32  (id: 2); // Broker port
-}
-
-enum StreamMetadataError : uint8 {
-  OK = 0,
-  UNKNOWN_STREAM = 1,
-}
-
-// StreamMetadata contains information for a stream.
-table StreamMetadata {
-  name       : string              (id: 0); // The name of the stream being described
-  subject    : string              (id: 1); // The stream subject
-  error      : StreamMetadataError (id: 2); // Indicates if there was something wrong with the requested stream
-  partitions : [PartitionMetadata] (id: 3); // Information for the stream partitions
-}
-
-// PartitionMetadata contains information for a stream partition.
-table PartitionMetadata {
-  id       : int32    (id: 0); // Partition id
-  leader   : string   (id: 1); // Broker id of the partition leader
-  replicas : [string] (id: 2); // Broker ids of the partition replicas
-  isr      : [string] (id: 3); // Broker ids of the in-sync replica set
 }
 
 // AckPolicy controls the behavior of message acknowledgements.
@@ -88,35 +33,86 @@ enum AckPolicy : uint8 {
   NONE   = 2, // No ack will be sent
 }
 
-table MessageHeader {
-  key   : string  (id: 0, required);
-  value : [ubyte] (id: 1, required);
+// PublishRequest is used for both gRPC Publish requests as well as direct NATS
+// publishes (see the README for the envelope format).
+table PublishRequest {
+  message       : [ubyte]      (id: 0, nested_flatbuffer: "Message");
+  correlationId : [ubyte]      (id: 1); // User-supplied id to correlate acks to publishes
+  ackInbox      : string       (id: 2); // NATS subject to publish acks to
+  ackPolicy     : AckPolicy    (id: 3); // Controls the behavior of acks
 }
 
-// Message represents a message from a stream.
-table Message {
-  offset        : int64           (id: 0); // Monotonic message offset in the stream
-  key           : [ubyte]         (id: 1); // Message key
-  value         : [ubyte]         (id: 2); // Message payload
-  timestamp     : int64           (id: 3); // When the message was received by the broker
-  subject       : string          (id: 4); // NATS subject message was received on
-  reply         : string          (id: 5); // NATS reply subject
-  headers       : [MessageHeader] (id: 6); // Message headers
-  ackInbox      : string          (id: 7); // NATS subject to publish acks to
-  correlationId : string          (id: 8); // User-supplied value to correlate acks to publishes
-  ackPolicy     : AckPolicy       (id: 9); // Controls the behavior of acks
+table PublishResponse {
+  ack : Ack (id: 0); // The ack for the published message if AckPolicy was not NONE
 }
 
-// Ack represents an acknowledgement that a message was committed to a stream
-// partition.
+// Ack represents an acknowledgement that a message was committed to a stream partition.
 table Ack {
-  stream           : string    (id: 0); // Name of the stream
-  partitionSubject : string    (id: 1); // NATS subject partition is attached to
-  msgSubject       : string    (id: 2); // NATS subject the message was received on
-  offset           : int64     (id: 3); // Stream offset the message was committed to
-  ackInbox         : string    (id: 4); // NATS subject to publish acks to
-  correlationId    : string    (id: 5); // User-supplied value from the message
+  correlationId    : [ubyte]   (id: 0); // User-supplied value from the message
+  stream           : string    (id: 1); // Name of the stream
+  partitionSubject : string    (id: 2); // NATS subject the partition is attached to
+  msgSubject       : string    (id: 3); // NATS subject the message was received on
+  offset           : int64     (id: 4); // Stream offset the message was committed to
+  ackInbox         : string    (id: 5); // NATS subject to publish acks to
   ackPolicy        : AckPolicy (id: 6); // The AckPolicy sent on the message
+}
+
+enum StartPosition : uint8 {
+  NEW_ONLY  = 0, // Start at new messages after the latest
+  OFFSET    = 1, // Start at a specified offset
+  EARLIEST  = 2, // Start at the oldest message
+  LATEST    = 3, // Start at the newest message
+  TIMESTAMP = 4, // Start at a specified (ack) timestamp
+}
+
+table SubscribeRequest {
+  stream         : string        (id: 0); // Stream name to subscribe to
+  partitionId    : uint32        (id: 1); // Stream partition to subscribe to
+  startPosition  : StartPosition (id: 2); // Where to begin consuming from
+  startOffset    : int64         (id: 3); // Offset to begin consuming from
+  startTimestamp : int64         (id: 4); // Timestamp to begin consuming from
+}
+
+table StreamMessage {
+  message   : [ubyte] (id: 0, nested_flatbuffer: "Message");
+  subject   : string  (id: 1); // NATS subject message was received on
+  offset    : int64   (id: 2); // Monotonic message offset in the stream
+  timestamp : int64   (id: 3); // When the message was received by the broker
+}
+
+table Broker {
+  id   : string (id: 0); // Broker id
+  host : string (id: 1); // Broker host
+  port : int32  (id: 2); // Broker port
+}
+
+// PartitionMetadata contains information for a stream partition.
+table PartitionMetadata {
+  id       : uint32   (id: 0); // Partition id
+  leader   : string   (id: 1); // Broker id of the partition leader
+  replicas : [string] (id: 2); // Broker ids of the partition replicas
+  isr      : [string] (id: 3); // Broker ids of the in-sync replica set
+}
+
+enum StreamError : uint8 {
+  OK = 0,
+  UNKNOWN_STREAM = 1,
+}
+
+table StreamMetadata {
+  stream     : string              (id: 0);
+  subject    : string              (id: 1); // NATS subject the stream is attached to
+  error      : StreamError         (id: 2); // Indicates if there was something wrong with the requested stream
+  partitions : [PartitionMetadata] (id: 3); // Information for the stream partitions
+}
+
+table FetchMetadataRequest {
+  streams : [string] (id: 0); // The streams to fetch metadata for (all if empty)
+}
+
+table FetchMetadataResponse {
+  brokers  : [Broker]         (id: 0);
+  metadata : [StreamMetadata] (id: 1);
 }
 
 // API is the main Liftbridge server interface clients interact with.
@@ -125,12 +121,6 @@ rpc_service API {
   // an AlreadyExists status code if a stream with the given subject and name
   // already exists.
   CreateStream(CreateStreamRequest) : CreateStreamResponse;
-
-  // Subscribe creates an ephemeral subscription for the given stream. It
-  // begins to receive messages starting at the given offset and waits for
-  // new messages when it reaches the end of the stream. Use the request
-  // context to close the subscription.
-  Subscribe(SubscribeRequest) : Message (streaming: "server");
 
   // FetchMetadata retrieves the latest cluster metadata, including stream
   // broker information.
@@ -141,4 +131,10 @@ rpc_service API {
   // received. If the ack is not received in time, a DeadlineExceeded status
   // code is returned.
   Publish(PublishRequest) : PublishResponse;
+
+  // Subscribe creates an ephemeral subscription for the given stream. It
+  // begins to receive messages starting at the given offset and waits for
+  // new messages when it reaches the end of the stream. Use the request
+  // context to close the subscription.
+  Subscribe(SubscribeRequest) : StreamMessage (streaming: "server");
 }
