@@ -1,6 +1,7 @@
 syntax = "proto3";
 package proto;
 
+option java_package = "liftbridge.proto";
 
 // CreateStreamRequest is sent to create a new stream.
 message CreateStreamRequest {
