@@ -48,7 +48,16 @@ message FetchMetadataResponse {
 
 // PublishRequest is sent to publish a new message.
 message PublishRequest {
-    Message message = 1; // Message to publish
+    bytes               key           = 1;  // Message key
+    bytes               value         = 2;  // Message payload
+    string              stream        = 3;  // Stream name to publish to
+    int32               partition     = 4;  // Stream partition to publish to
+    string              subject       = 5;  // NATS subject to publish to
+    string              replySubject  = 6;  // NATS reply subject
+    map<string, bytes>  headers       = 7;  // Message headers
+    string              ackInbox      = 8;  // NATS subject to publish acks to
+    string              correlationId = 9;  // User-supplied value to correlate acks to publishes
+    AckPolicy           ackPolicy     = 10; // Controls the behavior of acks
 }
 
 // PublishResponse is sent by the server after publishing a message.
@@ -96,12 +105,14 @@ message Message {
     bytes               key           = 2;  // Message key
     bytes               value         = 3;  // Message payload
     int64               timestamp     = 4 [jstype=JS_STRING];  // When the message was received by the broker
-    string              subject       = 5;  // NATS subject message was received on
-    string              reply         = 6;  // NATS reply subject
-    map<string, bytes>  headers       = 7;  // Message headers
-    string              ackInbox      = 8;  // NATS subject to publish acks to
-    string              correlationId = 9;  // User-supplied value to correlate acks to publishes
-    AckPolicy           ackPolicy     = 10; // Controls the behavior of acks
+    string              stream        = 5;  // Stream name message was received on
+    string              partition     = 6;  // Stream partition message was assigned to
+    string              subject       = 7;  // NATS subject message was received on
+    string              replySubject  = 8;  // NATS reply subject
+    map<string, bytes>  headers       = 9;  // Message headers
+    string              ackInbox      = 10; // NATS subject to publish acks to
+    string              correlationId = 11; // User-supplied value to correlate acks to publishes
+    AckPolicy           ackPolicy     = 12; // Controls the behavior of acks
 }
 
 // Ack represents an acknowledgement that a message was committed to a stream
