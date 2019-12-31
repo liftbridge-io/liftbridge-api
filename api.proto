@@ -106,13 +106,12 @@ message Message {
     bytes               value         = 3;  // Message payload
     int64               timestamp     = 4 [jstype=JS_STRING];  // When the message was received by the broker
     string              stream        = 5;  // Stream name message was received on
-    string              partition     = 6;  // Stream partition message was assigned to
+    int32               partition     = 6;  // Stream partition message was assigned to
     string              subject       = 7;  // NATS subject message was received on
     string              replySubject  = 8;  // NATS reply subject
     map<string, bytes>  headers       = 9;  // Message headers
     string              ackInbox      = 10; // NATS subject to publish acks to
     string              correlationId = 11; // User-supplied value to correlate acks to publishes
-    AckPolicy           ackPolicy     = 12; // Controls the behavior of acks
 }
 
 // Ack represents an acknowledgement that a message was committed to a stream
