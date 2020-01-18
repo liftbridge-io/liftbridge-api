@@ -112,6 +112,7 @@ message Message {
     map<string, bytes>  headers       = 9;  // Message headers
     string              ackInbox      = 10; // NATS subject to publish acks to
     string              correlationId = 11; // User-supplied value to correlate acks to publishes
+    AckPolicy           ackPolicy     = 12; // Controls the behavior of acks
 }
 
 // Ack represents an acknowledgement that a message was committed to a stream
