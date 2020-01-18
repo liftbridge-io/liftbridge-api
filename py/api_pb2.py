@@ -20,8 +20,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='api.proto',
   package='proto',
   syntax='proto3',
-  serialized_options=None,
-  serialized_pb=_b('\n\tapi.proto\x12\x05proto\"r\n\x13\x43reateStreamRequest\x12\x0f\n\x07subject\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05group\x18\x03 \x01(\t\x12\x19\n\x11replicationFactor\x18\x04 \x01(\x05\x12\x12\n\npartitions\x18\x05 \x01(\x05\"\x16\n\x14\x43reateStreamResponse\"\x8f\x01\n\x10SubscribeRequest\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x11\n\tpartition\x18\x02 \x01(\x05\x12+\n\rstartPosition\x18\x03 \x01(\x0e\x32\x14.proto.StartPosition\x12\x13\n\x0bstartOffset\x18\x04 \x01(\x03\x12\x16\n\x0estartTimestamp\x18\x05 \x01(\x03\"\'\n\x14\x46\x65tchMetadataRequest\x12\x0f\n\x07streams\x18\x01 \x03(\t\"`\n\x15\x46\x65tchMetadataResponse\x12\x1e\n\x07\x62rokers\x18\x01 \x03(\x0b\x32\r.proto.Broker\x12\'\n\x08metadata\x18\x02 \x03(\x0b\x32\x15.proto.StreamMetadata\"1\n\x0ePublishRequest\x12\x1f\n\x07message\x18\x01 \x01(\x0b\x32\x0e.proto.Message\"*\n\x0fPublishResponse\x12\x17\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\n.proto.Ack\"0\n\x06\x42roker\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04host\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x05\"\x88\x02\n\x0eStreamMetadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07subject\x18\x02 \x01(\t\x12*\n\x05\x65rror\x18\x03 \x01(\x0e\x32\x1b.proto.StreamMetadata.Error\x12\x39\n\npartitions\x18\x04 \x03(\x0b\x32%.proto.StreamMetadata.PartitionsEntry\x1aK\n\x0fPartitionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.proto.PartitionMetadata:\x02\x38\x01\"#\n\x05\x45rror\x12\x06\n\x02OK\x10\x00\x12\x12\n\x0eUNKNOWN_STREAM\x10\x01\"N\n\x11PartitionMetadata\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0e\n\x06leader\x18\x02 \x01(\t\x12\x10\n\x08replicas\x18\x03 \x03(\t\x12\x0b\n\x03isr\x18\x04 \x03(\t\"\x94\x02\n\x07Message\x12\x0e\n\x06offset\x18\x01 \x01(\x03\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x12\r\n\x05value\x18\x03 \x01(\x0c\x12\x11\n\ttimestamp\x18\x04 \x01(\x03\x12\x0f\n\x07subject\x18\x05 \x01(\t\x12\r\n\x05reply\x18\x06 \x01(\t\x12,\n\x07headers\x18\x07 \x03(\x0b\x32\x1b.proto.Message.HeadersEntry\x12\x10\n\x08\x61\x63kInbox\x18\x08 \x01(\t\x12\x15\n\rcorrelationId\x18\t \x01(\t\x12#\n\tackPolicy\x18\n \x01(\x0e\x32\x10.proto.AckPolicy\x1a.\n\x0cHeadersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"\xa1\x01\n\x03\x41\x63k\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x18\n\x10partitionSubject\x18\x02 \x01(\t\x12\x12\n\nmsgSubject\x18\x03 \x01(\t\x12\x0e\n\x06offset\x18\x04 \x01(\x03\x12\x10\n\x08\x61\x63kInbox\x18\x05 \x01(\t\x12\x15\n\rcorrelationId\x18\x06 \x01(\t\x12#\n\tackPolicy\x18\x07 \x01(\x0e\x32\x10.proto.AckPolicy*R\n\rStartPosition\x12\x0c\n\x08NEW_ONLY\x10\x00\x12\n\n\x06OFFSET\x10\x01\x12\x0c\n\x08\x45\x41RLIEST\x10\x02\x12\n\n\x06LATEST\x10\x03\x12\r\n\tTIMESTAMP\x10\x04**\n\tAckPolicy\x12\n\n\x06LEADER\x10\x00\x12\x07\n\x03\x41LL\x10\x01\x12\x08\n\x04NONE\x10\x02\x32\x94\x02\n\x03\x41PI\x12I\n\x0c\x43reateStream\x12\x1a.proto.CreateStreamRequest\x1a\x1b.proto.CreateStreamResponse\"\x00\x12\x38\n\tSubscribe\x12\x17.proto.SubscribeRequest\x1a\x0e.proto.Message\"\x00\x30\x01\x12L\n\rFetchMetadata\x12\x1b.proto.FetchMetadataRequest\x1a\x1c.proto.FetchMetadataResponse\"\x00\x12:\n\x07Publish\x12\x15.proto.PublishRequest\x1a\x16.proto.PublishResponse\"\x00\x62\x06proto3')
+  serialized_options=_b('\n\023io.liftbridge.proto'),
+  serialized_pb=_b('\n\tapi.proto\x12\x05proto\"r\n\x13\x43reateStreamRequest\x12\x0f\n\x07subject\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05group\x18\x03 \x01(\t\x12\x19\n\x11replicationFactor\x18\x04 \x01(\x05\x12\x12\n\npartitions\x18\x05 \x01(\x05\"\x16\n\x14\x43reateStreamResponse\"\x97\x01\n\x10SubscribeRequest\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x11\n\tpartition\x18\x02 \x01(\x05\x12+\n\rstartPosition\x18\x03 \x01(\x0e\x32\x14.proto.StartPosition\x12\x17\n\x0bstartOffset\x18\x04 \x01(\x03\x42\x02\x30\x01\x12\x1a\n\x0estartTimestamp\x18\x05 \x01(\x03\x42\x02\x30\x01\"\'\n\x14\x46\x65tchMetadataRequest\x12\x0f\n\x07streams\x18\x01 \x03(\t\"`\n\x15\x46\x65tchMetadataResponse\x12\x1e\n\x07\x62rokers\x18\x01 \x03(\x0b\x32\r.proto.Broker\x12\'\n\x08metadata\x18\x02 \x03(\x0b\x32\x15.proto.StreamMetadata\"\xa9\x02\n\x0ePublishRequest\x12\x0b\n\x03key\x18\x01 \x01(\x0c\x12\r\n\x05value\x18\x02 \x01(\x0c\x12\x0e\n\x06stream\x18\x03 \x01(\t\x12\x11\n\tpartition\x18\x04 \x01(\x05\x12\x0f\n\x07subject\x18\x05 \x01(\t\x12\x14\n\x0creplySubject\x18\x06 \x01(\t\x12\x33\n\x07headers\x18\x07 \x03(\x0b\x32\".proto.PublishRequest.HeadersEntry\x12\x10\n\x08\x61\x63kInbox\x18\x08 \x01(\t\x12\x15\n\rcorrelationId\x18\t \x01(\t\x12#\n\tackPolicy\x18\n \x01(\x0e\x32\x10.proto.AckPolicy\x1a.\n\x0cHeadersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"*\n\x0fPublishResponse\x12\x17\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\n.proto.Ack\"0\n\x06\x42roker\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04host\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x05\"\x88\x02\n\x0eStreamMetadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07subject\x18\x02 \x01(\t\x12*\n\x05\x65rror\x18\x03 \x01(\x0e\x32\x1b.proto.StreamMetadata.Error\x12\x39\n\npartitions\x18\x04 \x03(\x0b\x32%.proto.StreamMetadata.PartitionsEntry\x1aK\n\x0fPartitionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.proto.PartitionMetadata:\x02\x38\x01\"#\n\x05\x45rror\x12\x06\n\x02OK\x10\x00\x12\x12\n\x0eUNKNOWN_STREAM\x10\x01\"N\n\x11PartitionMetadata\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0e\n\x06leader\x18\x02 \x01(\t\x12\x10\n\x08replicas\x18\x03 \x03(\t\x12\x0b\n\x03isr\x18\x04 \x03(\t\"\xa1\x02\n\x07Message\x12\x12\n\x06offset\x18\x01 \x01(\x03\x42\x02\x30\x01\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x12\r\n\x05value\x18\x03 \x01(\x0c\x12\x15\n\ttimestamp\x18\x04 \x01(\x03\x42\x02\x30\x01\x12\x0e\n\x06stream\x18\x05 \x01(\t\x12\x11\n\tpartition\x18\x06 \x01(\x05\x12\x0f\n\x07subject\x18\x07 \x01(\t\x12\x14\n\x0creplySubject\x18\x08 \x01(\t\x12,\n\x07headers\x18\t \x03(\x0b\x32\x1b.proto.Message.HeadersEntry\x12\x10\n\x08\x61\x63kInbox\x18\n \x01(\t\x12\x15\n\rcorrelationId\x18\x0b \x01(\t\x1a.\n\x0cHeadersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"\xa5\x01\n\x03\x41\x63k\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x18\n\x10partitionSubject\x18\x02 \x01(\t\x12\x12\n\nmsgSubject\x18\x03 \x01(\t\x12\x12\n\x06offset\x18\x04 \x01(\x03\x42\x02\x30\x01\x12\x10\n\x08\x61\x63kInbox\x18\x05 \x01(\t\x12\x15\n\rcorrelationId\x18\x06 \x01(\t\x12#\n\tackPolicy\x18\x07 \x01(\x0e\x32\x10.proto.AckPolicy*R\n\rStartPosition\x12\x0c\n\x08NEW_ONLY\x10\x00\x12\n\n\x06OFFSET\x10\x01\x12\x0c\n\x08\x45\x41RLIEST\x10\x02\x12\n\n\x06LATEST\x10\x03\x12\r\n\tTIMESTAMP\x10\x04**\n\tAckPolicy\x12\n\n\x06LEADER\x10\x00\x12\x07\n\x03\x41LL\x10\x01\x12\x08\n\x04NONE\x10\x02\x32\x94\x02\n\x03\x41PI\x12I\n\x0c\x43reateStream\x12\x1a.proto.CreateStreamRequest\x1a\x1b.proto.CreateStreamResponse\"\x00\x12\x38\n\tSubscribe\x12\x17.proto.SubscribeRequest\x1a\x0e.proto.Message\"\x00\x30\x01\x12L\n\rFetchMetadata\x12\x1b.proto.FetchMetadataRequest\x1a\x1c.proto.FetchMetadataResponse\"\x00\x12:\n\x07Publish\x12\x15.proto.PublishRequest\x1a\x16.proto.PublishResponse\"\x00\x42\x15\n\x13io.liftbridge.protob\x06proto3')
 )
 
 _STARTPOSITION = _descriptor.EnumDescriptor(
@@ -53,8 +53,8 @@ _STARTPOSITION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1380,
-  serialized_end=1462,
+  serialized_start=1654,
+  serialized_end=1736,
 )
 _sym_db.RegisterEnumDescriptor(_STARTPOSITION)
 
@@ -80,8 +80,8 @@ _ACKPOLICY = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1464,
-  serialized_end=1506,
+  serialized_start=1738,
+  serialized_end=1780,
 )
 _sym_db.RegisterEnumDescriptor(_ACKPOLICY)
 
@@ -113,8 +113,8 @@ _STREAMMETADATA_ERROR = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=820,
-  serialized_end=855,
+  serialized_start=1077,
+  serialized_end=1112,
 )
 _sym_db.RegisterEnumDescriptor(_STREAMMETADATA_ERROR)
 
@@ -236,14 +236,14 @@ _SUBSCRIBEREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('0\001'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='startTimestamp', full_name='proto.SubscribeRequest.startTimestamp', index=4,
       number=5, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('0\001'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -257,7 +257,7 @@ _SUBSCRIBEREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=161,
-  serialized_end=304,
+  serialized_end=312,
 )
 
 
@@ -287,8 +287,8 @@ _FETCHMETADATAREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=306,
-  serialized_end=345,
+  serialized_start=314,
+  serialized_end=353,
 )
 
 
@@ -325,22 +325,29 @@ _FETCHMETADATARESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=347,
-  serialized_end=443,
+  serialized_start=355,
+  serialized_end=451,
 )
 
 
-_PUBLISHREQUEST = _descriptor.Descriptor(
-  name='PublishRequest',
-  full_name='proto.PublishRequest',
+_PUBLISHREQUEST_HEADERSENTRY = _descriptor.Descriptor(
+  name='HeadersEntry',
+  full_name='proto.PublishRequest.HeadersEntry',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='message', full_name='proto.PublishRequest.message', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='key', full_name='proto.PublishRequest.HeadersEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='proto.PublishRequest.HeadersEntry.value', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -350,14 +357,107 @@ _PUBLISHREQUEST = _descriptor.Descriptor(
   nested_types=[],
   enum_types=[
   ],
+  serialized_options=_b('8\001'),
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=705,
+  serialized_end=751,
+)
+
+_PUBLISHREQUEST = _descriptor.Descriptor(
+  name='PublishRequest',
+  full_name='proto.PublishRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='proto.PublishRequest.key', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='proto.PublishRequest.value', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='stream', full_name='proto.PublishRequest.stream', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='partition', full_name='proto.PublishRequest.partition', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='subject', full_name='proto.PublishRequest.subject', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='replySubject', full_name='proto.PublishRequest.replySubject', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='headers', full_name='proto.PublishRequest.headers', index=6,
+      number=7, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ackInbox', full_name='proto.PublishRequest.ackInbox', index=7,
+      number=8, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='correlationId', full_name='proto.PublishRequest.correlationId', index=8,
+      number=9, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ackPolicy', full_name='proto.PublishRequest.ackPolicy', index=9,
+      number=10, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_PUBLISHREQUEST_HEADERSENTRY, ],
+  enum_types=[
+  ],
   serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=445,
-  serialized_end=494,
+  serialized_start=454,
+  serialized_end=751,
 )
 
 
@@ -387,8 +487,8 @@ _PUBLISHRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=496,
-  serialized_end=538,
+  serialized_start=753,
+  serialized_end=795,
 )
 
 
@@ -432,8 +532,8 @@ _BROKER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=540,
-  serialized_end=588,
+  serialized_start=797,
+  serialized_end=845,
 )
 
 
@@ -470,8 +570,8 @@ _STREAMMETADATA_PARTITIONSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=743,
-  serialized_end=818,
+  serialized_start=1000,
+  serialized_end=1075,
 )
 
 _STREAMMETADATA = _descriptor.Descriptor(
@@ -522,8 +622,8 @@ _STREAMMETADATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=591,
-  serialized_end=855,
+  serialized_start=848,
+  serialized_end=1112,
 )
 
 
@@ -574,8 +674,8 @@ _PARTITIONMETADATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=857,
-  serialized_end=935,
+  serialized_start=1114,
+  serialized_end=1192,
 )
 
 
@@ -612,8 +712,8 @@ _MESSAGE_HEADERSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1168,
-  serialized_end=1214,
+  serialized_start=705,
+  serialized_end=751,
 )
 
 _MESSAGE = _descriptor.Descriptor(
@@ -629,7 +729,7 @@ _MESSAGE = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('0\001'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='key', full_name='proto.Message.key', index=1,
       number=2, type=12, cpp_type=9, label=1,
@@ -650,46 +750,53 @@ _MESSAGE = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('0\001'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='subject', full_name='proto.Message.subject', index=4,
+      name='stream', full_name='proto.Message.stream', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='reply', full_name='proto.Message.reply', index=5,
-      number=6, type=9, cpp_type=9, label=1,
+      name='partition', full_name='proto.Message.partition', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='subject', full_name='proto.Message.subject', index=6,
+      number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='headers', full_name='proto.Message.headers', index=6,
-      number=7, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='ackInbox', full_name='proto.Message.ackInbox', index=7,
+      name='replySubject', full_name='proto.Message.replySubject', index=7,
       number=8, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='correlationId', full_name='proto.Message.correlationId', index=8,
-      number=9, type=9, cpp_type=9, label=1,
+      name='headers', full_name='proto.Message.headers', index=8,
+      number=9, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ackInbox', full_name='proto.Message.ackInbox', index=9,
+      number=10, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ackPolicy', full_name='proto.Message.ackPolicy', index=9,
-      number=10, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
+      name='correlationId', full_name='proto.Message.correlationId', index=10,
+      number=11, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -705,8 +812,8 @@ _MESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=938,
-  serialized_end=1214,
+  serialized_start=1195,
+  serialized_end=1484,
 )
 
 
@@ -744,7 +851,7 @@ _ACK = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('0\001'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ackInbox', full_name='proto.Ack.ackInbox', index=4,
       number=5, type=9, cpp_type=9, label=1,
@@ -778,14 +885,16 @@ _ACK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1217,
-  serialized_end=1378,
+  serialized_start=1487,
+  serialized_end=1652,
 )
 
 _SUBSCRIBEREQUEST.fields_by_name['startPosition'].enum_type = _STARTPOSITION
 _FETCHMETADATARESPONSE.fields_by_name['brokers'].message_type = _BROKER
 _FETCHMETADATARESPONSE.fields_by_name['metadata'].message_type = _STREAMMETADATA
-_PUBLISHREQUEST.fields_by_name['message'].message_type = _MESSAGE
+_PUBLISHREQUEST_HEADERSENTRY.containing_type = _PUBLISHREQUEST
+_PUBLISHREQUEST.fields_by_name['headers'].message_type = _PUBLISHREQUEST_HEADERSENTRY
+_PUBLISHREQUEST.fields_by_name['ackPolicy'].enum_type = _ACKPOLICY
 _PUBLISHRESPONSE.fields_by_name['ack'].message_type = _ACK
 _STREAMMETADATA_PARTITIONSENTRY.fields_by_name['value'].message_type = _PARTITIONMETADATA
 _STREAMMETADATA_PARTITIONSENTRY.containing_type = _STREAMMETADATA
@@ -794,7 +903,6 @@ _STREAMMETADATA.fields_by_name['partitions'].message_type = _STREAMMETADATA_PART
 _STREAMMETADATA_ERROR.containing_type = _STREAMMETADATA
 _MESSAGE_HEADERSENTRY.containing_type = _MESSAGE
 _MESSAGE.fields_by_name['headers'].message_type = _MESSAGE_HEADERSENTRY
-_MESSAGE.fields_by_name['ackPolicy'].enum_type = _ACKPOLICY
 _ACK.fields_by_name['ackPolicy'].enum_type = _ACKPOLICY
 DESCRIPTOR.message_types_by_name['CreateStreamRequest'] = _CREATESTREAMREQUEST
 DESCRIPTOR.message_types_by_name['CreateStreamResponse'] = _CREATESTREAMRESPONSE
@@ -848,11 +956,19 @@ FetchMetadataResponse = _reflection.GeneratedProtocolMessageType('FetchMetadataR
 _sym_db.RegisterMessage(FetchMetadataResponse)
 
 PublishRequest = _reflection.GeneratedProtocolMessageType('PublishRequest', (_message.Message,), {
+
+  'HeadersEntry' : _reflection.GeneratedProtocolMessageType('HeadersEntry', (_message.Message,), {
+    'DESCRIPTOR' : _PUBLISHREQUEST_HEADERSENTRY,
+    '__module__' : 'api_pb2'
+    # @@protoc_insertion_point(class_scope:proto.PublishRequest.HeadersEntry)
+    })
+  ,
   'DESCRIPTOR' : _PUBLISHREQUEST,
   '__module__' : 'api_pb2'
   # @@protoc_insertion_point(class_scope:proto.PublishRequest)
   })
 _sym_db.RegisterMessage(PublishRequest)
+_sym_db.RegisterMessage(PublishRequest.HeadersEntry)
 
 PublishResponse = _reflection.GeneratedProtocolMessageType('PublishResponse', (_message.Message,), {
   'DESCRIPTOR' : _PUBLISHRESPONSE,
@@ -913,8 +1029,15 @@ Ack = _reflection.GeneratedProtocolMessageType('Ack', (_message.Message,), {
 _sym_db.RegisterMessage(Ack)
 
 
+DESCRIPTOR._options = None
+_SUBSCRIBEREQUEST.fields_by_name['startOffset']._options = None
+_SUBSCRIBEREQUEST.fields_by_name['startTimestamp']._options = None
+_PUBLISHREQUEST_HEADERSENTRY._options = None
 _STREAMMETADATA_PARTITIONSENTRY._options = None
 _MESSAGE_HEADERSENTRY._options = None
+_MESSAGE.fields_by_name['offset']._options = None
+_MESSAGE.fields_by_name['timestamp']._options = None
+_ACK.fields_by_name['offset']._options = None
 
 _API = _descriptor.ServiceDescriptor(
   name='API',
@@ -922,8 +1045,8 @@ _API = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=1509,
-  serialized_end=1785,
+  serialized_start=1783,
+  serialized_end=2059,
   methods=[
   _descriptor.MethodDescriptor(
     name='CreateStream',
