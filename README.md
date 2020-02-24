@@ -26,7 +26,7 @@ with the following header and be encoded as a `Message` (defined in
 ├───────────────┴───────────────┴───────────────┴───────────────┤
 │                          Magic Number                         │
 ├───────────────┬───────────────┬───────────────┬───────────────┤
-│    Version    │   HeaderLen   │     Flags     │    Reserved   │
+│    Version    │   HeaderLen   │     Flags     │    MsgType    │
 ├───────────────┴───────────────┴───────────────┴───────────────┤
 │                       CRC-32C (optional)                      │
 └───────────────────────────────────────────────────────────────┘
@@ -57,6 +57,16 @@ The flag bits are defined as follows:
 | Bit | Description     |
 | --- | --------------- |
 | 0   | CRC-32C enabled |
+
+#### MsgType [1 byte]
+
+This is the Liftbridge-specific message type the envelope contains:
+
+| MsgType | Description |
+| ------- | ----------- |
+| 0       | Publish     |
+| 1       | Ack         |
+| 2       | Replication |
 
 #### CRC-32C [4 bytes, optional]
 
