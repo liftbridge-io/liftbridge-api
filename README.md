@@ -21,6 +21,10 @@ with the following header and be encoded as a `Message` (defined in
 
 ### Liftbridge Envelope Header
 
+All Liftbridge messages and RPCs sent over NATS are prefixed with an envelope
+header. This includes client-facing messages, such as publishes and acks, as
+well as internal RPCs like replication.
+
 ```
 0               8               16              24              32
 ├───────────────┴───────────────┴───────────────┴───────────────┤
