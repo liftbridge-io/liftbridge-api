@@ -17,6 +17,16 @@ message CreateStreamResponse {
     // Intentionally empty.
 }
 
+// DeleteStreamRequest is sent to delete a stream.
+message DeleteStreamRequest {
+    string name              = 1; // Stream name
+}
+
+// DeleteStreamResponse is sent by server after deleting a stream.
+message DeleteStreamResponse {
+    // Intentionally empty.
+}
+
 // StartPosition determines the start-position type on a subscription.
 enum StartPosition {
     NEW_ONLY    = 0; // Start at new messages after the latest
@@ -133,6 +143,9 @@ service API {
     // an AlreadyExists status code if a stream with the given subject and name
     // already exists.
     rpc CreateStream(CreateStreamRequest) returns (CreateStreamResponse) {}
+
+    // DeleteStream deletes a stream.
+    rpc DeleteStream(DeleteStreamRequest) returns (DeleteStreamResponse) {}
 
     // Subscribe creates an ephemeral subscription for the given stream. It
     // begins to receive messages starting at the given offset and waits for
