@@ -19,8 +19,7 @@ message CreateStreamResponse {
 
 // DeleteStreamRequest is sent to delete a stream.
 message DeleteStreamRequest {
-    string subject           = 1; // Stream NATS subject
-    string name              = 2; // Stream name (unique per subject)
+    string name              = 1; // Stream name
 }
 
 // DeleteStreamResponse is sent by server after deleting a stream.
