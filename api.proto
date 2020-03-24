@@ -173,6 +173,6 @@ enum ActivityOp {
 // ActivityStreamEvent represents an entry into the activity stream.
 message ActivityStreamEvent {
     ActivityOp op = 1;
-    string Stream = 2;
+    string stream = 2;
     int32 Partition = 3;
 }
