@@ -29,7 +29,9 @@ message DeleteStreamResponse {
 
 // PauseStreamRequest is sent to pause a stream.
 message PauseStreamRequest {
-    string name              = 1; // Stream name
+    string name                     = 1; // Stream name
+    repeated int32 partitionIndices = 2; // Stream partitions
+    bool resumeAllAtOnce            = 3; // Resume all partitions at once
 }
 
 // PauseStreamResponse is sent by server after pausing a stream.
