@@ -174,5 +174,5 @@ enum ActivityOp {
 message ActivityStreamEvent {
     ActivityOp op = 1;
     string stream = 2;
-    int32 Partition = 3;
+    int32 partition = 3;
 }
