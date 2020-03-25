@@ -27,11 +27,14 @@ message DeleteStreamResponse {
     // Intentionally empty.
 }
 
-// PauseStreamRequest is sent to pause a stream.
+// PauseStreamRequest is sent to pause the specified stream partitions. If no
+// partitions are specified, this will pause all partitions in the stream.
+// Partitions are resumed when they are published to via the Liftbridge Publish
+// API.
 message PauseStreamRequest {
-    string name                     = 1; // Stream name
-    repeated int32 partitionIndices = 2; // Stream partitions
-    bool resumeAllAtOnce            = 3; // Resume all partitions at once
+    string         name       = 1; // Stream name
+    repeated int32 partitions = 2; // Stream partitions
+    bool           resumeAll  = 3; // Resume all partitions at once
 }
 
 // PauseStreamResponse is sent by server after pausing a stream.
@@ -159,7 +162,9 @@ service API {
     // DeleteStream deletes a stream.
     rpc DeleteStream(DeleteStreamRequest) returns (DeleteStreamResponse) {}
 
-    // PauseStream pauses a stream.
+    // PauseStream pauses a stream's partitions. If no partitions are
+    // specified, all of the stream's partitions will be paused. Partitions are
+    // resumed when they are published to via the Liftbridge Publish API.
     rpc PauseStream(PauseStreamRequest) returns (PauseStreamResponse) {}
 
     // Subscribe creates an ephemeral subscription for the given stream. It
