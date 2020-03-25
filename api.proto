@@ -164,15 +164,27 @@ service API {
     rpc Publish(PublishRequest) returns (PublishResponse) {}
 }
 
-// ActivityOp represents an activity stream operation.
-enum ActivityOp {
+// ActivityStreamOp represents an activity stream operation.
+enum ActivityStreamOp {
     CREATE_PARTITION = 0;
     DELETE_STREAM    = 1;
 }
 
+// CreatePartitionOp represents a partition creation operation.
+message CreatePartitionOp {
+    string stream    = 1;
+    int32  partition = 2;
+}
+
+// DeleteStreamOp represents a stream deletion operation.
+message DeleteStreamOp {
+    string stream = 1;
+}
+
 // ActivityStreamEvent represents an entry into the activity stream.
 message ActivityStreamEvent {
-    ActivityOp op = 1;
-    string stream = 2;
-    int32 partition = 3;
+    ActivityStreamOp  op                = 1;
+    CreatePartitionOp createPartitionOp = 2;
+    DeleteStreamOp    deleteStreamOp    = 3;
 }
+
