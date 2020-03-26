@@ -27,6 +27,21 @@ message DeleteStreamResponse {
     // Intentionally empty.
 }
 
+// PauseStreamRequest is sent to pause the specified stream partitions. If no
+// partitions are specified, this will pause all partitions in the stream.
+// Partitions are resumed when they are published to via the Liftbridge Publish
+// API.
+message PauseStreamRequest {
+    string         name       = 1; // Stream name
+    repeated int32 partitions = 2; // Stream partitions
+    bool           resumeAll  = 3; // Resume all partitions at once
+}
+
+// PauseStreamResponse is sent by server after pausing a stream.
+message PauseStreamResponse {
+    // Intentionally empty.
+}
+
 // StartPosition determines the start-position type on a subscription.
 enum StartPosition {
     NEW_ONLY    = 0; // Start at new messages after the latest
@@ -146,6 +161,11 @@ service API {
 
     // DeleteStream deletes a stream.
     rpc DeleteStream(DeleteStreamRequest) returns (DeleteStreamResponse) {}
+
+    // PauseStream pauses a stream's partitions. If no partitions are
+    // specified, all of the stream's partitions will be paused. Partitions are
+    // resumed when they are published to via the Liftbridge Publish API.
+    rpc PauseStream(PauseStreamRequest) returns (PauseStreamResponse) {}
 
     // Subscribe creates an ephemeral subscription for the given stream. It
     // begins to receive messages starting at the given offset and waits for

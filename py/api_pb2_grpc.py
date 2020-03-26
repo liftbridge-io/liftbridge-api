@@ -19,6 +19,16 @@ class APIStub(object):
         request_serializer=api__pb2.CreateStreamRequest.SerializeToString,
         response_deserializer=api__pb2.CreateStreamResponse.FromString,
         )
+    self.DeleteStream = channel.unary_unary(
+        '/proto.API/DeleteStream',
+        request_serializer=api__pb2.DeleteStreamRequest.SerializeToString,
+        response_deserializer=api__pb2.DeleteStreamResponse.FromString,
+        )
+    self.PauseStream = channel.unary_unary(
+        '/proto.API/PauseStream',
+        request_serializer=api__pb2.PauseStreamRequest.SerializeToString,
+        response_deserializer=api__pb2.PauseStreamResponse.FromString,
+        )
     self.Subscribe = channel.unary_stream(
         '/proto.API/Subscribe',
         request_serializer=api__pb2.SubscribeRequest.SerializeToString,
@@ -44,6 +54,22 @@ class APIServicer(object):
     """CreateStream creates a new stream attached to a NATS subject. It returns
     an AlreadyExists status code if a stream with the given subject and name
     already exists.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DeleteStream(self, request, context):
+    """DeleteStream deletes a stream.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PauseStream(self, request, context):
+    """PauseStream pauses a stream's partitions. If no partitions are
+    specified, all of the stream's partitions will be paused. Partitions are
+    resumed when they are published to via the Liftbridge Publish API.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -84,6 +110,16 @@ def add_APIServicer_to_server(servicer, server):
           servicer.CreateStream,
           request_deserializer=api__pb2.CreateStreamRequest.FromString,
           response_serializer=api__pb2.CreateStreamResponse.SerializeToString,
+      ),
+      'DeleteStream': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteStream,
+          request_deserializer=api__pb2.DeleteStreamRequest.FromString,
+          response_serializer=api__pb2.DeleteStreamResponse.SerializeToString,
+      ),
+      'PauseStream': grpc.unary_unary_rpc_method_handler(
+          servicer.PauseStream,
+          request_deserializer=api__pb2.PauseStreamRequest.FromString,
+          response_serializer=api__pb2.PauseStreamResponse.SerializeToString,
       ),
       'Subscribe': grpc.unary_stream_rpc_method_handler(
           servicer.Subscribe,
