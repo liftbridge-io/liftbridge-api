@@ -186,8 +186,10 @@ service API {
 
 // ActivityStreamOp represents an activity stream operation.
 enum ActivityStreamOp {
-    CREATE_PARTITION = 0;
-    DELETE_STREAM    = 1;
+    CREATE_PARTITION  = 0;
+    DELETE_STREAM     = 1;
+    PAUSE_PARTITIONS  = 2;
+    RESUME_PARTITIONS = 3;
 }
 
 // CreatePartitionOp represents a partition creation operation.
@@ -201,10 +203,23 @@ message DeleteStreamOp {
     string stream = 1;
 }
 
-// ActivityStreamEvent represents an entry into the activity stream.
-message ActivityStreamEvent {
-    ActivityStreamOp  op                = 1;
-    CreatePartitionOp createPartitionOp = 2;
-    DeleteStreamOp    deleteStreamOp    = 3;
+// PausePartitionsOp represents a partition pausing operation.
+message PausePartitionsOp {
+    string         stream     = 1;
+    repeated int32 partitions = 2;
 }
 
+// ResumePartitionsOp represents a partition resuming operation.
+message ResumePartitionsOp {
+    string         stream     = 1;
+    repeated int32 partitions = 2;
+}
+
+// ActivityStreamEvent represents an entry into the activity stream.
+message ActivityStreamEvent {
+    ActivityStreamOp   op                 = 1;
+    CreatePartitionOp  createPartitionOp  = 2;
+    DeleteStreamOp     deleteStreamOp     = 3;
+    PausePartitionsOp  pausePartitionsOp  = 4;
+    ResumePartitionsOp resumePartitionsOp = 5;
+}
