@@ -58,6 +58,7 @@ message SubscribeRequest {
     StartPosition startPosition  = 3; // Where to begin consuming from
     int64         startOffset    = 4 [jstype=JS_STRING]; // Offset to begin consuming from
     int64         startTimestamp = 5 [jstype=JS_STRING]; // Timestamp to begin consuming from
+    bool          ReadFromFollower = 6;
 }
 
 // FetchMetadataRequest is sent to retrieve the latest cluster metadata.
