@@ -203,8 +203,9 @@ message DeleteStreamOp {
 
 // ActivityStreamEvent represents an entry into the activity stream.
 message ActivityStreamEvent {
-    ActivityStreamOp  op                = 1;
-    CreatePartitionOp createPartitionOp = 2;
-    DeleteStreamOp    deleteStreamOp    = 3;
+    uint64            id                = 1;
+    ActivityStreamOp  op                = 2;
+    CreatePartitionOp createPartitionOp = 3;
+    DeleteStreamOp    deleteStreamOp    = 4;
 }
 
