@@ -154,16 +154,16 @@ message Ack {
 
 // ActivityStreamOp represents an activity stream operation.
 enum ActivityStreamOp {
-    CREATE_PARTITION = 0;
-    DELETE_STREAM    = 1;
-    PAUSE_STREAM     = 2;
-    RESUME_PARTITION = 3;
+    CREATE_STREAM = 0;
+    DELETE_STREAM = 1;
+    PAUSE_STREAM  = 2;
+    RESUME_STREAM = 3;
 }
 
-// CreatePartitionOp represents a partition creation operation.
-message CreatePartitionOp {
-    string stream    = 1;
-    int32  partition = 2;
+// CreateStreamOp represents a stream creation operation.
+message CreateStreamOp {
+    string          stream     = 1;
+    repeated int32  partitions = 2;
 }
 
 // DeleteStreamOp represents a stream deletion operation.
@@ -177,20 +177,20 @@ message PauseStreamOp {
     repeated int32 partitions = 2;
 }
 
-// ResumePartitionOp represents a partition resume operation.
-message ResumePartitionOp {
-    string stream    = 1;
-    int32  partition = 2;
+// ResumeStreamOp represents a stream resume operation.
+message ResumeStreamOp {
+    string          stream     = 1;
+    repeated int32  partitions = 2;
 }
 
 // ActivityStreamEvent represents an entry into the activity stream.
 message ActivityStreamEvent {
-    uint64            id                = 1;
-    ActivityStreamOp  op                = 2;
-    CreatePartitionOp createPartitionOp = 3;
-    DeleteStreamOp    deleteStreamOp    = 4;
-    PauseStreamOp     pauseStreamOp     = 5;
-    ResumePartitionOp resumePartitionOp = 6;
+    uint64           id             = 1;
+    ActivityStreamOp op             = 2;
+    CreateStreamOp   createStreamOp = 3;
+    DeleteStreamOp   deleteStreamOp = 4;
+    PauseStreamOp    pauseStreamOp  = 5;
+    ResumeStreamOp   resumeStreamOp = 6;
 }
 
 // API is the main Liftbridge server interface clients interact with.

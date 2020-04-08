@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='proto',
   syntax='proto3',
   serialized_options=_b('\n\023io.liftbridge.proto'),
-  serialized_pb=_b('\n\tapi.proto\x12\x05proto\"r\n\x13\x43reateStreamRequest\x12\x0f\n\x07subject\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05group\x18\x03 \x01(\t\x12\x19\n\x11replicationFactor\x18\x04 \x01(\x05\x12\x12\n\npartitions\x18\x05 \x01(\x05\"\x16\n\x14\x43reateStreamResponse\"#\n\x13\x44\x65leteStreamRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x16\n\x14\x44\x65leteStreamResponse\"I\n\x12PauseStreamRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\npartitions\x18\x02 \x03(\x05\x12\x11\n\tresumeAll\x18\x03 \x01(\x08\"\x15\n\x13PauseStreamResponse\"\x97\x01\n\x10SubscribeRequest\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x11\n\tpartition\x18\x02 \x01(\x05\x12+\n\rstartPosition\x18\x03 \x01(\x0e\x32\x14.proto.StartPosition\x12\x17\n\x0bstartOffset\x18\x04 \x01(\x03\x42\x02\x30\x01\x12\x1a\n\x0estartTimestamp\x18\x05 \x01(\x03\x42\x02\x30\x01\"\'\n\x14\x46\x65tchMetadataRequest\x12\x0f\n\x07streams\x18\x01 \x03(\t\"`\n\x15\x46\x65tchMetadataResponse\x12\x1e\n\x07\x62rokers\x18\x01 \x03(\x0b\x32\r.proto.Broker\x12\'\n\x08metadata\x18\x02 \x03(\x0b\x32\x15.proto.StreamMetadata\"\xa9\x02\n\x0ePublishRequest\x12\x0b\n\x03key\x18\x01 \x01(\x0c\x12\r\n\x05value\x18\x02 \x01(\x0c\x12\x0e\n\x06stream\x18\x03 \x01(\t\x12\x11\n\tpartition\x18\x04 \x01(\x05\x12\x0f\n\x07subject\x18\x05 \x01(\t\x12\x14\n\x0creplySubject\x18\x06 \x01(\t\x12\x33\n\x07headers\x18\x07 \x03(\x0b\x32\".proto.PublishRequest.HeadersEntry\x12\x10\n\x08\x61\x63kInbox\x18\x08 \x01(\t\x12\x15\n\rcorrelationId\x18\t \x01(\t\x12#\n\tackPolicy\x18\n \x01(\x0e\x32\x10.proto.AckPolicy\x1a.\n\x0cHeadersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"*\n\x0fPublishResponse\x12\x17\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\n.proto.Ack\"0\n\x06\x42roker\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04host\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x05\"\x88\x02\n\x0eStreamMetadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07subject\x18\x02 \x01(\t\x12*\n\x05\x65rror\x18\x03 \x01(\x0e\x32\x1b.proto.StreamMetadata.Error\x12\x39\n\npartitions\x18\x04 \x03(\x0b\x32%.proto.StreamMetadata.PartitionsEntry\x1aK\n\x0fPartitionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.proto.PartitionMetadata:\x02\x38\x01\"#\n\x05\x45rror\x12\x06\n\x02OK\x10\x00\x12\x12\n\x0eUNKNOWN_STREAM\x10\x01\"N\n\x11PartitionMetadata\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0e\n\x06leader\x18\x02 \x01(\t\x12\x10\n\x08replicas\x18\x03 \x03(\t\x12\x0b\n\x03isr\x18\x04 \x03(\t\"\xc6\x02\n\x07Message\x12\x12\n\x06offset\x18\x01 \x01(\x03\x42\x02\x30\x01\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x12\r\n\x05value\x18\x03 \x01(\x0c\x12\x15\n\ttimestamp\x18\x04 \x01(\x03\x42\x02\x30\x01\x12\x0e\n\x06stream\x18\x05 \x01(\t\x12\x11\n\tpartition\x18\x06 \x01(\x05\x12\x0f\n\x07subject\x18\x07 \x01(\t\x12\x14\n\x0creplySubject\x18\x08 \x01(\t\x12,\n\x07headers\x18\t \x03(\x0b\x32\x1b.proto.Message.HeadersEntry\x12\x10\n\x08\x61\x63kInbox\x18\n \x01(\t\x12\x15\n\rcorrelationId\x18\x0b \x01(\t\x12#\n\tackPolicy\x18\x0c \x01(\x0e\x32\x10.proto.AckPolicy\x1a.\n\x0cHeadersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"\xa5\x01\n\x03\x41\x63k\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x18\n\x10partitionSubject\x18\x02 \x01(\t\x12\x12\n\nmsgSubject\x18\x03 \x01(\t\x12\x12\n\x06offset\x18\x04 \x01(\x03\x42\x02\x30\x01\x12\x10\n\x08\x61\x63kInbox\x18\x05 \x01(\t\x12\x15\n\rcorrelationId\x18\x06 \x01(\t\x12#\n\tackPolicy\x18\x07 \x01(\x0e\x32\x10.proto.AckPolicy\"6\n\x11\x43reatePartitionOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x11\n\tpartition\x18\x02 \x01(\x05\" \n\x0e\x44\x65leteStreamOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\"3\n\rPauseStreamOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x12\n\npartitions\x18\x02 \x03(\x05\"6\n\x11ResumePartitionOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x11\n\tpartition\x18\x02 \x01(\x05\"\x8c\x02\n\x13\x41\x63tivityStreamEvent\x12\n\n\x02id\x18\x01 \x01(\x04\x12#\n\x02op\x18\x02 \x01(\x0e\x32\x17.proto.ActivityStreamOp\x12\x33\n\x11\x63reatePartitionOp\x18\x03 \x01(\x0b\x32\x18.proto.CreatePartitionOp\x12-\n\x0e\x64\x65leteStreamOp\x18\x04 \x01(\x0b\x32\x15.proto.DeleteStreamOp\x12+\n\rpauseStreamOp\x18\x05 \x01(\x0b\x32\x14.proto.PauseStreamOp\x12\x33\n\x11resumePartitionOp\x18\x06 \x01(\x0b\x32\x18.proto.ResumePartitionOp*R\n\rStartPosition\x12\x0c\n\x08NEW_ONLY\x10\x00\x12\n\n\x06OFFSET\x10\x01\x12\x0c\n\x08\x45\x41RLIEST\x10\x02\x12\n\n\x06LATEST\x10\x03\x12\r\n\tTIMESTAMP\x10\x04**\n\tAckPolicy\x12\n\n\x06LEADER\x10\x00\x12\x07\n\x03\x41LL\x10\x01\x12\x08\n\x04NONE\x10\x02*c\n\x10\x41\x63tivityStreamOp\x12\x14\n\x10\x43REATE_PARTITION\x10\x00\x12\x11\n\rDELETE_STREAM\x10\x01\x12\x10\n\x0cPAUSE_STREAM\x10\x02\x12\x14\n\x10RESUME_PARTITION\x10\x03\x32\xa7\x03\n\x03\x41PI\x12I\n\x0c\x43reateStream\x12\x1a.proto.CreateStreamRequest\x1a\x1b.proto.CreateStreamResponse\"\x00\x12I\n\x0c\x44\x65leteStream\x12\x1a.proto.DeleteStreamRequest\x1a\x1b.proto.DeleteStreamResponse\"\x00\x12\x46\n\x0bPauseStream\x12\x19.proto.PauseStreamRequest\x1a\x1a.proto.PauseStreamResponse\"\x00\x12\x38\n\tSubscribe\x12\x17.proto.SubscribeRequest\x1a\x0e.proto.Message\"\x00\x30\x01\x12L\n\rFetchMetadata\x12\x1b.proto.FetchMetadataRequest\x1a\x1c.proto.FetchMetadataResponse\"\x00\x12:\n\x07Publish\x12\x15.proto.PublishRequest\x1a\x16.proto.PublishResponse\"\x00\x42\x15\n\x13io.liftbridge.protob\x06proto3')
+  serialized_pb=_b('\n\tapi.proto\x12\x05proto\"r\n\x13\x43reateStreamRequest\x12\x0f\n\x07subject\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05group\x18\x03 \x01(\t\x12\x19\n\x11replicationFactor\x18\x04 \x01(\x05\x12\x12\n\npartitions\x18\x05 \x01(\x05\"\x16\n\x14\x43reateStreamResponse\"#\n\x13\x44\x65leteStreamRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x16\n\x14\x44\x65leteStreamResponse\"I\n\x12PauseStreamRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\npartitions\x18\x02 \x03(\x05\x12\x11\n\tresumeAll\x18\x03 \x01(\x08\"\x15\n\x13PauseStreamResponse\"\x97\x01\n\x10SubscribeRequest\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x11\n\tpartition\x18\x02 \x01(\x05\x12+\n\rstartPosition\x18\x03 \x01(\x0e\x32\x14.proto.StartPosition\x12\x17\n\x0bstartOffset\x18\x04 \x01(\x03\x42\x02\x30\x01\x12\x1a\n\x0estartTimestamp\x18\x05 \x01(\x03\x42\x02\x30\x01\"\'\n\x14\x46\x65tchMetadataRequest\x12\x0f\n\x07streams\x18\x01 \x03(\t\"`\n\x15\x46\x65tchMetadataResponse\x12\x1e\n\x07\x62rokers\x18\x01 \x03(\x0b\x32\r.proto.Broker\x12\'\n\x08metadata\x18\x02 \x03(\x0b\x32\x15.proto.StreamMetadata\"\xa9\x02\n\x0ePublishRequest\x12\x0b\n\x03key\x18\x01 \x01(\x0c\x12\r\n\x05value\x18\x02 \x01(\x0c\x12\x0e\n\x06stream\x18\x03 \x01(\t\x12\x11\n\tpartition\x18\x04 \x01(\x05\x12\x0f\n\x07subject\x18\x05 \x01(\t\x12\x14\n\x0creplySubject\x18\x06 \x01(\t\x12\x33\n\x07headers\x18\x07 \x03(\x0b\x32\".proto.PublishRequest.HeadersEntry\x12\x10\n\x08\x61\x63kInbox\x18\x08 \x01(\t\x12\x15\n\rcorrelationId\x18\t \x01(\t\x12#\n\tackPolicy\x18\n \x01(\x0e\x32\x10.proto.AckPolicy\x1a.\n\x0cHeadersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"*\n\x0fPublishResponse\x12\x17\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\n.proto.Ack\"0\n\x06\x42roker\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04host\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x05\"\x88\x02\n\x0eStreamMetadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07subject\x18\x02 \x01(\t\x12*\n\x05\x65rror\x18\x03 \x01(\x0e\x32\x1b.proto.StreamMetadata.Error\x12\x39\n\npartitions\x18\x04 \x03(\x0b\x32%.proto.StreamMetadata.PartitionsEntry\x1aK\n\x0fPartitionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.proto.PartitionMetadata:\x02\x38\x01\"#\n\x05\x45rror\x12\x06\n\x02OK\x10\x00\x12\x12\n\x0eUNKNOWN_STREAM\x10\x01\"N\n\x11PartitionMetadata\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0e\n\x06leader\x18\x02 \x01(\t\x12\x10\n\x08replicas\x18\x03 \x03(\t\x12\x0b\n\x03isr\x18\x04 \x03(\t\"\xc6\x02\n\x07Message\x12\x12\n\x06offset\x18\x01 \x01(\x03\x42\x02\x30\x01\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x12\r\n\x05value\x18\x03 \x01(\x0c\x12\x15\n\ttimestamp\x18\x04 \x01(\x03\x42\x02\x30\x01\x12\x0e\n\x06stream\x18\x05 \x01(\t\x12\x11\n\tpartition\x18\x06 \x01(\x05\x12\x0f\n\x07subject\x18\x07 \x01(\t\x12\x14\n\x0creplySubject\x18\x08 \x01(\t\x12,\n\x07headers\x18\t \x03(\x0b\x32\x1b.proto.Message.HeadersEntry\x12\x10\n\x08\x61\x63kInbox\x18\n \x01(\t\x12\x15\n\rcorrelationId\x18\x0b \x01(\t\x12#\n\tackPolicy\x18\x0c \x01(\x0e\x32\x10.proto.AckPolicy\x1a.\n\x0cHeadersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"\xa5\x01\n\x03\x41\x63k\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x18\n\x10partitionSubject\x18\x02 \x01(\t\x12\x12\n\nmsgSubject\x18\x03 \x01(\t\x12\x12\n\x06offset\x18\x04 \x01(\x03\x42\x02\x30\x01\x12\x10\n\x08\x61\x63kInbox\x18\x05 \x01(\t\x12\x15\n\rcorrelationId\x18\x06 \x01(\t\x12#\n\tackPolicy\x18\x07 \x01(\x0e\x32\x10.proto.AckPolicy\"4\n\x0e\x43reateStreamOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x12\n\npartitions\x18\x02 \x03(\x05\" \n\x0e\x44\x65leteStreamOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\"3\n\rPauseStreamOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x12\n\npartitions\x18\x02 \x03(\x05\"4\n\x0eResumeStreamOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x12\n\npartitions\x18\x02 \x03(\x05\"\x80\x02\n\x13\x41\x63tivityStreamEvent\x12\n\n\x02id\x18\x01 \x01(\x04\x12#\n\x02op\x18\x02 \x01(\x0e\x32\x17.proto.ActivityStreamOp\x12-\n\x0e\x63reateStreamOp\x18\x03 \x01(\x0b\x32\x15.proto.CreateStreamOp\x12-\n\x0e\x64\x65leteStreamOp\x18\x04 \x01(\x0b\x32\x15.proto.DeleteStreamOp\x12+\n\rpauseStreamOp\x18\x05 \x01(\x0b\x32\x14.proto.PauseStreamOp\x12-\n\x0eresumeStreamOp\x18\x06 \x01(\x0b\x32\x15.proto.ResumeStreamOp*R\n\rStartPosition\x12\x0c\n\x08NEW_ONLY\x10\x00\x12\n\n\x06OFFSET\x10\x01\x12\x0c\n\x08\x45\x41RLIEST\x10\x02\x12\n\n\x06LATEST\x10\x03\x12\r\n\tTIMESTAMP\x10\x04**\n\tAckPolicy\x12\n\n\x06LEADER\x10\x00\x12\x07\n\x03\x41LL\x10\x01\x12\x08\n\x04NONE\x10\x02*]\n\x10\x41\x63tivityStreamOp\x12\x11\n\rCREATE_STREAM\x10\x00\x12\x11\n\rDELETE_STREAM\x10\x01\x12\x10\n\x0cPAUSE_STREAM\x10\x02\x12\x11\n\rRESUME_STREAM\x10\x03\x32\xa7\x03\n\x03\x41PI\x12I\n\x0c\x43reateStream\x12\x1a.proto.CreateStreamRequest\x1a\x1b.proto.CreateStreamResponse\"\x00\x12I\n\x0c\x44\x65leteStream\x12\x1a.proto.DeleteStreamRequest\x1a\x1b.proto.DeleteStreamResponse\"\x00\x12\x46\n\x0bPauseStream\x12\x19.proto.PauseStreamRequest\x1a\x1a.proto.PauseStreamResponse\"\x00\x12\x38\n\tSubscribe\x12\x17.proto.SubscribeRequest\x1a\x0e.proto.Message\"\x00\x30\x01\x12L\n\rFetchMetadata\x12\x1b.proto.FetchMetadataRequest\x1a\x1c.proto.FetchMetadataResponse\"\x00\x12:\n\x07Publish\x12\x15.proto.PublishRequest\x1a\x16.proto.PublishResponse\"\x00\x42\x15\n\x13io.liftbridge.protob\x06proto3')
 )
 
 _STARTPOSITION = _descriptor.EnumDescriptor(
@@ -53,8 +53,8 @@ _STARTPOSITION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2320,
-  serialized_end=2402,
+  serialized_start=2304,
+  serialized_end=2386,
 )
 _sym_db.RegisterEnumDescriptor(_STARTPOSITION)
 
@@ -80,8 +80,8 @@ _ACKPOLICY = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2404,
-  serialized_end=2446,
+  serialized_start=2388,
+  serialized_end=2430,
 )
 _sym_db.RegisterEnumDescriptor(_ACKPOLICY)
 
@@ -93,7 +93,7 @@ _ACTIVITYSTREAMOP = _descriptor.EnumDescriptor(
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='CREATE_PARTITION', index=0, number=0,
+      name='CREATE_STREAM', index=0, number=0,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
@@ -105,14 +105,14 @@ _ACTIVITYSTREAMOP = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='RESUME_PARTITION', index=3, number=3,
+      name='RESUME_STREAM', index=3, number=3,
       serialized_options=None,
       type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2448,
-  serialized_end=2547,
+  serialized_start=2432,
+  serialized_end=2525,
 )
 _sym_db.RegisterEnumDescriptor(_ACTIVITYSTREAMOP)
 
@@ -125,10 +125,10 @@ TIMESTAMP = 4
 LEADER = 0
 ALL = 1
 NONE = 2
-CREATE_PARTITION = 0
+CREATE_STREAM = 0
 DELETE_STREAM = 1
 PAUSE_STREAM = 2
-RESUME_PARTITION = 3
+RESUME_STREAM = 3
 
 
 _STREAMMETADATA_ERROR = _descriptor.EnumDescriptor(
@@ -1056,24 +1056,24 @@ _ACK = _descriptor.Descriptor(
 )
 
 
-_CREATEPARTITIONOP = _descriptor.Descriptor(
-  name='CreatePartitionOp',
-  full_name='proto.CreatePartitionOp',
+_CREATESTREAMOP = _descriptor.Descriptor(
+  name='CreateStreamOp',
+  full_name='proto.CreateStreamOp',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='stream', full_name='proto.CreatePartitionOp.stream', index=0,
+      name='stream', full_name='proto.CreateStreamOp.stream', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='partition', full_name='proto.CreatePartitionOp.partition', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      name='partitions', full_name='proto.CreateStreamOp.partitions', index=1,
+      number=2, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -1090,7 +1090,7 @@ _CREATEPARTITIONOP = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=1850,
-  serialized_end=1904,
+  serialized_end=1902,
 )
 
 
@@ -1120,8 +1120,8 @@ _DELETESTREAMOP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1906,
-  serialized_end=1938,
+  serialized_start=1904,
+  serialized_end=1936,
 )
 
 
@@ -1158,29 +1158,29 @@ _PAUSESTREAMOP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1940,
-  serialized_end=1991,
+  serialized_start=1938,
+  serialized_end=1989,
 )
 
 
-_RESUMEPARTITIONOP = _descriptor.Descriptor(
-  name='ResumePartitionOp',
-  full_name='proto.ResumePartitionOp',
+_RESUMESTREAMOP = _descriptor.Descriptor(
+  name='ResumeStreamOp',
+  full_name='proto.ResumeStreamOp',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='stream', full_name='proto.ResumePartitionOp.stream', index=0,
+      name='stream', full_name='proto.ResumeStreamOp.stream', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='partition', full_name='proto.ResumePartitionOp.partition', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      name='partitions', full_name='proto.ResumeStreamOp.partitions', index=1,
+      number=2, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -1196,8 +1196,8 @@ _RESUMEPARTITIONOP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1993,
-  serialized_end=2047,
+  serialized_start=1991,
+  serialized_end=2043,
 )
 
 
@@ -1223,7 +1223,7 @@ _ACTIVITYSTREAMEVENT = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='createPartitionOp', full_name='proto.ActivityStreamEvent.createPartitionOp', index=2,
+      name='createStreamOp', full_name='proto.ActivityStreamEvent.createStreamOp', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -1244,7 +1244,7 @@ _ACTIVITYSTREAMEVENT = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='resumePartitionOp', full_name='proto.ActivityStreamEvent.resumePartitionOp', index=5,
+      name='resumeStreamOp', full_name='proto.ActivityStreamEvent.resumeStreamOp', index=5,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -1262,8 +1262,8 @@ _ACTIVITYSTREAMEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2050,
-  serialized_end=2318,
+  serialized_start=2046,
+  serialized_end=2302,
 )
 
 _SUBSCRIBEREQUEST.fields_by_name['startPosition'].enum_type = _STARTPOSITION
@@ -1283,10 +1283,10 @@ _MESSAGE.fields_by_name['headers'].message_type = _MESSAGE_HEADERSENTRY
 _MESSAGE.fields_by_name['ackPolicy'].enum_type = _ACKPOLICY
 _ACK.fields_by_name['ackPolicy'].enum_type = _ACKPOLICY
 _ACTIVITYSTREAMEVENT.fields_by_name['op'].enum_type = _ACTIVITYSTREAMOP
-_ACTIVITYSTREAMEVENT.fields_by_name['createPartitionOp'].message_type = _CREATEPARTITIONOP
+_ACTIVITYSTREAMEVENT.fields_by_name['createStreamOp'].message_type = _CREATESTREAMOP
 _ACTIVITYSTREAMEVENT.fields_by_name['deleteStreamOp'].message_type = _DELETESTREAMOP
 _ACTIVITYSTREAMEVENT.fields_by_name['pauseStreamOp'].message_type = _PAUSESTREAMOP
-_ACTIVITYSTREAMEVENT.fields_by_name['resumePartitionOp'].message_type = _RESUMEPARTITIONOP
+_ACTIVITYSTREAMEVENT.fields_by_name['resumeStreamOp'].message_type = _RESUMESTREAMOP
 DESCRIPTOR.message_types_by_name['CreateStreamRequest'] = _CREATESTREAMREQUEST
 DESCRIPTOR.message_types_by_name['CreateStreamResponse'] = _CREATESTREAMRESPONSE
 DESCRIPTOR.message_types_by_name['DeleteStreamRequest'] = _DELETESTREAMREQUEST
@@ -1303,10 +1303,10 @@ DESCRIPTOR.message_types_by_name['StreamMetadata'] = _STREAMMETADATA
 DESCRIPTOR.message_types_by_name['PartitionMetadata'] = _PARTITIONMETADATA
 DESCRIPTOR.message_types_by_name['Message'] = _MESSAGE
 DESCRIPTOR.message_types_by_name['Ack'] = _ACK
-DESCRIPTOR.message_types_by_name['CreatePartitionOp'] = _CREATEPARTITIONOP
+DESCRIPTOR.message_types_by_name['CreateStreamOp'] = _CREATESTREAMOP
 DESCRIPTOR.message_types_by_name['DeleteStreamOp'] = _DELETESTREAMOP
 DESCRIPTOR.message_types_by_name['PauseStreamOp'] = _PAUSESTREAMOP
-DESCRIPTOR.message_types_by_name['ResumePartitionOp'] = _RESUMEPARTITIONOP
+DESCRIPTOR.message_types_by_name['ResumeStreamOp'] = _RESUMESTREAMOP
 DESCRIPTOR.message_types_by_name['ActivityStreamEvent'] = _ACTIVITYSTREAMEVENT
 DESCRIPTOR.enum_types_by_name['StartPosition'] = _STARTPOSITION
 DESCRIPTOR.enum_types_by_name['AckPolicy'] = _ACKPOLICY
@@ -1449,12 +1449,12 @@ Ack = _reflection.GeneratedProtocolMessageType('Ack', (_message.Message,), {
   })
 _sym_db.RegisterMessage(Ack)
 
-CreatePartitionOp = _reflection.GeneratedProtocolMessageType('CreatePartitionOp', (_message.Message,), {
-  'DESCRIPTOR' : _CREATEPARTITIONOP,
+CreateStreamOp = _reflection.GeneratedProtocolMessageType('CreateStreamOp', (_message.Message,), {
+  'DESCRIPTOR' : _CREATESTREAMOP,
   '__module__' : 'api_pb2'
-  # @@protoc_insertion_point(class_scope:proto.CreatePartitionOp)
+  # @@protoc_insertion_point(class_scope:proto.CreateStreamOp)
   })
-_sym_db.RegisterMessage(CreatePartitionOp)
+_sym_db.RegisterMessage(CreateStreamOp)
 
 DeleteStreamOp = _reflection.GeneratedProtocolMessageType('DeleteStreamOp', (_message.Message,), {
   'DESCRIPTOR' : _DELETESTREAMOP,
@@ -1470,12 +1470,12 @@ PauseStreamOp = _reflection.GeneratedProtocolMessageType('PauseStreamOp', (_mess
   })
 _sym_db.RegisterMessage(PauseStreamOp)
 
-ResumePartitionOp = _reflection.GeneratedProtocolMessageType('ResumePartitionOp', (_message.Message,), {
-  'DESCRIPTOR' : _RESUMEPARTITIONOP,
+ResumeStreamOp = _reflection.GeneratedProtocolMessageType('ResumeStreamOp', (_message.Message,), {
+  'DESCRIPTOR' : _RESUMESTREAMOP,
   '__module__' : 'api_pb2'
-  # @@protoc_insertion_point(class_scope:proto.ResumePartitionOp)
+  # @@protoc_insertion_point(class_scope:proto.ResumeStreamOp)
   })
-_sym_db.RegisterMessage(ResumePartitionOp)
+_sym_db.RegisterMessage(ResumeStreamOp)
 
 ActivityStreamEvent = _reflection.GeneratedProtocolMessageType('ActivityStreamEvent', (_message.Message,), {
   'DESCRIPTOR' : _ACTIVITYSTREAMEVENT,
@@ -1501,8 +1501,8 @@ _API = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=2550,
-  serialized_end=2973,
+  serialized_start=2528,
+  serialized_end=2951,
   methods=[
   _descriptor.MethodDescriptor(
     name='CreateStream',
