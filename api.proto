@@ -175,6 +175,7 @@ message DeleteStreamOp {
 message PauseStreamOp {
     string         stream     = 1;
     repeated int32 partitions = 2;
+    bool           resumeAll  = 3;
 }
 
 // ResumeStreamOp represents a stream resume operation.
