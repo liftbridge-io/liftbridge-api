@@ -44,6 +44,11 @@ class APIStub(object):
         request_serializer=api__pb2.PublishRequest.SerializeToString,
         response_deserializer=api__pb2.PublishResponse.FromString,
         )
+    self.PublishToSubject = channel.unary_unary(
+        '/proto.API/PublishToSubject',
+        request_serializer=api__pb2.PublishToSubjectRequest.SerializeToString,
+        response_deserializer=api__pb2.PublishToSubjectResponse.FromString,
+        )
 
 
 class APIServicer(object):
@@ -94,10 +99,20 @@ class APIServicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def Publish(self, request, context):
-    """Publish a new message to a subject. If the AckPolicy is not NONE and a
+    """Publish a new message to a stream. If the AckPolicy is not NONE and a
     deadline is provided, this will synchronously block until the ack is
     received. If the ack is not received in time, a DeadlineExceeded status
     code is returned.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PublishToSubject(self, request, context):
+    """Publish a Liftbridge message to a NATS subject. If the AckPolicy is not NONE and a
+    deadline is provided, this will synchronously block until the first ack
+    is received. If an ack is not received in time, a DeadlineExceeded
+    status code is returned.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -135,6 +150,11 @@ def add_APIServicer_to_server(servicer, server):
           servicer.Publish,
           request_deserializer=api__pb2.PublishRequest.FromString,
           response_serializer=api__pb2.PublishResponse.SerializeToString,
+      ),
+      'PublishToSubject': grpc.unary_unary_rpc_method_handler(
+          servicer.PublishToSubject,
+          request_deserializer=api__pb2.PublishToSubjectRequest.FromString,
+          response_serializer=api__pb2.PublishToSubjectResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

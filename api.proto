@@ -72,22 +72,39 @@ message FetchMetadataResponse {
     repeated StreamMetadata metadata = 2; // Information for all streams
 }
 
-// PublishRequest is sent to publish a new message.
+// PublishRequest is sent to publish a new message to a stream.
 message PublishRequest {
-    bytes               key           = 1;  // Message key
-    bytes               value         = 2;  // Message payload
-    string              stream        = 3;  // Stream name to publish to
-    int32               partition     = 4;  // Stream partition to publish to
-    string              subject       = 5;  // NATS subject to publish to
-    string              replySubject  = 6;  // NATS reply subject
-    map<string, bytes>  headers       = 7;  // Message headers
-    string              ackInbox      = 8;  // NATS subject to publish acks to
-    string              correlationId = 9;  // User-supplied value to correlate acks to publishes
-    AckPolicy           ackPolicy     = 10; // Controls the behavior of acks
+    bytes               key           = 1; // Message key
+    bytes               value         = 2; // Message payload
+    string              stream        = 3; // Stream name to publish to
+    int32               partition     = 4; // Stream partition to publish to
+    map<string, bytes>  headers       = 5; // Message headers
+    string              ackInbox      = 6; // NATS subject to publish acks to
+    string              correlationId = 7; // User-supplied value to correlate acks to publishes
+    AckPolicy           ackPolicy     = 8; // Controls the behavior of acks
 }
 
-// PublishResponse is sent by the server after publishing a message.
+// PublishResponse is sent by the server after publishing a message to a
+// stream.
 message PublishResponse {
+    Ack ack = 1; // The ack for the published message if AckPolicy was not NONE
+}
+
+// PublishToSubjectRequest is sent to publish a Liftbridge message to a NATS
+// subject.
+message PublishToSubjectRequest {
+    bytes               key           = 1; // Message key
+    bytes               value         = 2; // Message payload
+    string              subject       = 3; // NATS subject to publish to
+    map<string, bytes>  headers       = 4; // Message headers
+    string              ackInbox      = 5; // NATS subject to publish acks to
+    string              correlationId = 6; // User-supplied value to correlate acks to publishes
+    AckPolicy           ackPolicy     = 7; // Controls the behavior of acks
+}
+
+// PublishToSubjectResponse is sent by the server after publishing a message to
+// a NATS subject.
+message PublishToSubjectResponse {
     Ack ack = 1; // The ack for the published message if AckPolicy was not NONE
 }
 
@@ -220,9 +237,15 @@ service API {
     // broker information.
     rpc FetchMetadata(FetchMetadataRequest) returns (FetchMetadataResponse) {}
 
-    // Publish a new message to a subject. If the AckPolicy is not NONE and a
+    // Publish a new message to a stream. If the AckPolicy is not NONE and a
     // deadline is provided, this will synchronously block until the ack is
     // received. If the ack is not received in time, a DeadlineExceeded status
     // code is returned.
     rpc Publish(PublishRequest) returns (PublishResponse) {}
+
+    // Publish a Liftbridge message to a NATS subject. If the AckPolicy is not NONE and a
+    // deadline is provided, this will synchronously block until the first ack
+    // is received. If an ack is not received in time, a DeadlineExceeded
+    // status code is returned.
+    rpc PublishToSubject(PublishToSubjectRequest) returns (PublishToSubjectResponse) {}
 }
