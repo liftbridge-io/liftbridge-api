@@ -3,7 +3,10 @@ all: go py
 
 .PHONY: go
 go:
-	protoc --gofast_out=plugins=grpc:go api.proto
+	protoc -I. \
+		--gofast_out=\
+Mgoogle/protobuf/duration.proto=github.com/gogo/protobuf/types,\
+plugins=grpc:go api.proto
 
 .PHONY: py
 py:

@@ -1,6 +1,6 @@
 syntax = "proto3";
 package proto;
-
+import "google/protobuf/duration.proto";
 option java_package = "io.liftbridge.proto";
 
 // CreateStreamRequest is sent to create a new stream.
@@ -10,6 +10,13 @@ message CreateStreamRequest {
     string group             = 3; // Partitions NATS subject amongst group members
     int32  replicationFactor = 4; // Number of stream replicas
     int32  partitions        = 5; // Number of stream partitions
+	int64                    RetentionMaxBytes     =6; // Custom StreamConfig
+	int64                    RetentionMaxMessages  =7; // Custom StreamConfig
+	google.protobuf.Duration RetentionMaxAge       =8; // Custom StreamConfig  
+	google.protobuf.Duration CleanerInterval       =9; // Custom StreamConfig
+	int64                    SegmentMaxBytes       =10; // Custom StreamConfig
+	google.protobuf.Duration SegmentMaxAge         =11; // Custom StreamConfig
+	int64                    CompactMaxGoroutines  =12; // Custom StreamConfig
 }
 
 // CreateStreamResponse is sent by server after creating a stream.
