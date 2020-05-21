@@ -44,6 +44,11 @@ class APIStub(object):
                 request_serializer=api__pb2.PublishRequest.SerializeToString,
                 response_deserializer=api__pb2.PublishResponse.FromString,
                 )
+        self.PublishAsync = channel.stream_stream(
+                '/proto.API/PublishAsync',
+                request_serializer=api__pb2.PublishRequest.SerializeToString,
+                response_deserializer=api__pb2.PublishResponse.FromString,
+                )
         self.PublishToSubject = channel.unary_unary(
                 '/proto.API/PublishToSubject',
                 request_serializer=api__pb2.PublishToSubjectRequest.SerializeToString,
@@ -108,6 +113,14 @@ class APIServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PublishAsync(self, request_iterator, context):
+        """Asynchronously publish messages to a stream. This returns a stream which
+        will yield PublishResponses for messages whose AckPolicy is not NONE.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def PublishToSubject(self, request, context):
         """Publish a Liftbridge message to a NATS subject. If the AckPolicy is not NONE and a
         deadline is provided, this will synchronously block until the first ack
@@ -148,6 +161,11 @@ def add_APIServicer_to_server(servicer, server):
             ),
             'Publish': grpc.unary_unary_rpc_method_handler(
                     servicer.Publish,
+                    request_deserializer=api__pb2.PublishRequest.FromString,
+                    response_serializer=api__pb2.PublishResponse.SerializeToString,
+            ),
+            'PublishAsync': grpc.stream_stream_rpc_method_handler(
+                    servicer.PublishAsync,
                     request_deserializer=api__pb2.PublishRequest.FromString,
                     response_serializer=api__pb2.PublishResponse.SerializeToString,
             ),
@@ -258,6 +276,22 @@ class API(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/proto.API/Publish',
+            api__pb2.PublishRequest.SerializeToString,
+            api__pb2.PublishResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PublishAsync(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_stream(request_iterator, target, '/proto.API/PublishAsync',
             api__pb2.PublishRequest.SerializeToString,
             api__pb2.PublishResponse.FromString,
             options, channel_credentials,
