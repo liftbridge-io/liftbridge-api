@@ -243,10 +243,6 @@ service API {
     // code is returned.
     rpc Publish(PublishRequest) returns (PublishResponse) {}
 
-    // Asynchronously publish messages to a stream. This returns a stream which
-    // will yield PublishResponses for messages whose AckPolicy is not NONE.
-    rpc PublishAsync(stream PublishRequest) returns (stream PublishResponse) {}
-
     // Publish a Liftbridge message to a NATS subject. If the AckPolicy is not NONE and a
     // deadline is provided, this will synchronously block until the first ack
     // is received. If an ack is not received in time, a DeadlineExceeded
