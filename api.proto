@@ -3,28 +3,34 @@ package proto;
 
 option java_package = "io.liftbridge.proto";
 
-// Custom Stream Config
-enum   CompactEnabled {     
-    UNKNOWN  = 0;
-    ENABLED  = 1;
-    DISABLED = 2;
+
+message RetentionMaxBytes {
+    int64 value = 1; // Value of RetentionMaxBytes config
+}
+
+message RetentionMaxMessages {
+    int64 value = 1;
+}
+
+message CompactEnabled {
+    bool value = 1;
 }
 
 // CreateStreamRequest is sent to create a new stream.
 message CreateStreamRequest {
-    string         subject              = 1; // Stream NATS subject
-    string         name                 = 2; // Stream name (unique per subject)
-    string         group                = 3; // Partitions NATS subject amongst group members
-    int32          replicationFactor    = 4; // Number of stream replicas
-    int32          partitions           = 5; // Number of stream partitions
-	int64          RetentionMaxBytes    = 6; // Custom StreamConfig
-	int64          RetentionMaxMessages = 7; // Custom StreamConfig
-	int64          RetentionMaxAge      = 8; // Custom StreamConfig  
-	int64          CleanerInterval      = 9; // Custom StreamConfig
-	int64          SegmentMaxBytes      = 10; // Custom StreamConfig
-	int64          SegmentMaxAge        = 11; // Custom StreamConfig
-    int64          CompactMaxGoroutines = 12; // Custom StreamConfig
-    CompactEnabled CompactEnabled       = 13;
+    string                  subject              = 1; // Stream NATS subject
+    string                  name                 = 2;  // Stream name (unique per subject)
+    string                  group                = 3;  // Partitions NATS subject amongst group members
+    int32                   replicationFactor    = 4;  // Number of stream replicas
+    int32                   partitions           = 5;  // Number of stream partitions
+	RetentionMaxBytes       RetentionMaxBytes    = 6;  // Custom StreamConfig
+	RetentionMaxMessages    RetentionMaxMessages = 7;  // Custom StreamConfig
+	int64                   RetentionMaxAge      = 8;  // Custom StreamConfig  
+	int64                   CleanerInterval      = 9;  // Custom StreamConfig
+	int64                   SegmentMaxBytes      = 10; // Custom StreamConfig
+	int64                   SegmentMaxAge        = 11; // Custom StreamConfig
+    int32                   CompactMaxGoroutines = 12; // Custom StreamConfig
+    bool                    CompactEnabled       = 13;
 }
 
 // CreateStreamResponse is sent by server after creating a stream.
