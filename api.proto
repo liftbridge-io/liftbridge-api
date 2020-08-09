@@ -150,10 +150,12 @@ message StreamMetadata {
 
 // PartitionMetadata contains information for a stream partition.
 message PartitionMetadata {
-    int32            id       = 1; // Partition id
-    string           leader   = 2; // Broker id of the partition leader
-    repeated string  replicas = 3; // Broker ids of the partition replicas
-    repeated string  isr      = 4; // Broker ids of the in-sync replica set
+    int32            id            = 1; // Partition id
+    string           leader        = 2; // Broker id of the partition leader
+    repeated string  replicas      = 3; // Broker ids of the partition replicas
+    repeated string  isr           = 4; // Broker ids of the in-sync replica set
+    int64            highWatermark = 5; // High watermark of the partition
+    int64            newestOffset  = 6; // Newest offset of the partition
 }
 
 // AckPolicy controls the behavior of message acknowledgements.
