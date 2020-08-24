@@ -156,6 +156,7 @@ message PartitionMetadata {
     repeated string  isr           = 4; // Broker ids of the in-sync replica set
     int64            highWatermark = 5; // High watermark of the partition
     int64            newestOffset  = 6; // Newest offset of the partition
+    bool             paused        = 7; // Is this partition paused?
 }
 
 // AckPolicy controls the behavior of message acknowledgements.
