@@ -186,14 +186,15 @@ message Message {
 // Ack represents an acknowledgement that a message was committed to a stream
 // partition.
 message Ack {
-    string    stream           = 1; // Name of the stream
-    string    partitionSubject = 2; // NATS subject partition is attached to
-    string    msgSubject       = 3; // NATS subject the message was received on
-    int64     offset           = 4 [jstype=JS_STRING]; // Stream offset the message was committed to
-    string    ackInbox         = 5; // NATS subject to publish acks to
-    string    correlationId    = 6; // User-supplied value from the message
-    AckPolicy ackPolicy        = 7; // The AckPolicy sent on the message
-    int64     timestamp        = 8 [jstype=JS_STRING]; // When the message was committed
+    string    stream             = 1; // Name of the stream
+    string    partitionSubject   = 2; // NATS subject partition is attached to
+    string    msgSubject         = 3; // NATS subject the message was received on
+    int64     offset             = 4 [jstype=JS_STRING]; // Stream offset the message was committed to
+    string    ackInbox           = 5; // NATS subject to publish acks to
+    string    correlationId      = 6; // User-supplied value from the message
+    AckPolicy ackPolicy          = 7; // The AckPolicy sent on the message
+    int64     receptionTimestamp = 8 [jstype=JS_STRING]; // When the message was received by the server
+    int64     commitTimestamp    = 9 [jstype=JS_STRING]; // When the message was committed
 }
 
 // ActivityStreamOp represents an activity stream operation.
