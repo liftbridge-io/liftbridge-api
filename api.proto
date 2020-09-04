@@ -130,6 +130,19 @@ message PublishToSubjectResponse {
     Ack ack = 1; // The ack for the published message if AckPolicy was not NONE
 }
 
+// SetStreamConfigRequest is sent to update stream or partition configuration.
+message SetStreamConfigRequest {
+    string         stream     = 1; // Name of stream to update
+    repeated int32 partitions = 2; // Stream partitions to update, if applicable
+    NullableBool   paused     = 3; // Pause/unpause the partitions
+    NullableBool   resumeAll  = 4; // Resume all partitions at once (must be set with paused flag)
+}
+
+// SetStreamConfigResponse is sent by the server after updating a stream's
+// configuration.
+message SetStreamConfigResponse {
+}
+
 // Broker contains information for a Liftbridge broker.
 message Broker {
     string id   = 1; // Broker id
@@ -280,4 +293,11 @@ service API {
     // is received. If an ack is not received in time, a DeadlineExceeded
     // status code is returned.
     rpc PublishToSubject(PublishToSubjectRequest) returns (PublishToSubjectResponse) {}
+
+    // SetStreamConfig dynamically updates a stream or its partitions'
+    // configuration.
+    //
+    // NOTE: This is a beta endpoint and is subject to change. It is not
+    // included as part of Liftbridge's semantic versioning scheme.
+    rpc SetStreamConfig(SetStreamConfigRequest) returns (SetStreamConfigResponse) {}
 }
