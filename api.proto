@@ -130,6 +130,33 @@ message PublishToSubjectResponse {
     Ack ack = 1; // The ack for the published message if AckPolicy was not NONE
 }
 
+// SetCursorRequest is sent to set a consumer's cursor position for a
+// particular stream partition.
+message SetCursorRequest {
+    string stream    = 1; // Stream name
+    int32  partition = 2; // Stream partition
+    string cursorId  = 3; // User-supplied value to uniquely identify this cursor
+    int64  offset    = 4; // Offset where the cursor should be placed
+}
+
+// SetCursorResponse is sent by the server after setting a consumer cursor.
+message SetCursorResponse {
+    // Intentionally empty
+}
+
+// FetchCursorRequest is sent to retrieve a consumer's cursor position for a
+// particular stream partition.
+message FetchCursorRequest {
+    string stream    = 1; // Stream name
+    int32  partition = 2; // Stream partition
+    string cursorId  = 3; // User-supplied value to uniquely identify this cursor
+}
+
+// FetchCursorResponse contains the requested consumer cursor position.
+message FetchCursorResponse {
+    int64 offset = 1; // Offset where cursor is located
+}
+
 // Broker contains information for a Liftbridge broker.
 message Broker {
     string id   = 1; // Broker id
@@ -280,4 +307,11 @@ service API {
     // is received. If an ack is not received in time, a DeadlineExceeded
     // status code is returned.
     rpc PublishToSubject(PublishToSubjectRequest) returns (PublishToSubjectResponse) {}
+
+    // SetCursor stores a cursor position for a particular stream partition
+    // which is uniquely identified by an opaque string.
+    rpc SetCursor(SetCursorRequest) returns (SetCursorResponse) {}
+
+    // FetchCursor retrieves a partition cursor position.
+    rpc FetchCursor(FetchCursorRequest) returns (FetchCursorResponse) {}
 }
