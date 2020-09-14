@@ -63,6 +63,19 @@ message PauseStreamResponse {
     // Intentionally empty.
 }
 
+// SetStreamReadonlyRequest is send to set a stream as read-only.
+message SetStreamReadonlyRequest {
+    string name               = 1; // Stream name
+    repeated int32 partitions = 2; // Stream partitions
+    bool readonly             = 3; // Should the readonly flag be set or removed
+}
+
+// SetStreamReadonlyResponse is sent by server after setting a stream's readonly
+// flag.
+message SetStreamReadonlyResponse {
+    // Intentionally empty.
+}
+
 // StartPosition determines the start-position type on a subscription.
 enum StartPosition {
     NEW_ONLY    = 0; // Start at new messages after the latest
@@ -199,10 +212,11 @@ message Ack {
 
 // ActivityStreamOp represents an activity stream operation.
 enum ActivityStreamOp {
-    CREATE_STREAM = 0;
-    DELETE_STREAM = 1;
-    PAUSE_STREAM  = 2;
-    RESUME_STREAM = 3;
+    CREATE_STREAM       = 0;
+    DELETE_STREAM       = 1;
+    PAUSE_STREAM        = 2;
+    RESUME_STREAM       = 3;
+    SET_STREAM_READONLY = 4;
 }
 
 // CreateStreamOp represents a stream creation operation.
@@ -229,14 +243,22 @@ message ResumeStreamOp {
     repeated int32  partitions = 2;
 }
 
+// ReadonlyStreamOp represents a stream readonly operation.
+message SetStreamReadonlyOp {
+    string         stream     = 1;
+    repeated int32 partitions = 2;
+    bool           readonly   = 3;
+}
+
 // ActivityStreamEvent represents an entry into the activity stream.
 message ActivityStreamEvent {
-    uint64           id             = 1;
-    ActivityStreamOp op             = 2;
-    CreateStreamOp   createStreamOp = 3;
-    DeleteStreamOp   deleteStreamOp = 4;
-    PauseStreamOp    pauseStreamOp  = 5;
-    ResumeStreamOp   resumeStreamOp = 6;
+    uint64              id                  = 1;
+    ActivityStreamOp    op                  = 2;
+    CreateStreamOp      createStreamOp      = 3;
+    DeleteStreamOp      deleteStreamOp      = 4;
+    PauseStreamOp       pauseStreamOp       = 5;
+    ResumeStreamOp      resumeStreamOp      = 6;
+    SetStreamReadonlyOp setStreamReadonlyOp = 7;
 }
 
 // API is the main Liftbridge server interface clients interact with.
@@ -253,6 +275,10 @@ service API {
     // specified, all of the stream's partitions will be paused. Partitions are
     // resumed when they are published to via the Liftbridge Publish API.
     rpc PauseStream(PauseStreamRequest) returns (PauseStreamResponse) {}
+
+    // SetStreamReadonly sets a read-only flag to a partition. Returns a
+    // NoSuchStream error code if the given stream or partition does not exist.
+    rpc SetStreamReadonly(SetStreamReadonlyRequest) returns (SetStreamReadonlyResponse) {}
 
     // Subscribe creates an ephemeral subscription for the given stream. It
     // begins to receive messages starting at the given offset and waits for
