@@ -276,9 +276,8 @@ service API {
     // resumed when they are published to via the Liftbridge Publish API.
     rpc PauseStream(PauseStreamRequest) returns (PauseStreamResponse) {}
 
-    // SetStreamReadonly sets a read-only flag to a partition. The latest
-    // message's offset is returned. Returns a NoSuchStream error code if the
-    // given stream or partition does not exist.
+    // SetStreamReadonly sets a read-only flag to a partition. Returns a
+    // NoSuchStream error code if the given stream or partition does not exist.
     rpc SetStreamReadonly(SetStreamReadonlyRequest) returns (SetStreamReadonlyResponse) {}
 
     // Subscribe creates an ephemeral subscription for the given stream. It

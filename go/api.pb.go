@@ -2318,9 +2318,8 @@ type APIClient interface {
 	// specified, all of the stream's partitions will be paused. Partitions are
 	// resumed when they are published to via the Liftbridge Publish API.
 	PauseStream(ctx context.Context, in *PauseStreamRequest, opts ...grpc.CallOption) (*PauseStreamResponse, error)
-	// SetStreamReadonly sets a read-only flag to a partition. The latest
-	// message's offset is returned. Returns a NoSuchStream error code if the
-	// given stream or partition does not exist.
+	// SetStreamReadonly sets a read-only flag to a partition. Returns a
+	// NoSuchStream error code if the given stream or partition does not exist.
 	SetStreamReadonly(ctx context.Context, in *SetStreamReadonlyRequest, opts ...grpc.CallOption) (*SetStreamReadonlyResponse, error)
 	// Subscribe creates an ephemeral subscription for the given stream. It
 	// begins to receive messages starting at the given offset and waits for
@@ -2492,9 +2491,8 @@ type APIServer interface {
 	// specified, all of the stream's partitions will be paused. Partitions are
 	// resumed when they are published to via the Liftbridge Publish API.
 	PauseStream(context.Context, *PauseStreamRequest) (*PauseStreamResponse, error)
-	// SetStreamReadonly sets a read-only flag to a partition. The latest
-	// message's offset is returned. Returns a NoSuchStream error code if the
-	// given stream or partition does not exist.
+	// SetStreamReadonly sets a read-only flag to a partition. Returns a
+	// NoSuchStream error code if the given stream or partition does not exist.
 	SetStreamReadonly(context.Context, *SetStreamReadonlyRequest) (*SetStreamReadonlyResponse, error)
 	// Subscribe creates an ephemeral subscription for the given stream. It
 	// begins to receive messages starting at the given offset and waits for
