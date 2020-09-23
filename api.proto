@@ -122,8 +122,9 @@ message PublishRequest {
 // PublishAsyncError is returned on the PublishAsync stream if a publish failed.
 message PublishAsyncError {
     enum Code {
-        UNKNOWN   = 0;
-        NOT_FOUND = 1; // Stream or partition not found
+        UNKNOWN     = 0;
+        BAD_REQUEST = 1; // Invalid request arguments
+        NOT_FOUND   = 2; // Stream or partition not found
     }
     Code   code    = 1; // Error code
     string message = 2; // Error message
