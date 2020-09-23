@@ -127,16 +127,16 @@ message PublishAsyncError {
         NOT_FOUND   = 2; // Stream or partition not found
         INTERNAL    = 3; // Internal server error
     }
-    string correlationId = 1; // User-supplied value from the message
-    Code   code          = 2; // Error code
-    string message       = 3; // Error message
+    Code   code    = 1; // Error code
+    string message = 2; // Error message
 }
 
 // PublishResponse is sent by the server after publishing a message to a
 // stream.
 message PublishResponse {
-    Ack               ack        = 1; // The ack for the published message if AckPolicy was not NONE
-    PublishAsyncError asyncError = 2; // Set if publish failed (only set on PublishAsync)
+    Ack               ack           = 1; // The ack for the published message if AckPolicy was not NONE
+    PublishAsyncError asyncError    = 2; // Set if publish failed (only set on PublishAsync)
+    string            correlationId = 3; // User-supplied value to correlate async responses to publishes
 }
 
 // PublishToSubjectRequest is sent to publish a Liftbridge message to a NATS
