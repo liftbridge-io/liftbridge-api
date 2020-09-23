@@ -126,8 +126,9 @@ message PublishAsyncError {
         BAD_REQUEST = 1; // Invalid request arguments
         NOT_FOUND   = 2; // Stream or partition not found
     }
-    Code   code    = 1; // Error code
-    string message = 2; // Error message
+    string correlationId = 1; // User-supplied value from the message
+    Code   code          = 2; // Error code
+    string message       = 3; // Error message
 }
 
 // PublishResponse is sent by the server after publishing a message to a
