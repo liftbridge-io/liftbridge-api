@@ -125,6 +125,7 @@ message PublishAsyncError {
         UNKNOWN     = 0;
         BAD_REQUEST = 1; // Invalid request arguments
         NOT_FOUND   = 2; // Stream or partition not found
+        INTERNAL    = 3; // Internal server error
     }
     string correlationId = 1; // User-supplied value from the message
     Code   code          = 2; // Error code
