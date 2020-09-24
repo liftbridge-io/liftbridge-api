@@ -119,10 +119,24 @@ message PublishRequest {
     AckPolicy           ackPolicy     = 8; // Controls the behavior of acks
 }
 
+// PublishAsyncError is returned on the PublishAsync stream if a publish failed.
+message PublishAsyncError {
+    enum Code {
+        UNKNOWN     = 0;
+        BAD_REQUEST = 1; // Invalid request arguments
+        NOT_FOUND   = 2; // Stream or partition not found
+        INTERNAL    = 3; // Internal server error
+    }
+    Code   code    = 1; // Error code
+    string message = 2; // Error message
+}
+
 // PublishResponse is sent by the server after publishing a message to a
 // stream.
 message PublishResponse {
-    Ack ack = 1; // The ack for the published message if AckPolicy was not NONE
+    Ack               ack           = 1; // The ack for the published message if AckPolicy was not NONE
+    PublishAsyncError asyncError    = 2; // Set if publish failed (only set on PublishAsync)
+    string            correlationId = 3; // User-supplied value to correlate async responses to publishes
 }
 
 // PublishToSubjectRequest is sent to publish a Liftbridge message to a NATS
