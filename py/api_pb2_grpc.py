@@ -30,6 +30,11 @@ class APIStub(object):
                 request_serializer=api__pb2.PauseStreamRequest.SerializeToString,
                 response_deserializer=api__pb2.PauseStreamResponse.FromString,
                 )
+        self.SetStreamReadonly = channel.unary_unary(
+                '/proto.API/SetStreamReadonly',
+                request_serializer=api__pb2.SetStreamReadonlyRequest.SerializeToString,
+                response_deserializer=api__pb2.SetStreamReadonlyResponse.FromString,
+                )
         self.Subscribe = channel.unary_stream(
                 '/proto.API/Subscribe',
                 request_serializer=api__pb2.SubscribeRequest.SerializeToString,
@@ -91,6 +96,14 @@ class APIServicer(object):
         """PauseStream pauses a stream's partitions. If no partitions are
         specified, all of the stream's partitions will be paused. Partitions are
         resumed when they are published to via the Liftbridge Publish API.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SetStreamReadonly(self, request, context):
+        """SetStreamReadonly sets a read-only flag to a partition. Returns a
+        NoSuchStream error code if the given stream or partition does not exist.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -175,6 +188,11 @@ def add_APIServicer_to_server(servicer, server):
                     servicer.PauseStream,
                     request_deserializer=api__pb2.PauseStreamRequest.FromString,
                     response_serializer=api__pb2.PauseStreamResponse.SerializeToString,
+            ),
+            'SetStreamReadonly': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetStreamReadonly,
+                    request_deserializer=api__pb2.SetStreamReadonlyRequest.FromString,
+                    response_serializer=api__pb2.SetStreamReadonlyResponse.SerializeToString,
             ),
             'Subscribe': grpc.unary_stream_rpc_method_handler(
                     servicer.Subscribe,
@@ -270,6 +288,23 @@ class API(object):
         return grpc.experimental.unary_unary(request, target, '/proto.API/PauseStream',
             api__pb2.PauseStreamRequest.SerializeToString,
             api__pb2.PauseStreamResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetStreamReadonly(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/proto.API/SetStreamReadonly',
+            api__pb2.SetStreamReadonlyRequest.SerializeToString,
+            api__pb2.SetStreamReadonlyResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
