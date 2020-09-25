@@ -60,6 +60,16 @@ class APIStub(object):
                 request_serializer=api__pb2.PublishToSubjectRequest.SerializeToString,
                 response_deserializer=api__pb2.PublishToSubjectResponse.FromString,
                 )
+        self.SetCursor = channel.unary_unary(
+                '/proto.API/SetCursor',
+                request_serializer=api__pb2.SetCursorRequest.SerializeToString,
+                response_deserializer=api__pb2.SetCursorResponse.FromString,
+                )
+        self.FetchCursor = channel.unary_unary(
+                '/proto.API/FetchCursor',
+                request_serializer=api__pb2.FetchCursorRequest.SerializeToString,
+                response_deserializer=api__pb2.FetchCursorResponse.FromString,
+                )
 
 
 class APIServicer(object):
@@ -146,6 +156,27 @@ class APIServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SetCursor(self, request, context):
+        """SetCursor stores a cursor position for a particular stream partition
+        which is uniquely identified by an opaque string.
+
+        NOTE: This is a beta endpoint and is subject to change. It is not
+        included as part of Liftbridge's semantic versioning scheme.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def FetchCursor(self, request, context):
+        """FetchCursor retrieves a partition cursor position.
+
+        NOTE: This is a beta endpoint and is subject to change. It is not
+        included as part of Liftbridge's semantic versioning scheme.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_APIServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -193,6 +224,16 @@ def add_APIServicer_to_server(servicer, server):
                     servicer.PublishToSubject,
                     request_deserializer=api__pb2.PublishToSubjectRequest.FromString,
                     response_serializer=api__pb2.PublishToSubjectResponse.SerializeToString,
+            ),
+            'SetCursor': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetCursor,
+                    request_deserializer=api__pb2.SetCursorRequest.FromString,
+                    response_serializer=api__pb2.SetCursorResponse.SerializeToString,
+            ),
+            'FetchCursor': grpc.unary_unary_rpc_method_handler(
+                    servicer.FetchCursor,
+                    request_deserializer=api__pb2.FetchCursorRequest.FromString,
+                    response_serializer=api__pb2.FetchCursorResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -355,5 +396,39 @@ class API(object):
         return grpc.experimental.unary_unary(request, target, '/proto.API/PublishToSubject',
             api__pb2.PublishToSubjectRequest.SerializeToString,
             api__pb2.PublishToSubjectResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetCursor(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/proto.API/SetCursor',
+            api__pb2.SetCursorRequest.SerializeToString,
+            api__pb2.SetCursorResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def FetchCursor(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/proto.API/FetchCursor',
+            api__pb2.FetchCursorRequest.SerializeToString,
+            api__pb2.FetchCursorResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
