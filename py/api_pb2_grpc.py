@@ -159,6 +159,9 @@ class APIServicer(object):
     def SetCursor(self, request, context):
         """SetCursor stores a cursor position for a particular stream partition
         which is uniquely identified by an opaque string.
+
+        NOTE: This is a beta endpoint and is subject to change. It is not
+        included as part of Liftbridge's semantic versioning scheme.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -166,6 +169,9 @@ class APIServicer(object):
 
     def FetchCursor(self, request, context):
         """FetchCursor retrieves a partition cursor position.
+
+        NOTE: This is a beta endpoint and is subject to change. It is not
+        included as part of Liftbridge's semantic versioning scheme.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

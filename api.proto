@@ -350,8 +350,14 @@ service API {
 
     // SetCursor stores a cursor position for a particular stream partition
     // which is uniquely identified by an opaque string.
+    //
+    // NOTE: This is a beta endpoint and is subject to change. It is not
+    // included as part of Liftbridge's semantic versioning scheme.
     rpc SetCursor(SetCursorRequest) returns (SetCursorResponse) {}
 
     // FetchCursor retrieves a partition cursor position.
+    //
+    // NOTE: This is a beta endpoint and is subject to change. It is not
+    // included as part of Liftbridge's semantic versioning scheme.
     rpc FetchCursor(FetchCursorRequest) returns (FetchCursorResponse) {}
 }

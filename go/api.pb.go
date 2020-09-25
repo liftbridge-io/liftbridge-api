@@ -2692,8 +2692,14 @@ type APIClient interface {
 	PublishToSubject(ctx context.Context, in *PublishToSubjectRequest, opts ...grpc.CallOption) (*PublishToSubjectResponse, error)
 	// SetCursor stores a cursor position for a particular stream partition
 	// which is uniquely identified by an opaque string.
+	//
+	// NOTE: This is a beta endpoint and is subject to change. It is not
+	// included as part of Liftbridge's semantic versioning scheme.
 	SetCursor(ctx context.Context, in *SetCursorRequest, opts ...grpc.CallOption) (*SetCursorResponse, error)
 	// FetchCursor retrieves a partition cursor position.
+	//
+	// NOTE: This is a beta endpoint and is subject to change. It is not
+	// included as part of Liftbridge's semantic versioning scheme.
 	FetchCursor(ctx context.Context, in *FetchCursorRequest, opts ...grpc.CallOption) (*FetchCursorResponse, error)
 }
 
@@ -2888,8 +2894,14 @@ type APIServer interface {
 	PublishToSubject(context.Context, *PublishToSubjectRequest) (*PublishToSubjectResponse, error)
 	// SetCursor stores a cursor position for a particular stream partition
 	// which is uniquely identified by an opaque string.
+	//
+	// NOTE: This is a beta endpoint and is subject to change. It is not
+	// included as part of Liftbridge's semantic versioning scheme.
 	SetCursor(context.Context, *SetCursorRequest) (*SetCursorResponse, error)
 	// FetchCursor retrieves a partition cursor position.
+	//
+	// NOTE: This is a beta endpoint and is subject to change. It is not
+	// included as part of Liftbridge's semantic versioning scheme.
 	FetchCursor(context.Context, *FetchCursorRequest) (*FetchCursorResponse, error)
 }
 
