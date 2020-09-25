@@ -126,6 +126,7 @@ message PublishAsyncError {
         BAD_REQUEST = 1; // Invalid request arguments
         NOT_FOUND   = 2; // Stream or partition not found
         INTERNAL    = 3; // Internal server error
+        READONLY    = 4; // Partition is readonly
     }
     Code   code    = 1; // Error code
     string message = 2; // Error message
