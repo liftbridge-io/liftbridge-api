@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\023io.liftbridge.proto',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\tapi.proto\x12\x05proto\"\x1e\n\rNullableInt64\x12\r\n\x05value\x18\x01 \x01(\x03\"\x1e\n\rNullableInt32\x12\r\n\x05value\x18\x01 \x01(\x05\"\x1d\n\x0cNullableBool\x12\r\n\x05value\x18\x01 \x01(\x08\"\xf2\x03\n\x13\x43reateStreamRequest\x12\x0f\n\x07subject\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05group\x18\x03 \x01(\t\x12\x19\n\x11replicationFactor\x18\x04 \x01(\x05\x12\x12\n\npartitions\x18\x05 \x01(\x05\x12/\n\x11RetentionMaxBytes\x18\x06 \x01(\x0b\x32\x14.proto.NullableInt64\x12\x32\n\x14RetentionMaxMessages\x18\x07 \x01(\x0b\x32\x14.proto.NullableInt64\x12-\n\x0fRetentionMaxAge\x18\x08 \x01(\x0b\x32\x14.proto.NullableInt64\x12-\n\x0f\x43leanerInterval\x18\t \x01(\x0b\x32\x14.proto.NullableInt64\x12-\n\x0fSegmentMaxBytes\x18\n \x01(\x0b\x32\x14.proto.NullableInt64\x12+\n\rSegmentMaxAge\x18\x0b \x01(\x0b\x32\x14.proto.NullableInt64\x12\x32\n\x14\x43ompactMaxGoroutines\x18\x0c \x01(\x0b\x32\x14.proto.NullableInt32\x12+\n\x0e\x43ompactEnabled\x18\r \x01(\x0b\x32\x13.proto.NullableBool\"\x16\n\x14\x43reateStreamResponse\"#\n\x13\x44\x65leteStreamRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x16\n\x14\x44\x65leteStreamResponse\"I\n\x12PauseStreamRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\npartitions\x18\x02 \x03(\x05\x12\x11\n\tresumeAll\x18\x03 \x01(\x08\"\x15\n\x13PauseStreamResponse\"\xaf\x01\n\x10SubscribeRequest\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x11\n\tpartition\x18\x02 \x01(\x05\x12+\n\rstartPosition\x18\x03 \x01(\x0e\x32\x14.proto.StartPosition\x12\x17\n\x0bstartOffset\x18\x04 \x01(\x03\x42\x02\x30\x01\x12\x1a\n\x0estartTimestamp\x18\x05 \x01(\x03\x42\x02\x30\x01\x12\x16\n\x0ereadISRReplica\x18\x06 \x01(\x08\"\'\n\x14\x46\x65tchMetadataRequest\x12\x0f\n\x07streams\x18\x01 \x03(\t\"`\n\x15\x46\x65tchMetadataResponse\x12\x1e\n\x07\x62rokers\x18\x01 \x03(\x0b\x32\r.proto.Broker\x12\'\n\x08metadata\x18\x02 \x03(\x0b\x32\x15.proto.StreamMetadata\"D\n\x1d\x46\x65tchPartitionMetadataRequest\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x13\n\x0bpartitionID\x18\x02 \x01(\x05\"U\n\x1e\x46\x65tchPartitionMetadataResponse\x12\x33\n\x11partitionMetadata\x18\x01 \x01(\x0b\x32\x18.proto.PartitionMetadata\"\x82\x02\n\x0ePublishRequest\x12\x0b\n\x03key\x18\x01 \x01(\x0c\x12\r\n\x05value\x18\x02 \x01(\x0c\x12\x0e\n\x06stream\x18\x03 \x01(\t\x12\x11\n\tpartition\x18\x04 \x01(\x05\x12\x33\n\x07headers\x18\x05 \x03(\x0b\x32\".proto.PublishRequest.HeadersEntry\x12\x10\n\x08\x61\x63kInbox\x18\x06 \x01(\t\x12\x15\n\rcorrelationId\x18\x07 \x01(\t\x12#\n\tackPolicy\x18\x08 \x01(\x0e\x32\x10.proto.AckPolicy\x1a.\n\x0cHeadersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"*\n\x0fPublishResponse\x12\x17\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\n.proto.Ack\"\x82\x02\n\x17PublishToSubjectRequest\x12\x0b\n\x03key\x18\x01 \x01(\x0c\x12\r\n\x05value\x18\x02 \x01(\x0c\x12\x0f\n\x07subject\x18\x03 \x01(\t\x12<\n\x07headers\x18\x04 \x03(\x0b\x32+.proto.PublishToSubjectRequest.HeadersEntry\x12\x10\n\x08\x61\x63kInbox\x18\x05 \x01(\t\x12\x15\n\rcorrelationId\x18\x06 \x01(\t\x12#\n\tackPolicy\x18\x07 \x01(\x0e\x32\x10.proto.AckPolicy\x1a.\n\x0cHeadersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"3\n\x18PublishToSubjectResponse\x12\x17\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\n.proto.Ack\"0\n\x06\x42roker\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04host\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x05\"\x88\x02\n\x0eStreamMetadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07subject\x18\x02 \x01(\t\x12*\n\x05\x65rror\x18\x03 \x01(\x0e\x32\x1b.proto.StreamMetadata.Error\x12\x39\n\npartitions\x18\x04 \x03(\x0b\x32%.proto.StreamMetadata.PartitionsEntry\x1aK\n\x0fPartitionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.proto.PartitionMetadata:\x02\x38\x01\"#\n\x05\x45rror\x12\x06\n\x02OK\x10\x00\x12\x12\n\x0eUNKNOWN_STREAM\x10\x01\"{\n\x11PartitionMetadata\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0e\n\x06leader\x18\x02 \x01(\t\x12\x10\n\x08replicas\x18\x03 \x03(\t\x12\x0b\n\x03isr\x18\x04 \x03(\t\x12\x15\n\rhighWatermark\x18\x05 \x01(\x03\x12\x14\n\x0cnewestOffset\x18\x06 \x01(\x03\"\xc6\x02\n\x07Message\x12\x12\n\x06offset\x18\x01 \x01(\x03\x42\x02\x30\x01\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x12\r\n\x05value\x18\x03 \x01(\x0c\x12\x15\n\ttimestamp\x18\x04 \x01(\x03\x42\x02\x30\x01\x12\x0e\n\x06stream\x18\x05 \x01(\t\x12\x11\n\tpartition\x18\x06 \x01(\x05\x12\x0f\n\x07subject\x18\x07 \x01(\t\x12\x14\n\x0creplySubject\x18\x08 \x01(\t\x12,\n\x07headers\x18\t \x03(\x0b\x32\x1b.proto.Message.HeadersEntry\x12\x10\n\x08\x61\x63kInbox\x18\n \x01(\t\x12\x15\n\rcorrelationId\x18\x0b \x01(\t\x12#\n\tackPolicy\x18\x0c \x01(\x0e\x32\x10.proto.AckPolicy\x1a.\n\x0cHeadersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"\xa5\x01\n\x03\x41\x63k\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x18\n\x10partitionSubject\x18\x02 \x01(\t\x12\x12\n\nmsgSubject\x18\x03 \x01(\t\x12\x12\n\x06offset\x18\x04 \x01(\x03\x42\x02\x30\x01\x12\x10\n\x08\x61\x63kInbox\x18\x05 \x01(\t\x12\x15\n\rcorrelationId\x18\x06 \x01(\t\x12#\n\tackPolicy\x18\x07 \x01(\x0e\x32\x10.proto.AckPolicy\"4\n\x0e\x43reateStreamOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x12\n\npartitions\x18\x02 \x03(\x05\" \n\x0e\x44\x65leteStreamOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\"F\n\rPauseStreamOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x12\n\npartitions\x18\x02 \x03(\x05\x12\x11\n\tresumeAll\x18\x03 \x01(\x08\"4\n\x0eResumeStreamOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x12\n\npartitions\x18\x02 \x03(\x05\"\x80\x02\n\x13\x41\x63tivityStreamEvent\x12\n\n\x02id\x18\x01 \x01(\x04\x12#\n\x02op\x18\x02 \x01(\x0e\x32\x17.proto.ActivityStreamOp\x12-\n\x0e\x63reateStreamOp\x18\x03 \x01(\x0b\x32\x15.proto.CreateStreamOp\x12-\n\x0e\x64\x65leteStreamOp\x18\x04 \x01(\x0b\x32\x15.proto.DeleteStreamOp\x12+\n\rpauseStreamOp\x18\x05 \x01(\x0b\x32\x14.proto.PauseStreamOp\x12-\n\x0eresumeStreamOp\x18\x06 \x01(\x0b\x32\x15.proto.ResumeStreamOp*R\n\rStartPosition\x12\x0c\n\x08NEW_ONLY\x10\x00\x12\n\n\x06OFFSET\x10\x01\x12\x0c\n\x08\x45\x41RLIEST\x10\x02\x12\n\n\x06LATEST\x10\x03\x12\r\n\tTIMESTAMP\x10\x04**\n\tAckPolicy\x12\n\n\x06LEADER\x10\x00\x12\x07\n\x03\x41LL\x10\x01\x12\x08\n\x04NONE\x10\x02*]\n\x10\x41\x63tivityStreamOp\x12\x11\n\rCREATE_STREAM\x10\x00\x12\x11\n\rDELETE_STREAM\x10\x01\x12\x10\n\x0cPAUSE_STREAM\x10\x02\x12\x11\n\rRESUME_STREAM\x10\x03\x32\xac\x05\n\x03\x41PI\x12I\n\x0c\x43reateStream\x12\x1a.proto.CreateStreamRequest\x1a\x1b.proto.CreateStreamResponse\"\x00\x12I\n\x0c\x44\x65leteStream\x12\x1a.proto.DeleteStreamRequest\x1a\x1b.proto.DeleteStreamResponse\"\x00\x12\x46\n\x0bPauseStream\x12\x19.proto.PauseStreamRequest\x1a\x1a.proto.PauseStreamResponse\"\x00\x12\x38\n\tSubscribe\x12\x17.proto.SubscribeRequest\x1a\x0e.proto.Message\"\x00\x30\x01\x12L\n\rFetchMetadata\x12\x1b.proto.FetchMetadataRequest\x1a\x1c.proto.FetchMetadataResponse\"\x00\x12g\n\x16\x46\x65tchPartitionMetadata\x12$.proto.FetchPartitionMetadataRequest\x1a%.proto.FetchPartitionMetadataResponse\"\x00\x12:\n\x07Publish\x12\x15.proto.PublishRequest\x1a\x16.proto.PublishResponse\"\x00\x12\x43\n\x0cPublishAsync\x12\x15.proto.PublishRequest\x1a\x16.proto.PublishResponse\"\x00(\x01\x30\x01\x12U\n\x10PublishToSubject\x12\x1e.proto.PublishToSubjectRequest\x1a\x1f.proto.PublishToSubjectResponse\"\x00\x42\x15\n\x13io.liftbridge.protob\x06proto3'
+  serialized_pb=b'\n\tapi.proto\x12\x05proto\"\x1e\n\rNullableInt64\x12\r\n\x05value\x18\x01 \x01(\x03\"\x1e\n\rNullableInt32\x12\r\n\x05value\x18\x01 \x01(\x05\"\x1d\n\x0cNullableBool\x12\r\n\x05value\x18\x01 \x01(\x08\"\xf2\x03\n\x13\x43reateStreamRequest\x12\x0f\n\x07subject\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05group\x18\x03 \x01(\t\x12\x19\n\x11replicationFactor\x18\x04 \x01(\x05\x12\x12\n\npartitions\x18\x05 \x01(\x05\x12/\n\x11RetentionMaxBytes\x18\x06 \x01(\x0b\x32\x14.proto.NullableInt64\x12\x32\n\x14RetentionMaxMessages\x18\x07 \x01(\x0b\x32\x14.proto.NullableInt64\x12-\n\x0fRetentionMaxAge\x18\x08 \x01(\x0b\x32\x14.proto.NullableInt64\x12-\n\x0f\x43leanerInterval\x18\t \x01(\x0b\x32\x14.proto.NullableInt64\x12-\n\x0fSegmentMaxBytes\x18\n \x01(\x0b\x32\x14.proto.NullableInt64\x12+\n\rSegmentMaxAge\x18\x0b \x01(\x0b\x32\x14.proto.NullableInt64\x12\x32\n\x14\x43ompactMaxGoroutines\x18\x0c \x01(\x0b\x32\x14.proto.NullableInt32\x12+\n\x0e\x43ompactEnabled\x18\r \x01(\x0b\x32\x13.proto.NullableBool\"\x16\n\x14\x43reateStreamResponse\"#\n\x13\x44\x65leteStreamRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x16\n\x14\x44\x65leteStreamResponse\"I\n\x12PauseStreamRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\npartitions\x18\x02 \x03(\x05\x12\x11\n\tresumeAll\x18\x03 \x01(\x08\"\x15\n\x13PauseStreamResponse\"N\n\x18SetStreamReadonlyRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\npartitions\x18\x02 \x03(\x05\x12\x10\n\x08readonly\x18\x03 \x01(\x08\"\x1b\n\x19SetStreamReadonlyResponse\"\xbf\x01\n\x10SubscribeRequest\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x11\n\tpartition\x18\x02 \x01(\x05\x12+\n\rstartPosition\x18\x03 \x01(\x0e\x32\x14.proto.StartPosition\x12\x17\n\x0bstartOffset\x18\x04 \x01(\x03\x42\x02\x30\x01\x12\x1a\n\x0estartTimestamp\x18\x05 \x01(\x03\x42\x02\x30\x01\x12\x16\n\x0ereadISRReplica\x18\x06 \x01(\x08\x12\x0e\n\x06resume\x18\x07 \x01(\x08\"\'\n\x14\x46\x65tchMetadataRequest\x12\x0f\n\x07streams\x18\x01 \x03(\t\"`\n\x15\x46\x65tchMetadataResponse\x12\x1e\n\x07\x62rokers\x18\x01 \x03(\x0b\x32\r.proto.Broker\x12\'\n\x08metadata\x18\x02 \x03(\x0b\x32\x15.proto.StreamMetadata\"D\n\x1d\x46\x65tchPartitionMetadataRequest\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x13\n\x0bpartitionID\x18\x02 \x01(\x05\"U\n\x1e\x46\x65tchPartitionMetadataResponse\x12\x33\n\x11partitionMetadata\x18\x01 \x01(\x0b\x32\x18.proto.PartitionMetadata\"\x82\x02\n\x0ePublishRequest\x12\x0b\n\x03key\x18\x01 \x01(\x0c\x12\r\n\x05value\x18\x02 \x01(\x0c\x12\x0e\n\x06stream\x18\x03 \x01(\t\x12\x11\n\tpartition\x18\x04 \x01(\x05\x12\x33\n\x07headers\x18\x05 \x03(\x0b\x32\".proto.PublishRequest.HeadersEntry\x12\x10\n\x08\x61\x63kInbox\x18\x06 \x01(\t\x12\x15\n\rcorrelationId\x18\x07 \x01(\t\x12#\n\tackPolicy\x18\x08 \x01(\x0e\x32\x10.proto.AckPolicy\x1a.\n\x0cHeadersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"\xa2\x01\n\x11PublishAsyncError\x12+\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x1d.proto.PublishAsyncError.Code\x12\x0f\n\x07message\x18\x02 \x01(\t\"O\n\x04\x43ode\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x01\x12\r\n\tNOT_FOUND\x10\x02\x12\x0c\n\x08INTERNAL\x10\x03\x12\x0c\n\x08READONLY\x10\x04\"o\n\x0fPublishResponse\x12\x17\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\n.proto.Ack\x12,\n\nasyncError\x18\x02 \x01(\x0b\x32\x18.proto.PublishAsyncError\x12\x15\n\rcorrelationId\x18\x03 \x01(\t\"\x82\x02\n\x17PublishToSubjectRequest\x12\x0b\n\x03key\x18\x01 \x01(\x0c\x12\r\n\x05value\x18\x02 \x01(\x0c\x12\x0f\n\x07subject\x18\x03 \x01(\t\x12<\n\x07headers\x18\x04 \x03(\x0b\x32+.proto.PublishToSubjectRequest.HeadersEntry\x12\x10\n\x08\x61\x63kInbox\x18\x05 \x01(\t\x12\x15\n\rcorrelationId\x18\x06 \x01(\t\x12#\n\tackPolicy\x18\x07 \x01(\x0e\x32\x10.proto.AckPolicy\x1a.\n\x0cHeadersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"3\n\x18PublishToSubjectResponse\x12\x17\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\n.proto.Ack\"W\n\x10SetCursorRequest\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x11\n\tpartition\x18\x02 \x01(\x05\x12\x10\n\x08\x63ursorId\x18\x03 \x01(\t\x12\x0e\n\x06offset\x18\x04 \x01(\x03\"\x13\n\x11SetCursorResponse\"I\n\x12\x46\x65tchCursorRequest\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x11\n\tpartition\x18\x02 \x01(\x05\x12\x10\n\x08\x63ursorId\x18\x03 \x01(\t\"%\n\x13\x46\x65tchCursorResponse\x12\x0e\n\x06offset\x18\x01 \x01(\x03\"0\n\x06\x42roker\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04host\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x05\"\x88\x02\n\x0eStreamMetadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07subject\x18\x02 \x01(\t\x12*\n\x05\x65rror\x18\x03 \x01(\x0e\x32\x1b.proto.StreamMetadata.Error\x12\x39\n\npartitions\x18\x04 \x03(\x0b\x32%.proto.StreamMetadata.PartitionsEntry\x1aK\n\x0fPartitionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.proto.PartitionMetadata:\x02\x38\x01\"#\n\x05\x45rror\x12\x06\n\x02OK\x10\x00\x12\x12\n\x0eUNKNOWN_STREAM\x10\x01\"\x8b\x01\n\x11PartitionMetadata\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0e\n\x06leader\x18\x02 \x01(\t\x12\x10\n\x08replicas\x18\x03 \x03(\t\x12\x0b\n\x03isr\x18\x04 \x03(\t\x12\x15\n\rhighWatermark\x18\x05 \x01(\x03\x12\x14\n\x0cnewestOffset\x18\x06 \x01(\x03\x12\x0e\n\x06paused\x18\x07 \x01(\x08\"\xc6\x02\n\x07Message\x12\x12\n\x06offset\x18\x01 \x01(\x03\x42\x02\x30\x01\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x12\r\n\x05value\x18\x03 \x01(\x0c\x12\x15\n\ttimestamp\x18\x04 \x01(\x03\x42\x02\x30\x01\x12\x0e\n\x06stream\x18\x05 \x01(\t\x12\x11\n\tpartition\x18\x06 \x01(\x05\x12\x0f\n\x07subject\x18\x07 \x01(\t\x12\x14\n\x0creplySubject\x18\x08 \x01(\t\x12,\n\x07headers\x18\t \x03(\x0b\x32\x1b.proto.Message.HeadersEntry\x12\x10\n\x08\x61\x63kInbox\x18\n \x01(\t\x12\x15\n\rcorrelationId\x18\x0b \x01(\t\x12#\n\tackPolicy\x18\x0c \x01(\x0e\x32\x10.proto.AckPolicy\x1a.\n\x0cHeadersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"\xe2\x01\n\x03\x41\x63k\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x18\n\x10partitionSubject\x18\x02 \x01(\t\x12\x12\n\nmsgSubject\x18\x03 \x01(\t\x12\x12\n\x06offset\x18\x04 \x01(\x03\x42\x02\x30\x01\x12\x10\n\x08\x61\x63kInbox\x18\x05 \x01(\t\x12\x15\n\rcorrelationId\x18\x06 \x01(\t\x12#\n\tackPolicy\x18\x07 \x01(\x0e\x32\x10.proto.AckPolicy\x12\x1e\n\x12receptionTimestamp\x18\x08 \x01(\x03\x42\x02\x30\x01\x12\x1b\n\x0f\x63ommitTimestamp\x18\t \x01(\x03\x42\x02\x30\x01\"4\n\x0e\x43reateStreamOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x12\n\npartitions\x18\x02 \x03(\x05\" \n\x0e\x44\x65leteStreamOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\"F\n\rPauseStreamOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x12\n\npartitions\x18\x02 \x03(\x05\x12\x11\n\tresumeAll\x18\x03 \x01(\x08\"4\n\x0eResumeStreamOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x12\n\npartitions\x18\x02 \x03(\x05\"K\n\x13SetStreamReadonlyOp\x12\x0e\n\x06stream\x18\x01 \x01(\t\x12\x12\n\npartitions\x18\x02 \x03(\x05\x12\x10\n\x08readonly\x18\x03 \x01(\x08\"\xb9\x02\n\x13\x41\x63tivityStreamEvent\x12\n\n\x02id\x18\x01 \x01(\x04\x12#\n\x02op\x18\x02 \x01(\x0e\x32\x17.proto.ActivityStreamOp\x12-\n\x0e\x63reateStreamOp\x18\x03 \x01(\x0b\x32\x15.proto.CreateStreamOp\x12-\n\x0e\x64\x65leteStreamOp\x18\x04 \x01(\x0b\x32\x15.proto.DeleteStreamOp\x12+\n\rpauseStreamOp\x18\x05 \x01(\x0b\x32\x14.proto.PauseStreamOp\x12-\n\x0eresumeStreamOp\x18\x06 \x01(\x0b\x32\x15.proto.ResumeStreamOp\x12\x37\n\x13setStreamReadonlyOp\x18\x07 \x01(\x0b\x32\x1a.proto.SetStreamReadonlyOp*R\n\rStartPosition\x12\x0c\n\x08NEW_ONLY\x10\x00\x12\n\n\x06OFFSET\x10\x01\x12\x0c\n\x08\x45\x41RLIEST\x10\x02\x12\n\n\x06LATEST\x10\x03\x12\r\n\tTIMESTAMP\x10\x04**\n\tAckPolicy\x12\n\n\x06LEADER\x10\x00\x12\x07\n\x03\x41LL\x10\x01\x12\x08\n\x04NONE\x10\x02*v\n\x10\x41\x63tivityStreamOp\x12\x11\n\rCREATE_STREAM\x10\x00\x12\x11\n\rDELETE_STREAM\x10\x01\x12\x10\n\x0cPAUSE_STREAM\x10\x02\x12\x11\n\rRESUME_STREAM\x10\x03\x12\x17\n\x13SET_STREAM_READONLY\x10\x04\x32\x90\x07\n\x03\x41PI\x12I\n\x0c\x43reateStream\x12\x1a.proto.CreateStreamRequest\x1a\x1b.proto.CreateStreamResponse\"\x00\x12I\n\x0c\x44\x65leteStream\x12\x1a.proto.DeleteStreamRequest\x1a\x1b.proto.DeleteStreamResponse\"\x00\x12\x46\n\x0bPauseStream\x12\x19.proto.PauseStreamRequest\x1a\x1a.proto.PauseStreamResponse\"\x00\x12X\n\x11SetStreamReadonly\x12\x1f.proto.SetStreamReadonlyRequest\x1a .proto.SetStreamReadonlyResponse\"\x00\x12\x38\n\tSubscribe\x12\x17.proto.SubscribeRequest\x1a\x0e.proto.Message\"\x00\x30\x01\x12L\n\rFetchMetadata\x12\x1b.proto.FetchMetadataRequest\x1a\x1c.proto.FetchMetadataResponse\"\x00\x12g\n\x16\x46\x65tchPartitionMetadata\x12$.proto.FetchPartitionMetadataRequest\x1a%.proto.FetchPartitionMetadataResponse\"\x00\x12:\n\x07Publish\x12\x15.proto.PublishRequest\x1a\x16.proto.PublishResponse\"\x00\x12\x43\n\x0cPublishAsync\x12\x15.proto.PublishRequest\x1a\x16.proto.PublishResponse\"\x00(\x01\x30\x01\x12U\n\x10PublishToSubject\x12\x1e.proto.PublishToSubjectRequest\x1a\x1f.proto.PublishToSubjectResponse\"\x00\x12@\n\tSetCursor\x12\x17.proto.SetCursorRequest\x1a\x18.proto.SetCursorResponse\"\x00\x12\x46\n\x0b\x46\x65tchCursor\x12\x19.proto.FetchCursorRequest\x1a\x1a.proto.FetchCursorResponse\"\x00\x42\x15\n\x13io.liftbridge.protob\x06proto3'
 )
 
 _STARTPOSITION = _descriptor.EnumDescriptor(
@@ -58,8 +58,8 @@ _STARTPOSITION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3304,
-  serialized_end=3386,
+  serialized_start=4099,
+  serialized_end=4181,
 )
 _sym_db.RegisterEnumDescriptor(_STARTPOSITION)
 
@@ -89,8 +89,8 @@ _ACKPOLICY = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3388,
-  serialized_end=3430,
+  serialized_start=4183,
+  serialized_end=4225,
 )
 _sym_db.RegisterEnumDescriptor(_ACKPOLICY)
 
@@ -122,11 +122,16 @@ _ACTIVITYSTREAMOP = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='SET_STREAM_READONLY', index=4, number=4,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3432,
-  serialized_end=3525,
+  serialized_start=4227,
+  serialized_end=4345,
 )
 _sym_db.RegisterEnumDescriptor(_ACTIVITYSTREAMOP)
 
@@ -143,7 +148,48 @@ CREATE_STREAM = 0
 DELETE_STREAM = 1
 PAUSE_STREAM = 2
 RESUME_STREAM = 3
+SET_STREAM_READONLY = 4
 
+
+_PUBLISHASYNCERROR_CODE = _descriptor.EnumDescriptor(
+  name='Code',
+  full_name='proto.PublishAsyncError.Code',
+  filename=None,
+  file=DESCRIPTOR,
+  create_key=_descriptor._internal_create_key,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='UNKNOWN', index=0, number=0,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='BAD_REQUEST', index=1, number=1,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='NOT_FOUND', index=2, number=2,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='INTERNAL', index=3, number=3,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='READONLY', index=4, number=4,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=1743,
+  serialized_end=1822,
+)
+_sym_db.RegisterEnumDescriptor(_PUBLISHASYNCERROR_CODE)
 
 _STREAMMETADATA_ERROR = _descriptor.EnumDescriptor(
   name='Error',
@@ -165,8 +211,8 @@ _STREAMMETADATA_ERROR = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2172,
-  serialized_end=2207,
+  serialized_start=2755,
+  serialized_end=2790,
 )
 _sym_db.RegisterEnumDescriptor(_STREAMMETADATA_ERROR)
 
@@ -536,6 +582,77 @@ _PAUSESTREAMRESPONSE = _descriptor.Descriptor(
 )
 
 
+_SETSTREAMREADONLYREQUEST = _descriptor.Descriptor(
+  name='SetStreamReadonlyRequest',
+  full_name='proto.SetStreamReadonlyRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='proto.SetStreamReadonlyRequest.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='partitions', full_name='proto.SetStreamReadonlyRequest.partitions', index=1,
+      number=2, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='readonly', full_name='proto.SetStreamReadonlyRequest.readonly', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=799,
+  serialized_end=877,
+)
+
+
+_SETSTREAMREADONLYRESPONSE = _descriptor.Descriptor(
+  name='SetStreamReadonlyResponse',
+  full_name='proto.SetStreamReadonlyResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=879,
+  serialized_end=906,
+)
+
+
 _SUBSCRIBEREQUEST = _descriptor.Descriptor(
   name='SubscribeRequest',
   full_name='proto.SubscribeRequest',
@@ -586,6 +703,13 @@ _SUBSCRIBEREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='resume', full_name='proto.SubscribeRequest.resume', index=6,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -598,8 +722,8 @@ _SUBSCRIBEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=800,
-  serialized_end=975,
+  serialized_start=909,
+  serialized_end=1100,
 )
 
 
@@ -630,8 +754,8 @@ _FETCHMETADATAREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=977,
-  serialized_end=1016,
+  serialized_start=1102,
+  serialized_end=1141,
 )
 
 
@@ -669,8 +793,8 @@ _FETCHMETADATARESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1018,
-  serialized_end=1114,
+  serialized_start=1143,
+  serialized_end=1239,
 )
 
 
@@ -708,8 +832,8 @@ _FETCHPARTITIONMETADATAREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1116,
-  serialized_end=1184,
+  serialized_start=1241,
+  serialized_end=1309,
 )
 
 
@@ -740,8 +864,8 @@ _FETCHPARTITIONMETADATARESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1186,
-  serialized_end=1271,
+  serialized_start=1311,
+  serialized_end=1396,
 )
 
 
@@ -779,8 +903,8 @@ _PUBLISHREQUEST_HEADERSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1486,
-  serialized_end=1532,
+  serialized_start=1611,
+  serialized_end=1657,
 )
 
 _PUBLISHREQUEST = _descriptor.Descriptor(
@@ -859,8 +983,48 @@ _PUBLISHREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1274,
-  serialized_end=1532,
+  serialized_start=1399,
+  serialized_end=1657,
+)
+
+
+_PUBLISHASYNCERROR = _descriptor.Descriptor(
+  name='PublishAsyncError',
+  full_name='proto.PublishAsyncError',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='code', full_name='proto.PublishAsyncError.code', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='message', full_name='proto.PublishAsyncError.message', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _PUBLISHASYNCERROR_CODE,
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1660,
+  serialized_end=1822,
 )
 
 
@@ -879,6 +1043,20 @@ _PUBLISHRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='asyncError', full_name='proto.PublishResponse.asyncError', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='correlationId', full_name='proto.PublishResponse.correlationId', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -891,8 +1069,8 @@ _PUBLISHRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1534,
-  serialized_end=1576,
+  serialized_start=1824,
+  serialized_end=1935,
 )
 
 
@@ -930,8 +1108,8 @@ _PUBLISHTOSUBJECTREQUEST_HEADERSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1486,
-  serialized_end=1532,
+  serialized_start=1611,
+  serialized_end=1657,
 )
 
 _PUBLISHTOSUBJECTREQUEST = _descriptor.Descriptor(
@@ -1003,8 +1181,8 @@ _PUBLISHTOSUBJECTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1579,
-  serialized_end=1837,
+  serialized_start=1938,
+  serialized_end=2196,
 )
 
 
@@ -1035,8 +1213,164 @@ _PUBLISHTOSUBJECTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1839,
-  serialized_end=1890,
+  serialized_start=2198,
+  serialized_end=2249,
+)
+
+
+_SETCURSORREQUEST = _descriptor.Descriptor(
+  name='SetCursorRequest',
+  full_name='proto.SetCursorRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='stream', full_name='proto.SetCursorRequest.stream', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='partition', full_name='proto.SetCursorRequest.partition', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='cursorId', full_name='proto.SetCursorRequest.cursorId', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='offset', full_name='proto.SetCursorRequest.offset', index=3,
+      number=4, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2251,
+  serialized_end=2338,
+)
+
+
+_SETCURSORRESPONSE = _descriptor.Descriptor(
+  name='SetCursorResponse',
+  full_name='proto.SetCursorResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2340,
+  serialized_end=2359,
+)
+
+
+_FETCHCURSORREQUEST = _descriptor.Descriptor(
+  name='FetchCursorRequest',
+  full_name='proto.FetchCursorRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='stream', full_name='proto.FetchCursorRequest.stream', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='partition', full_name='proto.FetchCursorRequest.partition', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='cursorId', full_name='proto.FetchCursorRequest.cursorId', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2361,
+  serialized_end=2434,
+)
+
+
+_FETCHCURSORRESPONSE = _descriptor.Descriptor(
+  name='FetchCursorResponse',
+  full_name='proto.FetchCursorResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='offset', full_name='proto.FetchCursorResponse.offset', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2436,
+  serialized_end=2473,
 )
 
 
@@ -1081,8 +1415,8 @@ _BROKER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1892,
-  serialized_end=1940,
+  serialized_start=2475,
+  serialized_end=2523,
 )
 
 
@@ -1120,8 +1454,8 @@ _STREAMMETADATA_PARTITIONSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2095,
-  serialized_end=2170,
+  serialized_start=2678,
+  serialized_end=2753,
 )
 
 _STREAMMETADATA = _descriptor.Descriptor(
@@ -1173,8 +1507,8 @@ _STREAMMETADATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1943,
-  serialized_end=2207,
+  serialized_start=2526,
+  serialized_end=2790,
 )
 
 
@@ -1228,6 +1562,13 @@ _PARTITIONMETADATA = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='paused', full_name='proto.PartitionMetadata.paused', index=6,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -1240,8 +1581,8 @@ _PARTITIONMETADATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2209,
-  serialized_end=2332,
+  serialized_start=2793,
+  serialized_end=2932,
 )
 
 
@@ -1279,8 +1620,8 @@ _MESSAGE_HEADERSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1486,
-  serialized_end=1532,
+  serialized_start=1611,
+  serialized_end=1657,
 )
 
 _MESSAGE = _descriptor.Descriptor(
@@ -1387,8 +1728,8 @@ _MESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2335,
-  serialized_end=2661,
+  serialized_start=2935,
+  serialized_end=3261,
 )
 
 
@@ -1449,6 +1790,20 @@ _ACK = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='receptionTimestamp', full_name='proto.Ack.receptionTimestamp', index=7,
+      number=8, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'0\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='commitTimestamp', full_name='proto.Ack.commitTimestamp', index=8,
+      number=9, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'0\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -1461,8 +1816,8 @@ _ACK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2664,
-  serialized_end=2829,
+  serialized_start=3264,
+  serialized_end=3490,
 )
 
 
@@ -1500,8 +1855,8 @@ _CREATESTREAMOP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2831,
-  serialized_end=2883,
+  serialized_start=3492,
+  serialized_end=3544,
 )
 
 
@@ -1532,8 +1887,8 @@ _DELETESTREAMOP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2885,
-  serialized_end=2917,
+  serialized_start=3546,
+  serialized_end=3578,
 )
 
 
@@ -1578,8 +1933,8 @@ _PAUSESTREAMOP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2919,
-  serialized_end=2989,
+  serialized_start=3580,
+  serialized_end=3650,
 )
 
 
@@ -1617,8 +1972,54 @@ _RESUMESTREAMOP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2991,
-  serialized_end=3043,
+  serialized_start=3652,
+  serialized_end=3704,
+)
+
+
+_SETSTREAMREADONLYOP = _descriptor.Descriptor(
+  name='SetStreamReadonlyOp',
+  full_name='proto.SetStreamReadonlyOp',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='stream', full_name='proto.SetStreamReadonlyOp.stream', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='partitions', full_name='proto.SetStreamReadonlyOp.partitions', index=1,
+      number=2, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='readonly', full_name='proto.SetStreamReadonlyOp.readonly', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3706,
+  serialized_end=3781,
 )
 
 
@@ -1672,6 +2073,13 @@ _ACTIVITYSTREAMEVENT = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='setStreamReadonlyOp', full_name='proto.ActivityStreamEvent.setStreamReadonlyOp', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -1684,8 +2092,8 @@ _ACTIVITYSTREAMEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3046,
-  serialized_end=3302,
+  serialized_start=3784,
+  serialized_end=4097,
 )
 
 _CREATESTREAMREQUEST.fields_by_name['RetentionMaxBytes'].message_type = _NULLABLEINT64
@@ -1703,7 +2111,10 @@ _FETCHPARTITIONMETADATARESPONSE.fields_by_name['partitionMetadata'].message_type
 _PUBLISHREQUEST_HEADERSENTRY.containing_type = _PUBLISHREQUEST
 _PUBLISHREQUEST.fields_by_name['headers'].message_type = _PUBLISHREQUEST_HEADERSENTRY
 _PUBLISHREQUEST.fields_by_name['ackPolicy'].enum_type = _ACKPOLICY
+_PUBLISHASYNCERROR.fields_by_name['code'].enum_type = _PUBLISHASYNCERROR_CODE
+_PUBLISHASYNCERROR_CODE.containing_type = _PUBLISHASYNCERROR
 _PUBLISHRESPONSE.fields_by_name['ack'].message_type = _ACK
+_PUBLISHRESPONSE.fields_by_name['asyncError'].message_type = _PUBLISHASYNCERROR
 _PUBLISHTOSUBJECTREQUEST_HEADERSENTRY.containing_type = _PUBLISHTOSUBJECTREQUEST
 _PUBLISHTOSUBJECTREQUEST.fields_by_name['headers'].message_type = _PUBLISHTOSUBJECTREQUEST_HEADERSENTRY
 _PUBLISHTOSUBJECTREQUEST.fields_by_name['ackPolicy'].enum_type = _ACKPOLICY
@@ -1722,6 +2133,7 @@ _ACTIVITYSTREAMEVENT.fields_by_name['createStreamOp'].message_type = _CREATESTRE
 _ACTIVITYSTREAMEVENT.fields_by_name['deleteStreamOp'].message_type = _DELETESTREAMOP
 _ACTIVITYSTREAMEVENT.fields_by_name['pauseStreamOp'].message_type = _PAUSESTREAMOP
 _ACTIVITYSTREAMEVENT.fields_by_name['resumeStreamOp'].message_type = _RESUMESTREAMOP
+_ACTIVITYSTREAMEVENT.fields_by_name['setStreamReadonlyOp'].message_type = _SETSTREAMREADONLYOP
 DESCRIPTOR.message_types_by_name['NullableInt64'] = _NULLABLEINT64
 DESCRIPTOR.message_types_by_name['NullableInt32'] = _NULLABLEINT32
 DESCRIPTOR.message_types_by_name['NullableBool'] = _NULLABLEBOOL
@@ -1731,15 +2143,22 @@ DESCRIPTOR.message_types_by_name['DeleteStreamRequest'] = _DELETESTREAMREQUEST
 DESCRIPTOR.message_types_by_name['DeleteStreamResponse'] = _DELETESTREAMRESPONSE
 DESCRIPTOR.message_types_by_name['PauseStreamRequest'] = _PAUSESTREAMREQUEST
 DESCRIPTOR.message_types_by_name['PauseStreamResponse'] = _PAUSESTREAMRESPONSE
+DESCRIPTOR.message_types_by_name['SetStreamReadonlyRequest'] = _SETSTREAMREADONLYREQUEST
+DESCRIPTOR.message_types_by_name['SetStreamReadonlyResponse'] = _SETSTREAMREADONLYRESPONSE
 DESCRIPTOR.message_types_by_name['SubscribeRequest'] = _SUBSCRIBEREQUEST
 DESCRIPTOR.message_types_by_name['FetchMetadataRequest'] = _FETCHMETADATAREQUEST
 DESCRIPTOR.message_types_by_name['FetchMetadataResponse'] = _FETCHMETADATARESPONSE
 DESCRIPTOR.message_types_by_name['FetchPartitionMetadataRequest'] = _FETCHPARTITIONMETADATAREQUEST
 DESCRIPTOR.message_types_by_name['FetchPartitionMetadataResponse'] = _FETCHPARTITIONMETADATARESPONSE
 DESCRIPTOR.message_types_by_name['PublishRequest'] = _PUBLISHREQUEST
+DESCRIPTOR.message_types_by_name['PublishAsyncError'] = _PUBLISHASYNCERROR
 DESCRIPTOR.message_types_by_name['PublishResponse'] = _PUBLISHRESPONSE
 DESCRIPTOR.message_types_by_name['PublishToSubjectRequest'] = _PUBLISHTOSUBJECTREQUEST
 DESCRIPTOR.message_types_by_name['PublishToSubjectResponse'] = _PUBLISHTOSUBJECTRESPONSE
+DESCRIPTOR.message_types_by_name['SetCursorRequest'] = _SETCURSORREQUEST
+DESCRIPTOR.message_types_by_name['SetCursorResponse'] = _SETCURSORRESPONSE
+DESCRIPTOR.message_types_by_name['FetchCursorRequest'] = _FETCHCURSORREQUEST
+DESCRIPTOR.message_types_by_name['FetchCursorResponse'] = _FETCHCURSORRESPONSE
 DESCRIPTOR.message_types_by_name['Broker'] = _BROKER
 DESCRIPTOR.message_types_by_name['StreamMetadata'] = _STREAMMETADATA
 DESCRIPTOR.message_types_by_name['PartitionMetadata'] = _PARTITIONMETADATA
@@ -1749,6 +2168,7 @@ DESCRIPTOR.message_types_by_name['CreateStreamOp'] = _CREATESTREAMOP
 DESCRIPTOR.message_types_by_name['DeleteStreamOp'] = _DELETESTREAMOP
 DESCRIPTOR.message_types_by_name['PauseStreamOp'] = _PAUSESTREAMOP
 DESCRIPTOR.message_types_by_name['ResumeStreamOp'] = _RESUMESTREAMOP
+DESCRIPTOR.message_types_by_name['SetStreamReadonlyOp'] = _SETSTREAMREADONLYOP
 DESCRIPTOR.message_types_by_name['ActivityStreamEvent'] = _ACTIVITYSTREAMEVENT
 DESCRIPTOR.enum_types_by_name['StartPosition'] = _STARTPOSITION
 DESCRIPTOR.enum_types_by_name['AckPolicy'] = _ACKPOLICY
@@ -1818,6 +2238,20 @@ PauseStreamResponse = _reflection.GeneratedProtocolMessageType('PauseStreamRespo
   })
 _sym_db.RegisterMessage(PauseStreamResponse)
 
+SetStreamReadonlyRequest = _reflection.GeneratedProtocolMessageType('SetStreamReadonlyRequest', (_message.Message,), {
+  'DESCRIPTOR' : _SETSTREAMREADONLYREQUEST,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:proto.SetStreamReadonlyRequest)
+  })
+_sym_db.RegisterMessage(SetStreamReadonlyRequest)
+
+SetStreamReadonlyResponse = _reflection.GeneratedProtocolMessageType('SetStreamReadonlyResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SETSTREAMREADONLYRESPONSE,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:proto.SetStreamReadonlyResponse)
+  })
+_sym_db.RegisterMessage(SetStreamReadonlyResponse)
+
 SubscribeRequest = _reflection.GeneratedProtocolMessageType('SubscribeRequest', (_message.Message,), {
   'DESCRIPTOR' : _SUBSCRIBEREQUEST,
   '__module__' : 'api_pb2'
@@ -1868,6 +2302,13 @@ PublishRequest = _reflection.GeneratedProtocolMessageType('PublishRequest', (_me
 _sym_db.RegisterMessage(PublishRequest)
 _sym_db.RegisterMessage(PublishRequest.HeadersEntry)
 
+PublishAsyncError = _reflection.GeneratedProtocolMessageType('PublishAsyncError', (_message.Message,), {
+  'DESCRIPTOR' : _PUBLISHASYNCERROR,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:proto.PublishAsyncError)
+  })
+_sym_db.RegisterMessage(PublishAsyncError)
+
 PublishResponse = _reflection.GeneratedProtocolMessageType('PublishResponse', (_message.Message,), {
   'DESCRIPTOR' : _PUBLISHRESPONSE,
   '__module__' : 'api_pb2'
@@ -1896,6 +2337,34 @@ PublishToSubjectResponse = _reflection.GeneratedProtocolMessageType('PublishToSu
   # @@protoc_insertion_point(class_scope:proto.PublishToSubjectResponse)
   })
 _sym_db.RegisterMessage(PublishToSubjectResponse)
+
+SetCursorRequest = _reflection.GeneratedProtocolMessageType('SetCursorRequest', (_message.Message,), {
+  'DESCRIPTOR' : _SETCURSORREQUEST,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:proto.SetCursorRequest)
+  })
+_sym_db.RegisterMessage(SetCursorRequest)
+
+SetCursorResponse = _reflection.GeneratedProtocolMessageType('SetCursorResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SETCURSORRESPONSE,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:proto.SetCursorResponse)
+  })
+_sym_db.RegisterMessage(SetCursorResponse)
+
+FetchCursorRequest = _reflection.GeneratedProtocolMessageType('FetchCursorRequest', (_message.Message,), {
+  'DESCRIPTOR' : _FETCHCURSORREQUEST,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:proto.FetchCursorRequest)
+  })
+_sym_db.RegisterMessage(FetchCursorRequest)
+
+FetchCursorResponse = _reflection.GeneratedProtocolMessageType('FetchCursorResponse', (_message.Message,), {
+  'DESCRIPTOR' : _FETCHCURSORRESPONSE,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:proto.FetchCursorResponse)
+  })
+_sym_db.RegisterMessage(FetchCursorResponse)
 
 Broker = _reflection.GeneratedProtocolMessageType('Broker', (_message.Message,), {
   'DESCRIPTOR' : _BROKER,
@@ -1976,6 +2445,13 @@ ResumeStreamOp = _reflection.GeneratedProtocolMessageType('ResumeStreamOp', (_me
   })
 _sym_db.RegisterMessage(ResumeStreamOp)
 
+SetStreamReadonlyOp = _reflection.GeneratedProtocolMessageType('SetStreamReadonlyOp', (_message.Message,), {
+  'DESCRIPTOR' : _SETSTREAMREADONLYOP,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:proto.SetStreamReadonlyOp)
+  })
+_sym_db.RegisterMessage(SetStreamReadonlyOp)
+
 ActivityStreamEvent = _reflection.GeneratedProtocolMessageType('ActivityStreamEvent', (_message.Message,), {
   'DESCRIPTOR' : _ACTIVITYSTREAMEVENT,
   '__module__' : 'api_pb2'
@@ -1994,6 +2470,8 @@ _MESSAGE_HEADERSENTRY._options = None
 _MESSAGE.fields_by_name['offset']._options = None
 _MESSAGE.fields_by_name['timestamp']._options = None
 _ACK.fields_by_name['offset']._options = None
+_ACK.fields_by_name['receptionTimestamp']._options = None
+_ACK.fields_by_name['commitTimestamp']._options = None
 
 _API = _descriptor.ServiceDescriptor(
   name='API',
@@ -2002,8 +2480,8 @@ _API = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=3528,
-  serialized_end=4212,
+  serialized_start=4348,
+  serialized_end=5260,
   methods=[
   _descriptor.MethodDescriptor(
     name='CreateStream',
@@ -2036,9 +2514,19 @@ _API = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='SetStreamReadonly',
+    full_name='proto.API.SetStreamReadonly',
+    index=3,
+    containing_service=None,
+    input_type=_SETSTREAMREADONLYREQUEST,
+    output_type=_SETSTREAMREADONLYRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='Subscribe',
     full_name='proto.API.Subscribe',
-    index=3,
+    index=4,
     containing_service=None,
     input_type=_SUBSCRIBEREQUEST,
     output_type=_MESSAGE,
@@ -2048,7 +2536,7 @@ _API = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='FetchMetadata',
     full_name='proto.API.FetchMetadata',
-    index=4,
+    index=5,
     containing_service=None,
     input_type=_FETCHMETADATAREQUEST,
     output_type=_FETCHMETADATARESPONSE,
@@ -2058,7 +2546,7 @@ _API = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='FetchPartitionMetadata',
     full_name='proto.API.FetchPartitionMetadata',
-    index=5,
+    index=6,
     containing_service=None,
     input_type=_FETCHPARTITIONMETADATAREQUEST,
     output_type=_FETCHPARTITIONMETADATARESPONSE,
@@ -2068,7 +2556,7 @@ _API = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='Publish',
     full_name='proto.API.Publish',
-    index=6,
+    index=7,
     containing_service=None,
     input_type=_PUBLISHREQUEST,
     output_type=_PUBLISHRESPONSE,
@@ -2078,7 +2566,7 @@ _API = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='PublishAsync',
     full_name='proto.API.PublishAsync',
-    index=7,
+    index=8,
     containing_service=None,
     input_type=_PUBLISHREQUEST,
     output_type=_PUBLISHRESPONSE,
@@ -2088,10 +2576,30 @@ _API = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='PublishToSubject',
     full_name='proto.API.PublishToSubject',
-    index=8,
+    index=9,
     containing_service=None,
     input_type=_PUBLISHTOSUBJECTREQUEST,
     output_type=_PUBLISHTOSUBJECTRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='SetCursor',
+    full_name='proto.API.SetCursor',
+    index=10,
+    containing_service=None,
+    input_type=_SETCURSORREQUEST,
+    output_type=_SETCURSORRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='FetchCursor',
+    full_name='proto.API.FetchCursor',
+    index=11,
+    containing_service=None,
+    input_type=_FETCHCURSORREQUEST,
+    output_type=_FETCHCURSORRESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
