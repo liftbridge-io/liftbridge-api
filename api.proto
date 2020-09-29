@@ -111,13 +111,13 @@ message FetchMetadataResponse {
 // Mainly it is useful to retrieve Highest Watermark and Highest Offset of the partition leader
 message FetchPartitionMetadataRequest {
     string stream       = 1;
-    int32  partitionID  = 2;
+    int32  partition    = 2;
 }
 
 
 //  FetchPartitionMetadataResponse contains the partition metadata requested
 message FetchPartitionMetadataResponse {
-    PartitionMetadata partitionMetadata =1;
+    PartitionMetadata metadata = 1;
 }
 
 // PublishRequest is sent to publish a new message to a stream.
