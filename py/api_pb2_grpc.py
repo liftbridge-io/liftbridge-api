@@ -45,6 +45,11 @@ class APIStub(object):
                 request_serializer=api__pb2.FetchMetadataRequest.SerializeToString,
                 response_deserializer=api__pb2.FetchMetadataResponse.FromString,
                 )
+        self.FetchPartitionMetadata = channel.unary_unary(
+                '/proto.API/FetchPartitionMetadata',
+                request_serializer=api__pb2.FetchPartitionMetadataRequest.SerializeToString,
+                response_deserializer=api__pb2.FetchPartitionMetadataResponse.FromString,
+                )
         self.Publish = channel.unary_unary(
                 '/proto.API/Publish',
                 request_serializer=api__pb2.PublishRequest.SerializeToString,
@@ -122,6 +127,14 @@ class APIServicer(object):
     def FetchMetadata(self, request, context):
         """FetchMetadata retrieves the latest cluster metadata, including stream
         broker information.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def FetchPartitionMetadata(self, request, context):
+        """FetchPartitionMetadata retrieves the latest partition metadata from partition leader
+        The main interest is to retrieve Highest Watermark and Newest Offset
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -209,6 +222,11 @@ def add_APIServicer_to_server(servicer, server):
                     servicer.FetchMetadata,
                     request_deserializer=api__pb2.FetchMetadataRequest.FromString,
                     response_serializer=api__pb2.FetchMetadataResponse.SerializeToString,
+            ),
+            'FetchPartitionMetadata': grpc.unary_unary_rpc_method_handler(
+                    servicer.FetchPartitionMetadata,
+                    request_deserializer=api__pb2.FetchPartitionMetadataRequest.FromString,
+                    response_serializer=api__pb2.FetchPartitionMetadataResponse.SerializeToString,
             ),
             'Publish': grpc.unary_unary_rpc_method_handler(
                     servicer.Publish,
@@ -345,6 +363,23 @@ class API(object):
         return grpc.experimental.unary_unary(request, target, '/proto.API/FetchMetadata',
             api__pb2.FetchMetadataRequest.SerializeToString,
             api__pb2.FetchMetadataResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def FetchPartitionMetadata(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/proto.API/FetchPartitionMetadata',
+            api__pb2.FetchPartitionMetadataRequest.SerializeToString,
+            api__pb2.FetchPartitionMetadataResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
