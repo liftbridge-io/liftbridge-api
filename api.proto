@@ -18,19 +18,21 @@ message NullableBool {
 
 // CreateStreamRequest is sent to create a new stream.
 message CreateStreamRequest {
-    string                  subject              = 1; // Stream NATS subject
-    string                  name                 = 2;  // Stream name (unique per subject)
-    string                  group                = 3;  // Partitions NATS subject amongst group members
-    int32                   replicationFactor    = 4;  // Number of stream replicas
-    int32                   partitions           = 5;  // Number of stream partitions
-    NullableInt64           RetentionMaxBytes    = 6;  // The maximum size a stream's log can grow to, in bytes.
-    NullableInt64           RetentionMaxMessages = 7;  // The maximum size a stream's log can grow to, in messages
-    NullableInt64           RetentionMaxAge      = 8;  // The TTL for stream log segment files 
-    NullableInt64           CleanerInterval      = 9;  // The frequency to check for log cleaner
-    NullableInt64           SegmentMaxBytes      = 10; // The maximum size of a single stream log segment file in bytes
-    NullableInt64           SegmentMaxAge        = 11; // The maximum time before a new stream log segment is rolled out
-    NullableInt32           CompactMaxGoroutines = 12; // The maximum number of concurrent goroutines to use for compaction on a stream log
-    NullableBool            CompactEnabled       = 13; // CompactEnabled controls compaction for a stream.
+    string        subject                       = 1;  // Stream NATS subject
+    string        name                          = 2;  // Stream name (unique per subject)
+    string        group                         = 3;  // Partitions NATS subject amongst group members
+    int32         replicationFactor             = 4;  // Number of stream replicas
+    int32         partitions                    = 5;  // Number of stream partitions
+    NullableInt64 RetentionMaxBytes             = 6;  // The maximum size a stream's log can grow to, in bytes.
+    NullableInt64 RetentionMaxMessages          = 7;  // The maximum size a stream's log can grow to, in messages
+    NullableInt64 RetentionMaxAge               = 8;  // The TTL for stream log segment files 
+    NullableInt64 CleanerInterval               = 9;  // The frequency to check for log cleaner
+    NullableInt64 SegmentMaxBytes               = 10; // The maximum size of a single stream log segment file in bytes
+    NullableInt64 SegmentMaxAge                 = 11; // The maximum time before a new stream log segment is rolled out
+    NullableInt32 CompactMaxGoroutines          = 12; // The maximum number of concurrent goroutines to use for compaction on a stream log
+    NullableBool  CompactEnabled                = 13; // CompactEnabled controls compaction for a stream.
+    NullableInt64 AutoPauseTime                 = 14; // The amount of time a stream partition can go idle before it is automatically paused.
+    NullableBool  AutoPauseDisableIfSubscribers = 15; // Disables automatic partition pausing when there are subscribers.
 }
 
 // CreateStreamResponse is sent by server after creating a stream.
