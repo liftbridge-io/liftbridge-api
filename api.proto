@@ -229,6 +229,7 @@ message PartitionMetadata {
     int64            highWatermark = 5; // High watermark of the partition
     int64            newestOffset  = 6; // Newest offset of the partition
     bool             paused        = 7; // Is this partition paused?
+    bool             readonly      = 8; // Is this partition read-only?
 }
 
 // AckPolicy controls the behavior of message acknowledgements.
