@@ -221,26 +221,26 @@ message StreamMetadata {
     int64                         creationTimestamp = 5 [jstype=JS_STRING]; // When the stream has been created
 }
 
-// PartitionEventMetrics contains metrics related to a stream partition.
-message PartitionEventMetrics {
-    int64 firstTimestamp = 1 [jstype=JS_STRING]; // When the first event has occured
-    int64 lastTimestamp  = 2 [jstype=JS_STRING]; // When the last event has occured
+// PartitionEventTimestamps contains timestamps related to a stream partition.
+message PartitionEventTimestamps {
+    int64 firstTimestamp  = 1 [jstype=JS_STRING]; // When the first event has occured
+    int64 latestTimestamp = 2 [jstype=JS_STRING]; // When the latest event has occured
 }
 
 // PartitionMetadata contains information for a stream partition.
 message PartitionMetadata {
-    int32                 id                = 1; // Partition id
-    string                leader            = 2; // Broker id of the partition leader
-    repeated string       replicas          = 3; // Broker ids of the partition replicas
-    repeated string       isr               = 4; // Broker ids of the in-sync replica set
-    int64                 highWatermark     = 5; // High watermark of the partition
-    int64                 newestOffset      = 6; // Newest offset of the partition
-    bool                  paused            = 7; // Is this partition paused?
-    bool                  readonly          = 8; // Is this partition read-only?
-    int64                 creationTimestamp = 9 [jstype=JS_STRING]; // When the partition has been created
-    PartitionEventMetrics messageMetrics    = 10; // Metrics for received messages
-    PartitionEventMetrics pauseMetrics      = 11; // Metrics for paused status
-    PartitionEventMetrics readonlyMetrics   = 12; // Metrics for readonly status
+    int32                    id                 = 1; // Partition id
+    string                   leader             = 2; // Broker id of the partition leader
+    repeated string          replicas           = 3; // Broker ids of the partition replicas
+    repeated string          isr                = 4; // Broker ids of the in-sync replica set
+    int64                    highWatermark      = 5; // High watermark of the partition
+    int64                    newestOffset       = 6; // Newest offset of the partition
+    bool                     paused             = 7; // Is this partition paused?
+    bool                     readonly           = 8; // Is this partition read-only?
+    int64                    creationTimestamp  = 9 [jstype=JS_STRING]; // When the partition has been created
+    PartitionEventTimestamps messageTimestamps  = 10; // Timestamps of when the first and latest message have been received
+    PartitionEventTimestamps pauseTimestamps    = 11; // Timestamps of when the paused status has been changed
+    PartitionEventTimestamps readonlyTimestamps = 12; // Timestamps of when the read-only status has been changed
 }
 
 // AckPolicy controls the behavior of message acknowledgements.
