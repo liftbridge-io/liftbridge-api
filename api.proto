@@ -237,10 +237,9 @@ message PartitionMetadata {
     int64                    newestOffset       = 6; // Newest offset of the partition
     bool                     paused             = 7; // Is this partition paused?
     bool                     readonly           = 8; // Is this partition read-only?
-    int64                    creationTimestamp  = 9 [jstype=JS_STRING]; // When the partition has been created
-    PartitionEventTimestamps messageTimestamps  = 10; // Timestamps of when the first and latest message have been received
-    PartitionEventTimestamps pauseTimestamps    = 11; // Timestamps of when the paused status has been changed
-    PartitionEventTimestamps readonlyTimestamps = 12; // Timestamps of when the read-only status has been changed
+    PartitionEventTimestamps messageTimestamps  = 9; // Timestamps of when the first and latest message have been received
+    PartitionEventTimestamps pauseTimestamps    = 10; // Timestamps of when the paused status has been changed
+    PartitionEventTimestamps readonlyTimestamps = 11; // Timestamps of when the read-only status has been changed
 }
 
 // AckPolicy controls the behavior of message acknowledgements.
