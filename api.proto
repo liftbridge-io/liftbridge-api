@@ -90,9 +90,10 @@ enum StartPosition {
 
 // StopPosition determines the stop-position type on a subscription.
 enum StopPosition {
-    STOP_OFFSET    = 0; // Stop at a specified offset
-    STOP_LATEST    = 1; // Stop at the latest offset
-    STOP_TIMESTAMP = 2; // Stop at a specified timestamp
+    STOP_ON_CANCEL = 0; // Stop when the request is cancelled
+    STOP_OFFSET    = 1; // Stop at a specified offset
+    STOP_LATEST    = 2; // Stop at the latest offset
+    STOP_TIMESTAMP = 3; // Stop at a specified timestamp
 }
 
 // SubscribeRequest is sent to subscribe to a stream partition.
