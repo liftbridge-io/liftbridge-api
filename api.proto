@@ -88,6 +88,13 @@ enum StartPosition {
     TIMESTAMP   = 4; // Start at a specified timestamp
 }
 
+// StopPosition determines the stop-position type on a subscription.
+enum StopPosition {
+    STOP_OFFSET    = 0; // Stop at a specified offset
+    STOP_LATEST    = 1; // Stop at the latest offset
+    STOP_TIMESTAMP = 2; // Stop at a specified timestamp
+}
+
 // SubscribeRequest is sent to subscribe to a stream partition.
 message SubscribeRequest {
     string        stream         = 1; // Stream name to subscribe to
@@ -97,6 +104,9 @@ message SubscribeRequest {
     int64         startTimestamp = 5 [jstype=JS_STRING]; // Timestamp to begin consuming from
     bool          readISRReplica = 6; // Subscribe from a random ISR replica instead of choosing explicitly leader
     bool          resume         = 7; // Allow resuming a paused partition before subscribing to it
+    StopPosition  stopPosition   = 8; // Where to stop consuming
+    int64         stopOffset     = 9  [jstype=JS_STRING]; // Offset to stop consuming at
+    int64         stopTimestamp  = 10 [jstype=JS_STRING]; // Timestamp to stop consuming at
 }
 
 // FetchMetadataRequest is sent to retrieve the latest cluster metadata.
