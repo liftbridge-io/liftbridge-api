@@ -136,14 +136,15 @@ message FetchPartitionMetadataResponse {
 
 // PublishRequest is sent to publish a new message to a stream.
 message PublishRequest {
-    bytes               key           = 1; // Message key
-    bytes               value         = 2; // Message payload
-    string              stream        = 3; // Stream name to publish to
-    int32               partition     = 4; // Stream partition to publish to
-    map<string, bytes>  headers       = 5; // Message headers
-    string              ackInbox      = 6; // NATS subject to publish acks to
-    string              correlationId = 7; // User-supplied value to correlate acks to publishes
-    AckPolicy           ackPolicy     = 8; // Controls the behavior of acks
+    bytes               key             = 1; // Message key
+    bytes               value           = 2; // Message payload
+    string              stream          = 3; // Stream name to publish to
+    int32               partition       = 4; // Stream partition to publish to
+    map<string, bytes>  headers         = 5; // Message headers
+    string              ackInbox        = 6; // NATS subject to publish acks to
+    string              correlationId   = 7; // User-supplied value to correlate acks to publishes
+    AckPolicy           ackPolicy       = 8; // Controls the behavior of acks
+    int64               lastKnownOffset = 9; // Provide last known offset on the partion before publish
 }
 
 // PublishAsyncError is returned on the PublishAsync stream if a publish failed.
@@ -262,18 +263,20 @@ enum AckPolicy {
 
 // Message represents a message from a stream.
 message Message {
-    int64               offset        = 1 [jstype=JS_STRING];  // Monotonic message offset in the stream
-    bytes               key           = 2;  // Message key
-    bytes               value         = 3;  // Message payload
-    int64               timestamp     = 4 [jstype=JS_STRING];  // When the message was received by the broker
-    string              stream        = 5;  // Stream name message was received on
-    int32               partition     = 6;  // Stream partition message was assigned to
-    string              subject       = 7;  // NATS subject message was received on
-    string              replySubject  = 8;  // NATS reply subject
-    map<string, bytes>  headers       = 9;  // Message headers
-    string              ackInbox      = 10; // NATS subject to publish acks to
-    string              correlationId = 11; // User-supplied value to correlate acks to publishes
-    AckPolicy           ackPolicy     = 12; // Controls the behavior of acks
+    int64               offset          = 1 [jstype=JS_STRING];  // Monotonic message offset in the stream
+    bytes               key             = 2;  // Message key
+    bytes               value           = 3;  // Message payload
+    int64               timestamp       = 4 [jstype=JS_STRING];  // When the message was received by the broker
+    string              stream          = 5;  // Stream name message was received on
+    int32               partition       = 6;  // Stream partition message was assigned to
+    string              subject         = 7;  // NATS subject message was received on
+    string              replySubject    = 8;  // NATS reply subject
+    map<string, bytes>  headers         = 9;  // Message headers
+    string              ackInbox        = 10; // NATS subject to publish acks to
+    string              correlationId   = 11; // User-supplied value to correlate acks to publishes
+    AckPolicy           ackPolicy       = 12; // Controls the behavior of acks
+    int64               lastKnownOffset = 13; // Provide last known offset on the partion before publish
+
 }
 
 // Ack represents an acknowledgement that a message was committed to a stream
