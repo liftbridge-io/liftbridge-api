@@ -279,6 +279,14 @@ message Message {
 
 }
 
+
+// AckError represents error that is piggybacked to AckInbox due to any error that is encountered upon publishing
+// E.g: A PublishRequest may includes the LastKnownOffset which is outdated on partition. This publish would be refused.
+enum AckError {
+    UNKNOWN = 0;
+    INCORRECT_OFFSET = 1;
+}
+
 // Ack represents an acknowledgement that a message was committed to a stream
 // partition.
 message Ack {
@@ -291,6 +299,7 @@ message Ack {
     AckPolicy ackPolicy          = 7; // The AckPolicy sent on the message
     int64     receptionTimestamp = 8 [jstype=JS_STRING]; // When the message was received by the server
     int64     commitTimestamp    = 9 [jstype=JS_STRING]; // When the message was committed
+    AckError  ackError           = 10; // AckError sent in case the partition refused to accept the published message
 }
 
 // ActivityStreamOp represents an activity stream operation.
