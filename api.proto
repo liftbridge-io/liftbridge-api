@@ -283,7 +283,7 @@ message Message {
 // AckError represents error that is piggybacked to AckInbox due to any error that is encountered upon publishing
 // E.g: A PublishRequest may includes the LastKnownOffset which is outdated on partition. This publish would be refused.
 enum AckError {
-    UNKNOWN = 0;
+    OK = 0;
     INCORRECT_OFFSET = 1;
 }
 
