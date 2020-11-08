@@ -144,7 +144,7 @@ message PublishRequest {
     string              ackInbox        = 6; // NATS subject to publish acks to
     string              correlationId   = 7; // User-supplied value to correlate acks to publishes
     AckPolicy           ackPolicy       = 8; // Controls the behavior of acks
-    int64               lastKnownOffset = 9; // Provide last known offset on the partion before publish
+    int64               expectedOffset  = 9; // Provide expected offset on the partion after publish
 }
 
 // PublishAsyncError is returned on the PublishAsync stream if a publish failed.
@@ -275,13 +275,13 @@ message Message {
     string              ackInbox        = 10; // NATS subject to publish acks to
     string              correlationId   = 11; // User-supplied value to correlate acks to publishes
     AckPolicy           ackPolicy       = 12; // Controls the behavior of acks
-    int64               lastKnownOffset = 13; // Provide last known offset on the partion before publish
+    int64               expectedOffset  = 13; // Provide expected offset on the partion after publish
 
 }
 
 
 // AckError represents error that is piggybacked to AckInbox due to any error that is encountered upon publishing
-// E.g: A PublishRequest may includes the LastKnownOffset which is outdated on partition. This publish would be refused.
+// E.g: A PublishRequest may includes the expectedOffset which is outdated on partition. This publish would be refused.
 enum AckError {
     OK = 0;
     INCORRECT_OFFSET = 1;
