@@ -1,0 +1,20 @@
+name: CI
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        if: success()
+        uses: actions/checkout@v1
+        with:
+          ref: master
+      - name: checkout-master
+        if: success()
+        run: git checkout master
+      - name: checkout
+        if: success()
+        uses: actions/checkout@v1
+      - name: make check
+        if: success()
+        run: make check
