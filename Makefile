@@ -1,3 +1,5 @@
+PROJECT := liftbridge-api
+
 BUF_VERSION := 0.31.1
 
 UNAME_OS := $(shell uname -s)
