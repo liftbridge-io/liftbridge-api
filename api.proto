@@ -34,6 +34,7 @@ message CreateStreamRequest {
     NullableInt64 autoPauseTime                 = 14; // The amount of time a stream partition can go idle before it is automatically paused
     NullableBool  autoPauseDisableIfSubscribers = 15; // Disables automatic partition pausing when there are subscribers
     NullableInt32 minIsr                        = 16; // The minimum number of replicas that must ack a stream write before it can be committed
+    bool          optimisticConcurrencyControl  = 17; // Set activation mode for Optimistic Concurrency Control on stream. Default is false
 }
 
 // CreateStreamResponse is sent by server after creating a stream.
@@ -275,12 +276,11 @@ message Message {
     string              ackInbox        = 10; // NATS subject to publish acks to
     string              correlationId   = 11; // User-supplied value to correlate acks to publishes
     AckPolicy           ackPolicy       = 12; // Controls the behavior of acks
-    int64               expectedOffset  = 13; // Provide expected offset on the partion after publish
 }
 
 
 // AckError represents error that is piggybacked to AckInbox due to any error that is encountered upon publishing
-// E.g: A PublishRequest may includes the expectedOffset which is outdated on partition. This publish would be refused.
+// E.g: A PublishRequest may includes the expected offset which is outdated on partition. This publish would be refused.
 enum AckError {
     UNKNOWN = 0;
     INCORRECT_OFFSET = 1;
