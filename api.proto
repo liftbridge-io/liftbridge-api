@@ -34,7 +34,7 @@ message CreateStreamRequest {
     NullableInt64 autoPauseTime                 = 14; // The amount of time a stream partition can go idle before it is automatically paused
     NullableBool  autoPauseDisableIfSubscribers = 15; // Disables automatic partition pausing when there are subscribers
     NullableInt32 minIsr                        = 16; // The minimum number of replicas that must ack a stream write before it can be committed
-    bool          optimisticConcurrencyControl  = 17; // Set activation mode for Optimistic Concurrency Control on stream. Default is false
+    NullableBool  optimisticConcurrencyControl  = 17; // Set activation mode for Optimistic Concurrency Control on stream. Default is false
 }
 
 // CreateStreamResponse is sent by server after creating a stream.
@@ -264,31 +264,31 @@ enum AckPolicy {
 
 // Message represents a message from a stream.
 message Message {
-    int64               offset          = 1 [jstype=JS_STRING];  // Monotonic message offset in the stream
-    bytes               key             = 2;  // Message key
-    bytes               value           = 3;  // Message payload
-    int64               timestamp       = 4 [jstype=JS_STRING];  // When the message was received by the broker
-    string              stream          = 5;  // Stream name message was received on
-    int32               partition       = 6;  // Stream partition message was assigned to
-    string              subject         = 7;  // NATS subject message was received on
-    string              replySubject    = 8;  // NATS reply subject
-    map<string, bytes>  headers         = 9;  // Message headers
-    string              ackInbox        = 10; // NATS subject to publish acks to
-    string              correlationId   = 11; // User-supplied value to correlate acks to publishes
-    AckPolicy           ackPolicy       = 12; // Controls the behavior of acks
-}
-
-
-// AckError represents error that is piggybacked to AckInbox due to any error that is encountered upon publishing
-// E.g: A PublishRequest may includes the expected offset which is outdated on partition. This publish would be refused.
-enum AckError {
-    UNKNOWN = 0;
-    INCORRECT_OFFSET = 1;
+    int64               offset        = 1 [jstype=JS_STRING];  // Monotonic message offset in the stream
+    bytes               key           = 2;  // Message key
+    bytes               value         = 3;  // Message payload
+    int64               timestamp     = 4 [jstype=JS_STRING];  // When the message was received by the broker
+    string              stream        = 5;  // Stream name message was received on
+    int32               partition     = 6;  // Stream partition message was assigned to
+    string              subject       = 7;  // NATS subject message was received on
+    string              replySubject  = 8;  // NATS reply subject
+    map<string, bytes>  headers       = 9;  // Message headers
+    string              ackInbox      = 10; // NATS subject to publish acks to
+    string              correlationId = 11; // User-supplied value to correlate acks to publishes
+    AckPolicy           ackPolicy     = 12; // Controls the behavior of acks
 }
 
 // Ack represents an acknowledgement that a message was committed to a stream
 // partition.
 message Ack {
+    // AckError represents error that is piggybacked to AckInbox due to any error that is encountered upon publishing
+    // E.g: A PublishRequest may includes the expected offset which is outdated on partition. This publish would be refused.
+    enum AckError {
+        OK               = 0;
+        UNKNOWN          = 1;
+        INCORRECT_OFFSET = 2;
+    }
+
     string    stream             = 1; // Name of the stream
     string    partitionSubject   = 2; // NATS subject partition is attached to
     string    msgSubject         = 3; // NATS subject the message was received on
