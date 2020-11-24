@@ -281,9 +281,9 @@ message Message {
 // Ack represents an acknowledgement that a message was committed to a stream
 // partition.
 message Ack {
-    // AckError represents error that is piggybacked to AckInbox due to any error that is encountered upon publishing
+    // Error represents an error that is piggybacked to AckInbox due to any error that is encountered upon publishing
     // E.g: A PublishRequest may includes the expected offset which is outdated on partition. This publish would be refused.
-    enum AckError {
+    enum Error {
         OK               = 0;
         UNKNOWN          = 1;
         INCORRECT_OFFSET = 2;
@@ -298,7 +298,7 @@ message Ack {
     AckPolicy ackPolicy          = 7; // The AckPolicy sent on the message
     int64     receptionTimestamp = 8 [jstype=JS_STRING]; // When the message was received by the server
     int64     commitTimestamp    = 9 [jstype=JS_STRING]; // When the message was committed
-    AckError  ackError           = 10; // AckError sent in case the partition refused to accept the published message
+    Error     ackError           = 10; // Error sent in case the partition refused to accept the published message
 }
 
 // ActivityStreamOp represents an activity stream operation.
