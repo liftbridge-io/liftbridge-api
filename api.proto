@@ -34,6 +34,7 @@ message CreateStreamRequest {
     NullableInt64 autoPauseTime                 = 14; // The amount of time a stream partition can go idle before it is automatically paused
     NullableBool  autoPauseDisableIfSubscribers = 15; // Disables automatic partition pausing when there are subscribers
     NullableInt32 minIsr                        = 16; // The minimum number of replicas that must ack a stream write before it can be committed
+    NullableBool  optimisticConcurrencyControl  = 17; // Set activation mode for Optimistic Concurrency Control on stream. Default is false
 }
 
 // CreateStreamResponse is sent by server after creating a stream.
@@ -136,14 +137,15 @@ message FetchPartitionMetadataResponse {
 
 // PublishRequest is sent to publish a new message to a stream.
 message PublishRequest {
-    bytes               key           = 1; // Message key
-    bytes               value         = 2; // Message payload
-    string              stream        = 3; // Stream name to publish to
-    int32               partition     = 4; // Stream partition to publish to
-    map<string, bytes>  headers       = 5; // Message headers
-    string              ackInbox      = 6; // NATS subject to publish acks to
-    string              correlationId = 7; // User-supplied value to correlate acks to publishes
-    AckPolicy           ackPolicy     = 8; // Controls the behavior of acks
+    bytes               key             = 1; // Message key
+    bytes               value           = 2; // Message payload
+    string              stream          = 3; // Stream name to publish to
+    int32               partition       = 4; // Stream partition to publish to
+    map<string, bytes>  headers         = 5; // Message headers
+    string              ackInbox        = 6; // NATS subject to publish acks to
+    string              correlationId   = 7; // User-supplied value to correlate acks to publishes
+    AckPolicy           ackPolicy       = 8; // Controls the behavior of acks
+    int64               expectedOffset  = 9; // Provide expected offset on the partion after publish
 }
 
 // PublishAsyncError is returned on the PublishAsync stream if a publish failed.
@@ -279,6 +281,14 @@ message Message {
 // Ack represents an acknowledgement that a message was committed to a stream
 // partition.
 message Ack {
+    // Error represents an error that is piggybacked to AckInbox due to any error that is encountered upon publishing
+    // E.g: A PublishRequest may includes the expected offset which is outdated on partition. This publish would be refused.
+    enum Error {
+        OK               = 0;
+        UNKNOWN          = 1;
+        INCORRECT_OFFSET = 2;
+    }
+
     string    stream             = 1; // Name of the stream
     string    partitionSubject   = 2; // NATS subject partition is attached to
     string    msgSubject         = 3; // NATS subject the message was received on
@@ -288,6 +298,7 @@ message Ack {
     AckPolicy ackPolicy          = 7; // The AckPolicy sent on the message
     int64     receptionTimestamp = 8 [jstype=JS_STRING]; // When the message was received by the server
     int64     commitTimestamp    = 9 [jstype=JS_STRING]; // When the message was committed
+    Error     ackError           = 10; // Error sent in case the partition refused to accept the published message
 }
 
 // ActivityStreamOp represents an activity stream operation.
