@@ -151,11 +151,12 @@ message PublishRequest {
 // PublishAsyncError is returned on the PublishAsync stream if a publish failed.
 message PublishAsyncError {
     enum Code {
-        UNKNOWN     = 0;
-        BAD_REQUEST = 1; // Invalid request arguments
-        NOT_FOUND   = 2; // Stream or partition not found
-        INTERNAL    = 3; // Internal server error
-        READONLY    = 4; // Partition is readonly
+        UNKNOWN          = 0;
+        BAD_REQUEST      = 1; // Invalid request arguments
+        NOT_FOUND        = 2; // Stream or partition not found
+        INTERNAL         = 3; // Internal server error
+        READONLY         = 4; // Partition is readonly
+        INCORRECT_OFFSET = 5; // Publish is sent with incorrect expected offset. Used for concurrency control
     }
     Code   code    = 1; // Error code
     string message = 2; // Error message
