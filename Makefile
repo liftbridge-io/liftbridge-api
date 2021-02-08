@@ -1,6 +1,6 @@
 PROJECT := liftbridge-api
 
-BUF_VERSION := 0.31.1
+BUF_VERSION := 0.36.0
 
 UNAME_OS := $(shell uname -s)
 UNAME_ARCH := $(shell uname -m)
@@ -36,5 +36,5 @@ py:
 
 .PHONY: check
 check: $(BUF)
-	buf check lint
-	buf check breaking --against '.git#branch=master'
+	buf lint
+	buf breaking --against '.git#branch=master'
