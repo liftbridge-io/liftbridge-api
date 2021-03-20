@@ -35,6 +35,8 @@ message CreateStreamRequest {
     NullableBool  autoPauseDisableIfSubscribers = 15; // Disables automatic partition pausing when there are subscribers
     NullableInt32 minIsr                        = 16; // The minimum number of replicas that must ack a stream write before it can be committed
     NullableBool  optimisticConcurrencyControl  = 17; // Set activation mode for Optimistic Concurrency Control on stream. Default is false
+    NullableBool  encryptionDataAtRest          = 18; // Set activation mode for encryption of data-at-rest on stream. Default is false
+
 }
 
 // CreateStreamResponse is sent by server after creating a stream.
@@ -151,12 +153,13 @@ message PublishRequest {
 // PublishAsyncError is returned on the PublishAsync stream if a publish failed.
 message PublishAsyncError {
     enum Code {
-        UNKNOWN          = 0;
-        BAD_REQUEST      = 1; // Invalid request arguments
-        NOT_FOUND        = 2; // Stream or partition not found
-        INTERNAL         = 3; // Internal server error
-        READONLY         = 4; // Partition is readonly
-        INCORRECT_OFFSET = 5; // Publish is sent with incorrect expected offset. Used for concurrency control
+        UNKNOWN           = 0;
+        BAD_REQUEST       = 1; // Invalid request arguments
+        NOT_FOUND         = 2; // Stream or partition not found
+        INTERNAL          = 3; // Internal server error
+        READONLY          = 4; // Partition is readonly
+        INCORRECT_OFFSET  = 5; // Publish is sent with incorrect expected offset. Used for concurrency control
+        ENCRYPTION_FAILED = 6; // Failed to encrypt data on partition
     }
     Code   code    = 1; // Error code
     string message = 2; // Error message
@@ -291,6 +294,7 @@ message Ack {
         UNKNOWN          = 1;
         INCORRECT_OFFSET = 2;
         TOO_LARGE        = 3;
+        ENCRYPTION       = 4;
     }
 
     string    stream             = 1; // Name of the stream
