@@ -35,7 +35,7 @@ message CreateStreamRequest {
     NullableBool  autoPauseDisableIfSubscribers = 15; // Disables automatic partition pausing when there are subscribers
     NullableInt32 minIsr                        = 16; // The minimum number of replicas that must ack a stream write before it can be committed
     NullableBool  optimisticConcurrencyControl  = 17; // Set activation mode for Optimistic Concurrency Control on stream. Default is false
-    NullableBool  encryptionDataAtRest          = 18; // Set activation mode for encryption of data-at-rest on stream. Default is false
+    NullableBool  encryption                    = 18; // Set activation mode for encryption of data-at-rest on stream. Default is false
 
 }
 
