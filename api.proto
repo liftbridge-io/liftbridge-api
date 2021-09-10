@@ -220,9 +220,11 @@ message FetchCursorResponse {
 
 // Broker contains information for a Liftbridge broker.
 message Broker {
-    string id   = 1; // Broker id
-    string host = 2; // Broker host
-    int32  port = 3; // Broker port
+    string id             = 1; // Broker id
+    string host           = 2; // Broker host
+    int32  port           = 3; // Broker port
+    int32  partitionCount = 4; // Number of partitions stored on broker
+    int32  leaderCount    = 5; // Number of partitions stored on broker as partition leader
 }
 
 // StreamMetadata contains information for a stream.
