@@ -218,6 +218,18 @@ message FetchCursorResponse {
     int64 offset = 1; // Offset where cursor is located
 }
 
+// JoinConsumerGroupRequest is sent to add a consumer to a consumer group.
+message JoinConsumerGroupRequest {
+    string          groupId    = 1; // ID of consumer group to join
+    string          consumerId = 2; // Uniquely identifies the consumer
+    repeated string streams    = 3; // Streams to consume
+}
+
+// JoinConsumerGroupResponse is sent by the server after adding a consumer to a
+// consumer group.
+message JoinConsumerGroupResponse {
+}
+
 // Broker contains information for a Liftbridge broker.
 message Broker {
     string id             = 1; // Broker id
@@ -424,4 +436,11 @@ service API {
     // NOTE: This is a beta endpoint and is subject to change. It is not
     // included as part of Liftbridge's semantic versioning scheme.
     rpc FetchCursor(FetchCursorRequest) returns (FetchCursorResponse) {}
+
+    // JoinConsumerGroup adds a consumer to a consumer group. If the group does
+    // not exist, it will create it first.
+    //
+    // NOTE: This is a beta endpoint and is subject to change. It is not
+    // included as part of Liftbridge's semantic versioning scheme.
+    rpc JoinConsumerGroup(JoinConsumerGroupRequest) returns (JoinConsumerGroupResponse) {}
 }

@@ -75,6 +75,11 @@ class APIStub(object):
                 request_serializer=api__pb2.FetchCursorRequest.SerializeToString,
                 response_deserializer=api__pb2.FetchCursorResponse.FromString,
                 )
+        self.JoinConsumerGroup = channel.unary_unary(
+                '/proto.API/JoinConsumerGroup',
+                request_serializer=api__pb2.JoinConsumerGroupRequest.SerializeToString,
+                response_deserializer=api__pb2.JoinConsumerGroupResponse.FromString,
+                )
 
 
 class APIServicer(object):
@@ -190,6 +195,17 @@ class APIServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def JoinConsumerGroup(self, request, context):
+        """JoinConsumerGroup adds a consumer to a consumer group. If the group does
+        not exist, it will create it first.
+
+        NOTE: This is a beta endpoint and is subject to change. It is not
+        included as part of Liftbridge's semantic versioning scheme.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_APIServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -252,6 +268,11 @@ def add_APIServicer_to_server(servicer, server):
                     servicer.FetchCursor,
                     request_deserializer=api__pb2.FetchCursorRequest.FromString,
                     response_serializer=api__pb2.FetchCursorResponse.SerializeToString,
+            ),
+            'JoinConsumerGroup': grpc.unary_unary_rpc_method_handler(
+                    servicer.JoinConsumerGroup,
+                    request_deserializer=api__pb2.JoinConsumerGroupRequest.FromString,
+                    response_serializer=api__pb2.JoinConsumerGroupResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -465,5 +486,22 @@ class API(object):
         return grpc.experimental.unary_unary(request, target, '/proto.API/FetchCursor',
             api__pb2.FetchCursorRequest.SerializeToString,
             api__pb2.FetchCursorResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def JoinConsumerGroup(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/proto.API/JoinConsumerGroup',
+            api__pb2.JoinConsumerGroupRequest.SerializeToString,
+            api__pb2.JoinConsumerGroupResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
