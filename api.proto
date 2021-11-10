@@ -228,6 +228,8 @@ message JoinConsumerGroupRequest {
 // JoinConsumerGroupResponse is sent by the server after adding a consumer to a
 // consumer group.
 message JoinConsumerGroupResponse {
+    string coordinator      = 1; // Broker acting as consumer group coordinator
+    uint64 coordinatorEpoch = 2; // Consumer group epoch for fencing coordinator generations
 }
 
 // Broker contains information for a Liftbridge broker.
