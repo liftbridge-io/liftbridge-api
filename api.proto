@@ -237,7 +237,7 @@ message JoinConsumerGroupResponse {
 message PollConsumerGroupRequest {
     string groupId          = 1;
     string consumerId       = 2;
-    string coordinatorEpoch = 3;
+    uint64 coordinatorEpoch = 3;
 }
 
 // PartitionAssignment contains a set of stream partitions that are assigned to
