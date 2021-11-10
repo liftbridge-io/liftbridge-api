@@ -232,6 +232,27 @@ message JoinConsumerGroupResponse {
     uint64 coordinatorEpoch = 2; // Consumer group epoch for fencing coordinator generations
 }
 
+// PollConsumerGroupRequest is sent to a consumer group coordinator to keep the
+// consumer active in the group.
+message PollConsumerGroupRequest {
+    string groupId          = 1;
+    string consumerId       = 2;
+    string coordinatorEpoch = 3;
+}
+
+// PartitionAssignment contains a set of stream partitions that are assigned to
+// a consumer.
+message PartitionAssignment {
+    string         stream     = 1;
+    repeated int32 partitions = 2;
+}
+
+// PollConsumerGroupResponse is sent by the group coordinator to notify the
+// consumer of its partition assignments.
+message PollConsumerGroupResponse {
+    repeated PartitionAssignment assignments = 1; // Partitions assigned to consumer
+}
+
 // Broker contains information for a Liftbridge broker.
 message Broker {
     string id             = 1; // Broker id
@@ -445,4 +466,14 @@ service API {
     // NOTE: This is a beta endpoint and is subject to change. It is not
     // included as part of Liftbridge's semantic versioning scheme.
     rpc JoinConsumerGroup(JoinConsumerGroupRequest) returns (JoinConsumerGroupResponse) {}
+
+    // PollConsumerGroup is a long-lived, bidirectional RPC between a consumer
+    // group member and the group coordinator. The client should periodically
+    // sent requests which act as a heartbeat to keep the consumer active in
+    // the group. The server will send responses containing the consumer's
+    // partition assignments.
+    //
+    // NOTE: This is a beta endpoint and is subject to change. It is not
+    // included as part of Liftbridge's semantic versioning scheme.
+    rpc PollConsumerGroup(stream PollConsumerGroupRequest) returns (stream PollConsumerGroupResponse) {}
 }
