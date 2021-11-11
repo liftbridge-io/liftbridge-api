@@ -80,10 +80,10 @@ class APIStub(object):
                 request_serializer=api__pb2.JoinConsumerGroupRequest.SerializeToString,
                 response_deserializer=api__pb2.JoinConsumerGroupResponse.FromString,
                 )
-        self.PollConsumerGroup = channel.stream_stream(
-                '/proto.API/PollConsumerGroup',
-                request_serializer=api__pb2.PollConsumerGroupRequest.SerializeToString,
-                response_deserializer=api__pb2.PollConsumerGroupResponse.FromString,
+        self.FetchConsumerGroupAssignments = channel.unary_unary(
+                '/proto.API/FetchConsumerGroupAssignments',
+                request_serializer=api__pb2.FetchConsumerGroupAssignmentsRequest.SerializeToString,
+                response_deserializer=api__pb2.FetchConsumerGroupAssignmentsResponse.FromString,
                 )
 
 
@@ -211,12 +211,10 @@ class APIServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def PollConsumerGroup(self, request_iterator, context):
-        """PollConsumerGroup is a long-lived, bidirectional RPC between a consumer
-        group member and the group coordinator. The client should periodically
-        sent requests which act as a heartbeat to keep the consumer active in
-        the group. The server will send responses containing the consumer's
-        partition assignments.
+    def FetchConsumerGroupAssignments(self, request, context):
+        """FetchConsumerGroupAssignments retrieves the partition assignments for a
+        consumer. This also acts as a heartbeat for the consumer so that the
+        coordinator keeps the consumer active in the group.
 
         NOTE: This is a beta endpoint and is subject to change. It is not
         included as part of Liftbridge's semantic versioning scheme.
@@ -293,10 +291,10 @@ def add_APIServicer_to_server(servicer, server):
                     request_deserializer=api__pb2.JoinConsumerGroupRequest.FromString,
                     response_serializer=api__pb2.JoinConsumerGroupResponse.SerializeToString,
             ),
-            'PollConsumerGroup': grpc.stream_stream_rpc_method_handler(
-                    servicer.PollConsumerGroup,
-                    request_deserializer=api__pb2.PollConsumerGroupRequest.FromString,
-                    response_serializer=api__pb2.PollConsumerGroupResponse.SerializeToString,
+            'FetchConsumerGroupAssignments': grpc.unary_unary_rpc_method_handler(
+                    servicer.FetchConsumerGroupAssignments,
+                    request_deserializer=api__pb2.FetchConsumerGroupAssignmentsRequest.FromString,
+                    response_serializer=api__pb2.FetchConsumerGroupAssignmentsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -531,7 +529,7 @@ class API(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def PollConsumerGroup(request_iterator,
+    def FetchConsumerGroupAssignments(request,
             target,
             options=(),
             channel_credentials=None,
@@ -541,8 +539,8 @@ class API(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.stream_stream(request_iterator, target, '/proto.API/PollConsumerGroup',
-            api__pb2.PollConsumerGroupRequest.SerializeToString,
-            api__pb2.PollConsumerGroupResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/proto.API/FetchConsumerGroupAssignments',
+            api__pb2.FetchConsumerGroupAssignmentsRequest.SerializeToString,
+            api__pb2.FetchConsumerGroupAssignmentsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
