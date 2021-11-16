@@ -230,6 +230,7 @@ message JoinConsumerGroupRequest {
 message JoinConsumerGroupResponse {
     string coordinator      = 1; // Broker acting as consumer group coordinator
     uint64 coordinatorEpoch = 2 [jstype=JS_STRING]; // Consumer group epoch for fencing coordinator generations
+    int64  consumersTimeout = 3 [jstype=JS_STRING]; // Coordinator's consumer liveness check frequency
 }
 
 // FetchConsumerGroupAssignmentsRequest is sent to a consumer group coordinator
