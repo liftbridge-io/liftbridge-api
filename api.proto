@@ -101,27 +101,32 @@ enum StopPosition {
 
 // SubscribeRequest is sent to subscribe to a stream partition.
 message SubscribeRequest {
-    string        stream         = 1; // Stream name to subscribe to
-    int32         partition      = 2; // Stream partition to subscribe to
-    StartPosition startPosition  = 3; // Where to begin consuming from
-    int64         startOffset    = 4 [jstype=JS_STRING]; // Offset to begin consuming from
-    int64         startTimestamp = 5 [jstype=JS_STRING]; // Timestamp to begin consuming from
-    bool          readISRReplica = 6; // Subscribe from a random ISR replica instead of choosing explicitly leader
-    bool          resume         = 7; // Allow resuming a paused partition before subscribing to it
-    StopPosition  stopPosition   = 8; // Where to stop consuming
-    int64         stopOffset     = 9  [jstype=JS_STRING]; // Offset to stop consuming at
-    int64         stopTimestamp  = 10 [jstype=JS_STRING]; // Timestamp to stop consuming at
+    string        stream          = 1; // Stream name to subscribe to
+    int32         partition       = 2; // Stream partition to subscribe to
+    StartPosition startPosition   = 3; // Where to begin consuming from
+    int64         startOffset     = 4 [jstype=JS_STRING]; // Offset to begin consuming from
+    int64         startTimestamp  = 5 [jstype=JS_STRING]; // Timestamp to begin consuming from
+    bool          readISRReplica  = 6; // Subscribe from a random ISR replica instead of choosing explicitly leader
+    bool          resume          = 7; // Allow resuming a paused partition before subscribing to it
+    StopPosition  stopPosition    = 8; // Where to stop consuming
+    int64         stopOffset      = 9  [jstype=JS_STRING]; // Offset to stop consuming at
+    int64         stopTimestamp   = 10 [jstype=JS_STRING]; // Timestamp to stop consuming at
+    string        groupId         = 11; // Consumer group id if subscriber is part of a consumer group
+    string        consumerId      = 12; // Unique consumer id if subscriber is part of a consumer group
+    uint64        assignmentEpoch = 13; // Consumer group assignment generation for consumer fencing
 }
 
 // FetchMetadataRequest is sent to retrieve the latest cluster metadata.
 message FetchMetadataRequest {
     repeated string streams = 1; // The streams to fetch metadata for (all if empty)
+    repeated string groups  = 2; // The consumer groups to fetch metadata for
 }
 
 // FetchMetadataResponse contains the cluster metadata requested.
 message FetchMetadataResponse {
-    repeated Broker         brokers  = 1; // Information for all brokers
-    repeated StreamMetadata metadata = 2; // Information for all streams
+    repeated Broker                brokers        = 1; // Information for all brokers
+    repeated StreamMetadata        streamMetadata = 2; // Information for requested streams
+    repeated ConsumerGroupMetadata groupMetadata  = 3; // Information for requested groups
 }
 
 // FetchPartitionMetadataRequest is sent to retrieve latest partition metadata.
@@ -251,7 +256,7 @@ message PartitionAssignment {
 // FetchConsumerGroupAssignmentsResponse is sent by the group coordinator to
 // notify the consumer of its partition assignments.
 message FetchConsumerGroupAssignmentsResponse {
-    uint64                       membershipEpoch = 1 [jstype=JS_STRING]; // Generation of membership for consumer fencing
+    uint64                       assignmentEpoch = 1 [jstype=JS_STRING]; // Generation of assignments for consumer fencing
     repeated PartitionAssignment assignments     = 2; // Partitions assigned to consumer
 }
 
@@ -275,6 +280,18 @@ message StreamMetadata {
     Error                         error             = 3; // Indicates if there was something wrong with the requested stream
     map<int32, PartitionMetadata> partitions        = 4; // Information for the stream partitions
     int64                         creationTimestamp = 5 [jstype=JS_STRING]; // When the stream has been created
+}
+
+// ConsumerGroupMetadata contains information for a consumer group.
+message ConsumerGroupMetadata {
+    enum Error {
+        OK            = 0;
+        UNKNOWN_GROUP = 1;
+    }
+    string  groupId          = 1; // The consumer group id
+    Error   error            = 2; // Indicates if there was something wrong with the requested group
+    string  coordinator      = 3; // The broker that is the group coordinator
+    uint64  coordinatorEpoch = 4 [jstype=JS_STRING]; // The group coordinator generation
 }
 
 // PartitionEventTimestamps contains timestamps related to a stream partition.
