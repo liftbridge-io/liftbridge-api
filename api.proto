@@ -240,16 +240,16 @@ message JoinConsumerGroupRequest {
 // consumer group.
 message JoinConsumerGroupResponse {
     string coordinator      = 1; // Broker acting as consumer group coordinator
-    uint64 coordinatorEpoch = 2 [jstype=JS_STRING]; // Consumer group epoch for fencing coordinator generations
+    uint64 epoch            = 2 [jstype=JS_STRING]; // Consumer group epoch for fencing coordinator generations
     int64  consumersTimeout = 3 [jstype=JS_STRING]; // Coordinator's consumer liveness check frequency
 }
 
 // FetchConsumerGroupAssignmentsRequest is sent to a consumer group coordinator
 // to retrieve the consumer's partition assignments.
 message FetchConsumerGroupAssignmentsRequest {
-    string groupId          = 1;
-    string consumerId       = 2;
-    uint64 coordinatorEpoch = 3 [jstype=JS_STRING];
+    string groupId    = 1;
+    string consumerId = 2;
+    uint64 epoch      = 3 [jstype=JS_STRING];
 }
 
 // PartitionAssignment contains a set of stream partitions that are assigned to
