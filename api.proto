@@ -262,8 +262,8 @@ message PartitionAssignment {
 // FetchConsumerGroupAssignmentsResponse is sent by the group coordinator to
 // notify the consumer of its partition assignments.
 message FetchConsumerGroupAssignmentsResponse {
-    uint64                       assignmentEpoch = 1 [jstype=JS_STRING]; // Generation of assignments for consumer fencing
-    repeated PartitionAssignment assignments     = 2; // Partitions assigned to consumer
+    uint64                       epoch       = 1 [jstype=JS_STRING]; // Group generation for consumer fencing
+    repeated PartitionAssignment assignments = 2; // Partitions assigned to consumer
 }
 
 // Broker contains information for a Liftbridge broker.
