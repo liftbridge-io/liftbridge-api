@@ -294,10 +294,10 @@ message ConsumerGroupMetadata {
         OK            = 0;
         UNKNOWN_GROUP = 1;
     }
-    string  groupId          = 1; // The consumer group id
-    Error   error            = 2; // Indicates if there was something wrong with the requested group
-    string  coordinator      = 3; // The broker that is the group coordinator
-    uint64  coordinatorEpoch = 4 [jstype=JS_STRING]; // The group coordinator generation
+    string groupId     = 1; // The consumer group id
+    Error  error       = 2; // Indicates if there was something wrong with the requested group
+    string coordinator = 3; // The broker that is the group coordinator
+    uint64 epoch       = 4 [jstype=JS_STRING]; // The group generation
 }
 
 // PartitionEventTimestamps contains timestamps related to a stream partition.
