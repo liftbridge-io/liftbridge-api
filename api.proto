@@ -239,9 +239,10 @@ message JoinConsumerGroupRequest {
 // JoinConsumerGroupResponse is sent by the server after adding a consumer to a
 // consumer group.
 message JoinConsumerGroupResponse {
-    string coordinator      = 1; // Broker acting as consumer group coordinator
-    uint64 epoch            = 2 [jstype=JS_STRING]; // Consumer group epoch for fencing coordinator generations
-    int64  consumersTimeout = 3 [jstype=JS_STRING]; // Coordinator's consumer liveness check frequency
+    string coordinator        = 1; // Broker acting as consumer group coordinator
+    uint64 epoch              = 2 [jstype=JS_STRING]; // Consumer group epoch for fencing coordinator generations
+    int64  consumerTimeout    = 3 [jstype=JS_STRING]; // Coordinator's consumer liveness check frequency
+    int64  coordinatorTimeout = 4 [jstype=JS_STRING]; // Timeout in which consumer should report coordinator as failed
 }
 
 // FetchConsumerGroupAssignmentsRequest is sent to a consumer group coordinator
@@ -264,6 +265,21 @@ message PartitionAssignment {
 message FetchConsumerGroupAssignmentsResponse {
     uint64                       epoch       = 1 [jstype=JS_STRING]; // Group generation for consumer fencing
     repeated PartitionAssignment assignments = 2; // Partitions assigned to consumer
+}
+
+// ReportConsumerGroupCoordinatorRequest is sent by a consumer group member to
+// report the group coordinator as failed.
+message ReportConsumerGroupCoordinatorRequest {
+    string groupId     = 1;
+    string consumerId  = 2;
+    string coordinator = 3;
+    uint64 epoch       = 4 [jstype=JS_STRING];
+}
+
+// ReportConsumerGroupCoordinatorResponse is sent by the server in response to
+// a request to report a consumer group coordinator.
+message ReportConsumerGroupCoordinatorResponse {
+    // Intentionally empty
 }
 
 // Broker contains information for a Liftbridge broker.
@@ -499,4 +515,12 @@ service API {
     // NOTE: This is a beta endpoint and is subject to change. It is not
     // included as part of Liftbridge's semantic versioning scheme.
     rpc FetchConsumerGroupAssignments(FetchConsumerGroupAssignmentsRequest) returns (FetchConsumerGroupAssignmentsResponse) {}
+
+    // ReportConsumerGroupCoordinator reports a consumer group coordinator as
+    // failed. If a majority of the group's members report the coordinator
+    // within a bounded period, the cluster will select a new coordinator.
+    //
+    // NOTE: This is a beta endpoint and is subject to change. It is not
+    // included as part of Liftbridge's semantic versioning scheme.
+    rpc ReportConsumerGroupCoordinator(ReportConsumerGroupCoordinatorRequest) returns (ReportConsumerGroupCoordinatorResponse) {}
 }
