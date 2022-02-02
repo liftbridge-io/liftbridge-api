@@ -245,6 +245,19 @@ message JoinConsumerGroupResponse {
     int64  coordinatorTimeout = 4 [jstype=JS_STRING]; // Timeout in which consumer should report coordinator as failed
 }
 
+// LeaveConsumerGroupRequest is sent to remove a consumer from a consumer
+// group.
+message LeaveConsumerGroupRequest {
+    string groupId    = 1; // ID of consumer group to leave
+    string consumerId = 2; // Consumer to remove
+}
+
+// LeaveConsumerGroupResponse is sent by the server after removing a consumer
+// from a consumer group.
+message LeaveConsumerGroupResponse {
+    // Intentionally empty.
+}
+
 // FetchConsumerGroupAssignmentsRequest is sent to a consumer group coordinator
 // to retrieve the consumer's partition assignments.
 message FetchConsumerGroupAssignmentsRequest {
@@ -507,6 +520,12 @@ service API {
     // NOTE: This is a beta endpoint and is subject to change. It is not
     // included as part of Liftbridge's semantic versioning scheme.
     rpc JoinConsumerGroup(JoinConsumerGroupRequest) returns (JoinConsumerGroupResponse) {}
+
+    // LeaveConsumerGroup removes a consumer from a consumer group.
+    //
+    // NOTE: This is a beta endpoint and is subject to change. It is not
+    // included as part of Liftbridge's semantic versioning scheme.
+    rpc LeaveConsumerGroup(LeaveConsumerGroupRequest) returns (LeaveConsumerGroupResponse) {}
 
     // FetchConsumerGroupAssignments retrieves the partition assignments for a
     // consumer. This also acts as a heartbeat for the consumer so that the
