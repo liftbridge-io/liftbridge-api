@@ -171,6 +171,7 @@ message PublishAsyncError {
         READONLY          = 4; // Partition is readonly
         INCORRECT_OFFSET  = 5; // Publish is sent with incorrect expected offset. Used for concurrency control
         ENCRYPTION_FAILED = 6; // Failed to encrypt data on partition
+        PERMISSION_DENIED = 7; // Fail to perform action on resource.
     }
     Code   code    = 1; // Error code
     string message = 2; // Error message
