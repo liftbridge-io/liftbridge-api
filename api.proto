@@ -99,6 +99,14 @@ enum StopPosition {
     STOP_TIMESTAMP = 3; // Stop at a specified timestamp
 }
 
+// Consumer contains information pertaining to a subscriber that is a member of
+// a consumer group.
+message Consumer {
+    string groupId    = 1; // ID of group consumer is a member of
+    uint64 groupEpoch = 2; // Consumer group generation for consumer fencing
+    string consumerId = 3; // Unique consumer ID
+}
+
 // SubscribeRequest is sent to subscribe to a stream partition.
 message SubscribeRequest {
     string        stream         = 1; // Stream name to subscribe to
@@ -111,17 +119,20 @@ message SubscribeRequest {
     StopPosition  stopPosition   = 8; // Where to stop consuming
     int64         stopOffset     = 9  [jstype=JS_STRING]; // Offset to stop consuming at
     int64         stopTimestamp  = 10 [jstype=JS_STRING]; // Timestamp to stop consuming at
+    Consumer      consumer       = 11; // Set if subscriber is part of a consumer group
 }
 
 // FetchMetadataRequest is sent to retrieve the latest cluster metadata.
 message FetchMetadataRequest {
     repeated string streams = 1; // The streams to fetch metadata for (all if empty)
+    repeated string groups  = 2; // The consumer groups to fetch metadata for
 }
 
 // FetchMetadataResponse contains the cluster metadata requested.
 message FetchMetadataResponse {
-    repeated Broker         brokers  = 1; // Information for all brokers
-    repeated StreamMetadata metadata = 2; // Information for all streams
+    repeated Broker                brokers        = 1; // Information for all brokers
+    repeated StreamMetadata        streamMetadata = 2; // Information for requested streams
+    repeated ConsumerGroupMetadata groupMetadata  = 3; // Information for requested groups
 }
 
 // FetchPartitionMetadataRequest is sent to retrieve latest partition metadata.
@@ -147,7 +158,7 @@ message PublishRequest {
     string              ackInbox        = 6; // NATS subject to publish acks to
     string              correlationId   = 7; // User-supplied value to correlate acks to publishes
     AckPolicy           ackPolicy       = 8; // Controls the behavior of acks
-    int64               expectedOffset  = 9; // Provide expected offset on the partion after publish
+    int64               expectedOffset  = 9 [jstype=JS_STRING]; // Provide expected offset on the partion after publish
 }
 
 // PublishAsyncError is returned on the PublishAsync stream if a publish failed.
@@ -198,7 +209,7 @@ message SetCursorRequest {
     string stream    = 1; // Stream name
     int32  partition = 2; // Stream partition
     string cursorId  = 3; // User-supplied value to uniquely identify this cursor
-    int64  offset    = 4; // Offset where the cursor should be placed
+    int64  offset    = 4 [jstype=JS_STRING]; // Offset where the cursor should be placed
 }
 
 // SetCursorResponse is sent by the server after setting a consumer cursor.
@@ -216,7 +227,73 @@ message FetchCursorRequest {
 
 // FetchCursorResponse contains the requested consumer cursor position.
 message FetchCursorResponse {
-    int64 offset = 1; // Offset where cursor is located
+    int64 offset = 1 [jstype=JS_STRING]; // Offset where cursor is located
+}
+
+// JoinConsumerGroupRequest is sent to add a consumer to a consumer group.
+message JoinConsumerGroupRequest {
+    string          groupId    = 1; // ID of consumer group to join
+    string          consumerId = 2; // Uniquely identifies the consumer
+    repeated string streams    = 3; // Streams to consume
+}
+
+// JoinConsumerGroupResponse is sent by the server after adding a consumer to a
+// consumer group.
+message JoinConsumerGroupResponse {
+    string coordinator        = 1; // Broker acting as consumer group coordinator
+    uint64 epoch              = 2 [jstype=JS_STRING]; // Consumer group epoch for fencing coordinator generations
+    int64  consumerTimeout    = 3 [jstype=JS_STRING]; // Coordinator's consumer liveness check frequency
+    int64  coordinatorTimeout = 4 [jstype=JS_STRING]; // Timeout in which consumer should report coordinator as failed
+}
+
+// LeaveConsumerGroupRequest is sent to remove a consumer from a consumer
+// group.
+message LeaveConsumerGroupRequest {
+    string groupId    = 1; // ID of consumer group to leave
+    string consumerId = 2; // Consumer to remove
+}
+
+// LeaveConsumerGroupResponse is sent by the server after removing a consumer
+// from a consumer group.
+message LeaveConsumerGroupResponse {
+    // Intentionally empty.
+}
+
+// FetchConsumerGroupAssignmentsRequest is sent to a consumer group coordinator
+// to retrieve the consumer's partition assignments.
+message FetchConsumerGroupAssignmentsRequest {
+    string groupId    = 1;
+    string consumerId = 2;
+    uint64 epoch      = 3 [jstype=JS_STRING];
+}
+
+// PartitionAssignment contains a set of stream partitions that are assigned to
+// a consumer.
+message PartitionAssignment {
+    string         stream     = 1;
+    repeated int32 partitions = 2;
+}
+
+// FetchConsumerGroupAssignmentsResponse is sent by the group coordinator to
+// notify the consumer of its partition assignments.
+message FetchConsumerGroupAssignmentsResponse {
+    uint64                       epoch       = 1 [jstype=JS_STRING]; // Group generation for consumer fencing
+    repeated PartitionAssignment assignments = 2; // Partitions assigned to consumer
+}
+
+// ReportConsumerGroupCoordinatorRequest is sent by a consumer group member to
+// report the group coordinator as failed.
+message ReportConsumerGroupCoordinatorRequest {
+    string groupId     = 1;
+    string consumerId  = 2;
+    string coordinator = 3;
+    uint64 epoch       = 4 [jstype=JS_STRING];
+}
+
+// ReportConsumerGroupCoordinatorResponse is sent by the server in response to
+// a request to report a consumer group coordinator.
+message ReportConsumerGroupCoordinatorResponse {
+    // Intentionally empty
 }
 
 // Broker contains information for a Liftbridge broker.
@@ -241,6 +318,18 @@ message StreamMetadata {
     int64                         creationTimestamp = 5 [jstype=JS_STRING]; // When the stream has been created
 }
 
+// ConsumerGroupMetadata contains information for a consumer group.
+message ConsumerGroupMetadata {
+    enum Error {
+        OK            = 0;
+        UNKNOWN_GROUP = 1;
+    }
+    string groupId     = 1; // The consumer group id
+    Error  error       = 2; // Indicates if there was something wrong with the requested group
+    string coordinator = 3; // The broker that is the group coordinator
+    uint64 epoch       = 4 [jstype=JS_STRING]; // The group generation
+}
+
 // PartitionEventTimestamps contains timestamps related to a stream partition.
 message PartitionEventTimestamps {
     int64 firstTimestamp  = 1 [jstype=JS_STRING]; // When the first event has occured
@@ -253,8 +342,8 @@ message PartitionMetadata {
     string                   leader                     = 2; // Broker id of the partition leader
     repeated string          replicas                   = 3; // Broker ids of the partition replicas
     repeated string          isr                        = 4; // Broker ids of the in-sync replica set
-    int64                    highWatermark              = 5; // High watermark of the partition
-    int64                    newestOffset               = 6; // Newest offset of the partition
+    int64                    highWatermark              = 5 [jstype=JS_STRING]; // High watermark of the partition
+    int64                    newestOffset               = 6 [jstype=JS_STRING]; // Newest offset of the partition
     bool                     paused                     = 7; // Is this partition paused?
     bool                     readonly                   = 8; // Is this partition read-only?
     PartitionEventTimestamps messagesReceivedTimestamps = 9; // Timestamps of when the first and latest message have been received
@@ -354,7 +443,7 @@ message SetStreamReadonlyOp {
 
 // ActivityStreamEvent represents an entry into the activity stream.
 message ActivityStreamEvent {
-    uint64              id                  = 1;
+    uint64              id                  = 1 [jstype=JS_STRING];
     ActivityStreamOp    op                  = 2;
     CreateStreamOp      createStreamOp      = 3;
     DeleteStreamOp      deleteStreamOp      = 4;
@@ -425,4 +514,33 @@ service API {
     // NOTE: This is a beta endpoint and is subject to change. It is not
     // included as part of Liftbridge's semantic versioning scheme.
     rpc FetchCursor(FetchCursorRequest) returns (FetchCursorResponse) {}
+
+    // JoinConsumerGroup adds a consumer to a consumer group. If the group does
+    // not exist, it will create it first.
+    //
+    // NOTE: This is a beta endpoint and is subject to change. It is not
+    // included as part of Liftbridge's semantic versioning scheme.
+    rpc JoinConsumerGroup(JoinConsumerGroupRequest) returns (JoinConsumerGroupResponse) {}
+
+    // LeaveConsumerGroup removes a consumer from a consumer group.
+    //
+    // NOTE: This is a beta endpoint and is subject to change. It is not
+    // included as part of Liftbridge's semantic versioning scheme.
+    rpc LeaveConsumerGroup(LeaveConsumerGroupRequest) returns (LeaveConsumerGroupResponse) {}
+
+    // FetchConsumerGroupAssignments retrieves the partition assignments for a
+    // consumer. This also acts as a heartbeat for the consumer so that the
+    // coordinator keeps the consumer active in the group.
+    //
+    // NOTE: This is a beta endpoint and is subject to change. It is not
+    // included as part of Liftbridge's semantic versioning scheme.
+    rpc FetchConsumerGroupAssignments(FetchConsumerGroupAssignmentsRequest) returns (FetchConsumerGroupAssignmentsResponse) {}
+
+    // ReportConsumerGroupCoordinator reports a consumer group coordinator as
+    // failed. If a majority of the group's members report the coordinator
+    // within a bounded period, the cluster will select a new coordinator.
+    //
+    // NOTE: This is a beta endpoint and is subject to change. It is not
+    // included as part of Liftbridge's semantic versioning scheme.
+    rpc ReportConsumerGroupCoordinator(ReportConsumerGroupCoordinatorRequest) returns (ReportConsumerGroupCoordinatorResponse) {}
 }
