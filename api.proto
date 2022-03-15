@@ -453,10 +453,9 @@ message JoinConsumerGroupOp {
 
 // LeaveConsumerGroupOp represents a consumer group leave operation.
 message LeaveConsumerGroupOp {
-    string          groupId    = 1;
-    string          consumerId = 2;
-    repeated string streams    = 3;
-    bool            lastMember = 4; // Resulted in group deletion
+    string groupId    = 1;
+    string consumerId = 2;
+    bool   lastMember = 3; // Resulted in group deletion
 }
 
 // ActivityStreamEvent represents an entry into the activity stream.
