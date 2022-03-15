@@ -445,17 +445,15 @@ message SetStreamReadonlyOp {
 
 // JoinConsumerGroupOp represents a consumer group join operation.
 message JoinConsumerGroupOp {
-    string          groupId     = 1;
-    string          consumerId  = 2;
-    repeated string streams     = 3;
-    bool            firstMember = 4; // Resulted in group creation
+    string          groupId    = 1;
+    string          consumerId = 2;
+    repeated string streams    = 3;
 }
 
 // LeaveConsumerGroupOp represents a consumer group leave operation.
 message LeaveConsumerGroupOp {
     string groupId    = 1;
     string consumerId = 2;
-    bool   lastMember = 3; // Resulted in group deletion
 }
 
 // ActivityStreamEvent represents an entry into the activity stream.
