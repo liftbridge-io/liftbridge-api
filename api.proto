@@ -403,11 +403,13 @@ message Ack {
 
 // ActivityStreamOp represents an activity stream operation.
 enum ActivityStreamOp {
-    CREATE_STREAM       = 0;
-    DELETE_STREAM       = 1;
-    PAUSE_STREAM        = 2;
-    RESUME_STREAM       = 3;
-    SET_STREAM_READONLY = 4;
+    CREATE_STREAM        = 0;
+    DELETE_STREAM        = 1;
+    PAUSE_STREAM         = 2;
+    RESUME_STREAM        = 3;
+    SET_STREAM_READONLY  = 4;
+    JOIN_CONSUMER_GROUP  = 5;
+    LEAVE_CONSUMER_GROUP = 6;
 }
 
 // CreateStreamOp represents a stream creation operation.
@@ -441,15 +443,31 @@ message SetStreamReadonlyOp {
     bool           readonly   = 3;
 }
 
+// JoinConsumerGroupOp represents a consumer group join operation.
+message JoinConsumerGroupOp {
+    string          groupId    = 1;
+    string          consumerId = 2;
+    repeated string streams    = 3;
+}
+
+// LeaveConsumerGroupOp represents a consumer group leave operation.
+message LeaveConsumerGroupOp {
+    string groupId    = 1;
+    string consumerId = 2;
+    bool   expired    = 3; // If consumer was removed because they timed out.
+}
+
 // ActivityStreamEvent represents an entry into the activity stream.
 message ActivityStreamEvent {
-    uint64              id                  = 1 [jstype=JS_STRING];
-    ActivityStreamOp    op                  = 2;
-    CreateStreamOp      createStreamOp      = 3;
-    DeleteStreamOp      deleteStreamOp      = 4;
-    PauseStreamOp       pauseStreamOp       = 5;
-    ResumeStreamOp      resumeStreamOp      = 6;
-    SetStreamReadonlyOp setStreamReadonlyOp = 7;
+    uint64               id                   = 1 [jstype=JS_STRING];
+    ActivityStreamOp     op                   = 2;
+    CreateStreamOp       createStreamOp       = 3;
+    DeleteStreamOp       deleteStreamOp       = 4;
+    PauseStreamOp        pauseStreamOp        = 5;
+    ResumeStreamOp       resumeStreamOp       = 6;
+    SetStreamReadonlyOp  setStreamReadonlyOp  = 7;
+    JoinConsumerGroupOp  joinConsumerGroupOp  = 8;
+    LeaveConsumerGroupOp leaveConsumerGroupOp = 9;
 }
 
 // API is the main Liftbridge server interface clients interact with.
