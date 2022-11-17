@@ -80,10 +80,35 @@ class APIStub(object):
                 request_serializer=api__pb2.JoinConsumerGroupRequest.SerializeToString,
                 response_deserializer=api__pb2.JoinConsumerGroupResponse.FromString,
                 )
+        self.LeaveConsumerGroup = channel.unary_unary(
+                '/proto.API/LeaveConsumerGroup',
+                request_serializer=api__pb2.LeaveConsumerGroupRequest.SerializeToString,
+                response_deserializer=api__pb2.LeaveConsumerGroupResponse.FromString,
+                )
         self.FetchConsumerGroupAssignments = channel.unary_unary(
                 '/proto.API/FetchConsumerGroupAssignments',
                 request_serializer=api__pb2.FetchConsumerGroupAssignmentsRequest.SerializeToString,
                 response_deserializer=api__pb2.FetchConsumerGroupAssignmentsResponse.FromString,
+                )
+        self.ReportConsumerGroupCoordinator = channel.unary_unary(
+                '/proto.API/ReportConsumerGroupCoordinator',
+                request_serializer=api__pb2.ReportConsumerGroupCoordinatorRequest.SerializeToString,
+                response_deserializer=api__pb2.ReportConsumerGroupCoordinatorResponse.FromString,
+                )
+        self.AddPolicy = channel.unary_unary(
+                '/proto.API/AddPolicy',
+                request_serializer=api__pb2.AddPolicyRequest.SerializeToString,
+                response_deserializer=api__pb2.AddPolicyResponse.FromString,
+                )
+        self.RevokePolicy = channel.unary_unary(
+                '/proto.API/RevokePolicy',
+                request_serializer=api__pb2.RevokePolicyRequest.SerializeToString,
+                response_deserializer=api__pb2.RevokePolicyResponse.FromString,
+                )
+        self.ListPolicy = channel.unary_unary(
+                '/proto.API/ListPolicy',
+                request_serializer=api__pb2.ListPolicyRequest.SerializeToString,
+                response_deserializer=api__pb2.ListPolicyResponse.FromString,
                 )
 
 
@@ -211,6 +236,16 @@ class APIServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def LeaveConsumerGroup(self, request, context):
+        """LeaveConsumerGroup removes a consumer from a consumer group.
+
+        NOTE: This is a beta endpoint and is subject to change. It is not
+        included as part of Liftbridge's semantic versioning scheme.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def FetchConsumerGroupAssignments(self, request, context):
         """FetchConsumerGroupAssignments retrieves the partition assignments for a
         consumer. This also acts as a heartbeat for the consumer so that the
@@ -218,6 +253,39 @@ class APIServicer(object):
 
         NOTE: This is a beta endpoint and is subject to change. It is not
         included as part of Liftbridge's semantic versioning scheme.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ReportConsumerGroupCoordinator(self, request, context):
+        """ReportConsumerGroupCoordinator reports a consumer group coordinator as
+        failed. If a majority of the group's members report the coordinator
+        within a bounded period, the cluster will select a new coordinator.
+
+        NOTE: This is a beta endpoint and is subject to change. It is not
+        included as part of Liftbridge's semantic versioning scheme.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def AddPolicy(self, request, context):
+        """AddPolicy add an ACL policy to the cluster
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RevokePolicy(self, request, context):
+        """RevokePolicy revokes an existing ACL policy from the cluster
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListPolicy(self, request, context):
+        """ListPolicy retrieves all existing ACL policies from the cluster
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -291,10 +359,35 @@ def add_APIServicer_to_server(servicer, server):
                     request_deserializer=api__pb2.JoinConsumerGroupRequest.FromString,
                     response_serializer=api__pb2.JoinConsumerGroupResponse.SerializeToString,
             ),
+            'LeaveConsumerGroup': grpc.unary_unary_rpc_method_handler(
+                    servicer.LeaveConsumerGroup,
+                    request_deserializer=api__pb2.LeaveConsumerGroupRequest.FromString,
+                    response_serializer=api__pb2.LeaveConsumerGroupResponse.SerializeToString,
+            ),
             'FetchConsumerGroupAssignments': grpc.unary_unary_rpc_method_handler(
                     servicer.FetchConsumerGroupAssignments,
                     request_deserializer=api__pb2.FetchConsumerGroupAssignmentsRequest.FromString,
                     response_serializer=api__pb2.FetchConsumerGroupAssignmentsResponse.SerializeToString,
+            ),
+            'ReportConsumerGroupCoordinator': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReportConsumerGroupCoordinator,
+                    request_deserializer=api__pb2.ReportConsumerGroupCoordinatorRequest.FromString,
+                    response_serializer=api__pb2.ReportConsumerGroupCoordinatorResponse.SerializeToString,
+            ),
+            'AddPolicy': grpc.unary_unary_rpc_method_handler(
+                    servicer.AddPolicy,
+                    request_deserializer=api__pb2.AddPolicyRequest.FromString,
+                    response_serializer=api__pb2.AddPolicyResponse.SerializeToString,
+            ),
+            'RevokePolicy': grpc.unary_unary_rpc_method_handler(
+                    servicer.RevokePolicy,
+                    request_deserializer=api__pb2.RevokePolicyRequest.FromString,
+                    response_serializer=api__pb2.RevokePolicyResponse.SerializeToString,
+            ),
+            'ListPolicy': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListPolicy,
+                    request_deserializer=api__pb2.ListPolicyRequest.FromString,
+                    response_serializer=api__pb2.ListPolicyResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -529,6 +622,23 @@ class API(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def LeaveConsumerGroup(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/proto.API/LeaveConsumerGroup',
+            api__pb2.LeaveConsumerGroupRequest.SerializeToString,
+            api__pb2.LeaveConsumerGroupResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def FetchConsumerGroupAssignments(request,
             target,
             options=(),
@@ -542,5 +652,73 @@ class API(object):
         return grpc.experimental.unary_unary(request, target, '/proto.API/FetchConsumerGroupAssignments',
             api__pb2.FetchConsumerGroupAssignmentsRequest.SerializeToString,
             api__pb2.FetchConsumerGroupAssignmentsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ReportConsumerGroupCoordinator(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/proto.API/ReportConsumerGroupCoordinator',
+            api__pb2.ReportConsumerGroupCoordinatorRequest.SerializeToString,
+            api__pb2.ReportConsumerGroupCoordinatorResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def AddPolicy(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/proto.API/AddPolicy',
+            api__pb2.AddPolicyRequest.SerializeToString,
+            api__pb2.AddPolicyResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def RevokePolicy(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/proto.API/RevokePolicy',
+            api__pb2.RevokePolicyRequest.SerializeToString,
+            api__pb2.RevokePolicyResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListPolicy(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/proto.API/ListPolicy',
+            api__pb2.ListPolicyRequest.SerializeToString,
+            api__pb2.ListPolicyResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

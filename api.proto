@@ -296,6 +296,42 @@ message ReportConsumerGroupCoordinatorResponse {
     // Intentionally empty
 }
 
+// ACLPolicy represents an Access Control List policy
+message ACLPolicy {
+    string userId     = 1;
+    string resourceId = 2;
+    string action     = 3; 
+}
+// AddPolicyRequest is sent by the client to the metadata leader to add a new authorization policy.
+message AddPolicyRequest {
+    ACLPolicy policy = 1;
+}
+
+// AddPolicyResponse is sent by the server in response to a request to add a new authorization policy.
+message AddPolicyResponse {
+    // Intentionally empty
+}
+
+// RevokePolicyRequest is sent by the client to the metadata leader to revoke an authorization policy.
+message RevokePolicyRequest {
+    ACLPolicy policy = 1;
+}
+
+// RevokePolicyResponse is sent by the server in response to a request revoke an authorization policy.
+message RevokePolicyResponse {
+    // Intentionally empty
+}
+
+// ListPolicyRequest is sent by the client ot metadata leader to list all existing ACL policies on all resources.
+message ListPolicyRequest {
+    // Intentionally empty
+}
+
+// ListPolicyResponse is sent by the server in response to ListPolicyRequest
+message ListPolicyResponse {
+    map<int32,ACLPolicy> policies = 1;
+}
+
 // Broker contains information for a Liftbridge broker.
 message Broker {
     string id             = 1; // Broker id
@@ -561,4 +597,13 @@ service API {
     // NOTE: This is a beta endpoint and is subject to change. It is not
     // included as part of Liftbridge's semantic versioning scheme.
     rpc ReportConsumerGroupCoordinator(ReportConsumerGroupCoordinatorRequest) returns (ReportConsumerGroupCoordinatorResponse) {}
+
+    // AddPolicy add an ACL policy to the cluster
+    rpc AddPolicy(AddPolicyRequest) returns (AddPolicyResponse) {}
+
+    // RevokePolicy revokes an existing ACL policy from the cluster
+    rpc RevokePolicy(RevokePolicyRequest) returns (RevokePolicyResponse) {}
+    
+    // ListPolicy retrieves all existing ACL policies from the cluster
+    rpc ListPolicy(ListPolicyRequest) returns (ListPolicyResponse) {}
 }
