@@ -302,6 +302,7 @@ message ACLPolicy {
     string resourceId = 2;
     string action     = 3; 
 }
+
 // AddPolicyRequest is sent by the client to the metadata leader to add a new authorization policy.
 message AddPolicyRequest {
     ACLPolicy policy = 1;
@@ -322,7 +323,7 @@ message RevokePolicyResponse {
     // Intentionally empty
 }
 
-// ListPolicyRequest is sent by the client ot metadata leader to list all existing ACL policies on all resources.
+// ListPolicyRequest is sent by the client to the metadata leader to list all existing ACL policies on all resources.
 message ListPolicyRequest {
     // Intentionally empty
 }
@@ -598,7 +599,7 @@ service API {
     // included as part of Liftbridge's semantic versioning scheme.
     rpc ReportConsumerGroupCoordinator(ReportConsumerGroupCoordinatorRequest) returns (ReportConsumerGroupCoordinatorResponse) {}
 
-    // AddPolicy add an ACL policy to the cluster
+    // AddPolicy adds an ACL policy to the cluster
     rpc AddPolicy(AddPolicyRequest) returns (AddPolicyResponse) {}
 
     // RevokePolicy revokes an existing ACL policy from the cluster

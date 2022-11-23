@@ -2752,7 +2752,7 @@ func (m *RevokePolicyResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_RevokePolicyResponse proto.InternalMessageInfo
 
-// ListPolicyRequest is sent by the client ot metadata leader to list all existing ACL policies on all resources.
+// ListPolicyRequest is sent by the client to the metadata leader to list all existing ACL policies on all resources.
 type ListPolicyRequest struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -4401,7 +4401,7 @@ type APIClient interface {
 	// NOTE: This is a beta endpoint and is subject to change. It is not
 	// included as part of Liftbridge's semantic versioning scheme.
 	ReportConsumerGroupCoordinator(ctx context.Context, in *ReportConsumerGroupCoordinatorRequest, opts ...grpc.CallOption) (*ReportConsumerGroupCoordinatorResponse, error)
-	// AddPolicy add an ACL policy to the cluster
+	// AddPolicy adds an ACL policy to the cluster
 	AddPolicy(ctx context.Context, in *AddPolicyRequest, opts ...grpc.CallOption) (*AddPolicyResponse, error)
 	// RevokePolicy revokes an existing ACL policy from the cluster
 	RevokePolicy(ctx context.Context, in *RevokePolicyRequest, opts ...grpc.CallOption) (*RevokePolicyResponse, error)
@@ -4709,7 +4709,7 @@ type APIServer interface {
 	// NOTE: This is a beta endpoint and is subject to change. It is not
 	// included as part of Liftbridge's semantic versioning scheme.
 	ReportConsumerGroupCoordinator(context.Context, *ReportConsumerGroupCoordinatorRequest) (*ReportConsumerGroupCoordinatorResponse, error)
-	// AddPolicy add an ACL policy to the cluster
+	// AddPolicy adds an ACL policy to the cluster
 	AddPolicy(context.Context, *AddPolicyRequest) (*AddPolicyResponse, error)
 	// RevokePolicy revokes an existing ACL policy from the cluster
 	RevokePolicy(context.Context, *RevokePolicyRequest) (*RevokePolicyResponse, error)

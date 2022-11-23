@@ -271,7 +271,7 @@ class APIServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def AddPolicy(self, request, context):
-        """AddPolicy add an ACL policy to the cluster
+        """AddPolicy adds an ACL policy to the cluster
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
