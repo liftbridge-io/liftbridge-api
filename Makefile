@@ -1,6 +1,6 @@
 PROJECT := liftbridge-api
 
-BUF_VERSION := 0.36.0
+BUF_VERSION := 1.47.2
 
 UNAME_OS := $(shell uname -s)
 UNAME_ARCH := $(shell uname -m)
@@ -28,7 +28,9 @@ all: go py
 
 .PHONY: go
 go:
-	protoc --gofast_out=plugins=grpc:go api.proto
+	protoc --go_out=go --go_opt=paths=source_relative \
+	       --go-grpc_out=go --go-grpc_opt=paths=source_relative \
+	       api.proto
 
 .PHONY: py
 py:
@@ -38,3 +40,8 @@ py:
 check: $(BUF)
 	buf lint
 	buf breaking --against '.git#branch=master'
+
+.PHONY: install-tools
+install-tools:
+	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
