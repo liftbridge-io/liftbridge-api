@@ -4,6 +4,30 @@ This repository contains the public API definitions for
 [Liftbridge](https://github.com/liftbridge-io/liftbridge). It is primarily
 intended for Liftbridge client developers.
 
+## Maintenance
+
+This project is maintained by [Basekick Labs](https://github.com/Basekick-Labs), creators of [Arc](https://github.com/Basekick-Labs/arc).
+
+## Installation
+
+```go
+go get github.com/liftbridge-io/liftbridge-api/go@v2
+```
+
+### Dependencies (v2.0.0+)
+
+Starting with v2.0.0, this package uses the official Google protobuf and gRPC libraries:
+
+```go
+require (
+    github.com/liftbridge-io/liftbridge-api/go v2.0.0
+    google.golang.org/grpc v1.69.2
+    google.golang.org/protobuf v1.36.1
+)
+```
+
+**Note:** v2.0.0 migrated from the deprecated `gogo/protobuf` to `google.golang.org/protobuf`. This is a breaking change - see the [release notes](https://github.com/liftbridge-io/liftbridge-api/releases/tag/v2.0.0) for migration details.
+
 ## gRPC API
 
 The client-facing gRPC API is defined in [api.proto](api.proto).
