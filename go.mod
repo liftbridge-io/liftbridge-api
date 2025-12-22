@@ -1,4 +1,4 @@
-module github.com/liftbridge-io/liftbridge-api
+module github.com/liftbridge-io/liftbridge-api/v2
 
 go 1.25.3
 

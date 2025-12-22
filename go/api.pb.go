@@ -4089,8 +4089,8 @@ const file_api_proto_rawDesc = "" +
 	"\x11JoinConsumerGroup\x12\x1f.proto.JoinConsumerGroupRequest\x1a .proto.JoinConsumerGroupResponse\"\x00\x12[\n" +
 	"\x12LeaveConsumerGroup\x12 .proto.LeaveConsumerGroupRequest\x1a!.proto.LeaveConsumerGroupResponse\"\x00\x12|\n" +
 	"\x1dFetchConsumerGroupAssignments\x12+.proto.FetchConsumerGroupAssignmentsRequest\x1a,.proto.FetchConsumerGroupAssignmentsResponse\"\x00\x12\x7f\n" +
-	"\x1eReportConsumerGroupCoordinator\x12,.proto.ReportConsumerGroupCoordinatorRequest\x1a-.proto.ReportConsumerGroupCoordinatorResponse\"\x00BG\n" +
-	"\x13io.liftbridge.protoZ0github.com/liftbridge-io/liftbridge-api/go;protob\x06proto3"
+	"\x1eReportConsumerGroupCoordinator\x12,.proto.ReportConsumerGroupCoordinatorRequest\x1a-.proto.ReportConsumerGroupCoordinatorResponse\"\x00BJ\n" +
+	"\x13io.liftbridge.protoZ3github.com/liftbridge-io/liftbridge-api/v2/go;protob\x06proto3"
 
 var (
 	file_api_proto_rawDescOnce sync.Once

@@ -1,7 +1,7 @@
 syntax = "proto3";
 package proto;
 
-option go_package = "github.com/liftbridge-io/liftbridge-api/go;proto";
+option go_package = "github.com/liftbridge-io/liftbridge-api/v2/go;proto";
 option java_package = "io.liftbridge.proto";
 
 

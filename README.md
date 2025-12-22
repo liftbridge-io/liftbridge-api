@@ -11,7 +11,7 @@ This project is maintained by [Basekick Labs](https://github.com/Basekick-Labs),
 ## Installation
 
 ```go
-go get github.com/liftbridge-io/liftbridge-api/go@v2
+go get github.com/liftbridge-io/liftbridge-api/v2@latest
 ```
 
 ### Dependencies (v2.0.0+)
@@ -19,8 +19,10 @@ go get github.com/liftbridge-io/liftbridge-api/go@v2
 Starting with v2.0.0, this package uses the official Google protobuf and gRPC libraries:
 
 ```go
+import proto "github.com/liftbridge-io/liftbridge-api/v2/go"
+
 require (
-    github.com/liftbridge-io/liftbridge-api/go v2.0.0
+    github.com/liftbridge-io/liftbridge-api/v2 v2.0.0
     google.golang.org/grpc v1.69.2
     google.golang.org/protobuf v1.36.1
 )
